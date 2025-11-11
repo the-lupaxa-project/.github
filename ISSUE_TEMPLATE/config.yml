@@ -2,7 +2,7 @@ blank_issues_enabled: false
 
 contact_links:
   - name: 🛡️ Security disclosure
-    url: https://github.com/the-lupaxa-project/.github/blob/main/SECURITY.md
+    url: https://github.com/the-lupaxa-project/.github/blob/master/SECURITY.md
     about: Found a vulnerability? Please review our Security Policy.
 
   - name: ☕ Support the project

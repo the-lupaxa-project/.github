@@ -74,7 +74,7 @@ Whenever overrides exist, repositories should retain references back to the orga
 
 Example:
 
-> This repository extends the [Lupaxa Project Contributing Guidelines](https://github.com/the-lupaxa-project/.github/blob/main/CONTRIBUTING.md).
+> This repository extends the [Lupaxa Project Contributing Guidelines](https://github.com/the-lupaxa-project/.github/blob/master/CONTRIBUTING.md).
 
 ### 🌍 Community Standards
 
