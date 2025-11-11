@@ -1,4 +1,4 @@
-name: 💬 Ask a general question
+name: Ask a general question
 description: Have a question that isn't a bug or feature request? Ask here!
 title: "[Question]: "
 labels: ["type: question", "state: triage"]
@@ -7,7 +7,7 @@ body:
   - type: textarea
     id: question
     attributes:
-      label: ❓ What's your question?
+      label: What's your question?
       description: Please provide enough detail so we can give a helpful answer.
     validations:
       required: true

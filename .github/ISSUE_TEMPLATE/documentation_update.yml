@@ -1,4 +1,4 @@
-name: 📄 Documentation update
+name: Documentation update
 description: Suggest an update or correction to README, docs, or project policies.
 title: "[Docs]: "
 labels: ["type: docs", "state: triage"]
@@ -7,7 +7,7 @@ body:
   - type: textarea
     id: area
     attributes:
-      label: 📄 Which document needs updating?
+      label: Which document needs updating?
       description: Tell us which file or page this is about (e.g. README, SECURITY.md, CONTRIBUTING.md, org profile).
       placeholder: "Example: .github/README.md"
     validations:
@@ -16,7 +16,7 @@ body:
   - type: textarea
     id: current
     attributes:
-      label: 📝 Current text / problem
+      label: Current text / problem
       description: Paste the current text or describe what's wrong (typo, broken link, unclear wording, outdated info, etc.)
     validations:
       required: true
@@ -24,7 +24,7 @@ body:
   - type: textarea
     id: suggestion
     attributes:
-      label: 💡 Proposed change
+      label: Proposed change
       description: If you already know how it should read, add the corrected wording here.
       placeholder: "Proposed new paragraph, fixed link, or updated example"
     validations:
@@ -33,7 +33,7 @@ body:
   - type: textarea
     id: context
     attributes:
-      label: 🧩 Additional context
+      label: Additional context
       description: Add links, screenshots, or references that explain why this change is needed.
     validations:
       required: false

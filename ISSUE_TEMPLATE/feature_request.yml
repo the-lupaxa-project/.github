@@ -1,4 +1,4 @@
-name: 🛠 Feature request
+name: Feature request
 description: Got an idea for an improvement or new feature? Let us know!
 title: "[Feature]: "
 labels: ["type: feature", "state: triage"]
@@ -7,7 +7,7 @@ body:
   - type: textarea
     id: related-problem
     attributes:
-      label: 💭 Is your request related to a problem?
+      label: Is your request related to a problem?
       description: Describe what problem this feature would solve.
     validations:
       required: true
@@ -15,7 +15,7 @@ body:
   - type: textarea
     id: suggested-solution
     attributes:
-      label: 💡 Suggested solution
+      label: Suggested solution
       description: Clearly describe your proposed idea or improvement.
     validations:
       required: true
@@ -23,7 +23,7 @@ body:
   - type: textarea
     id: alternatives
     attributes:
-      label: 🔄 Alternatives considered
+      label: Alternatives considered
       description: List any alternative solutions or approaches you've tried.
     validations:
       required: false
@@ -31,7 +31,7 @@ body:
   - type: textarea
     id: additional
     attributes:
-      label: 🧩 Additional context
+      label: Additional context
       description: Include screenshots, mock-ups, or any supporting material.
 
   - type: checkboxes

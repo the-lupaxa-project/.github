@@ -1,25 +1,25 @@
 <!-- markdownlint-disable -->
 <p align="center">
-  <a href="https://github.com/the-lupaxa-project">
-    <img src="https://raw.githubusercontent.com/the-lupaxa-project/org-logos/master/orgs/the-lupaxa-project/readme-logo.png" alt="The Lupaxa Project Logo" width="200" />
-  </a>
-  <br />
+    <a href="https://github.com/the-lupaxa-project">
+        <img src="https://raw.githubusercontent.com/the-lupaxa-project/org-logos/master/orgs/the-lupaxa-project/readme-logo.png" alt="The Lupaxa Project Logo" width="256" />
+    </a>
 </p>
 
 <h3 align="center">
-  The Lupaxa Project: Security Policy
+    The Lupaxa Project: Security Policy
 </h3>
+
 <hr style="width: 50%; height: 1px; margin: 1em auto 0.5em;">
 <!-- markdownlint-enable -->
 
-### 🔒 Overview
+### Overview
 
 The Lupaxa Project follows a **Security by Design** philosophy across all open-source and internal projects.  
 We take vulnerabilities seriously and deeply value responsible disclosure from the community.
 
 We believe that transparency, collaboration, and defensive design are essential for maintaining trust in open source.
 
-### 📣 Reporting a Vulnerability
+### Reporting a Vulnerability
 
 If you discover a potential security issue:
 
@@ -36,7 +36,7 @@ If you discover a potential security issue:
 
 We will acknowledge receipt within **48 hours** and provide regular updates until the issue is resolved.
 
-### 🧪 Scope
+### Scope
 
 This policy covers:
 
@@ -46,14 +46,14 @@ This policy covers:
 
 If you are unsure whether a project is in scope, please ask — we will confirm.
 
-### 🧰 Our Commitments
+### Our Commitments
 
 - We will triage and verify all valid reports within **five business days**.  
 - A fix or mitigation plan will be communicated before public disclosure.  
 - Credit will be given to reporters who follow responsible disclosure practices.  
 - We will work collaboratively to ensure any identified risks are resolved quickly and transparently.
 
-### 🧩 Responsible Disclosure Guidelines
+### Responsible Disclosure Guidelines
 
 We ask that you:
 
@@ -66,6 +66,8 @@ Following these principles helps us maintain a secure environment for everyone w
 <!-- markdownlint-disable -->
 <hr style="width: 50%; height: 1px; margin: 1em auto 0.5em;">
 <p align="center">
-  <em>The Lupaxa Project — Open Source, Secure by Design, Guided by Integrity.</em>
+    <em>
+        The Lupaxa Project — Open Source, Secure by Design, Guided by Integrity.
+    </em>
 </p>
 <!-- markdownlint-enable -->
