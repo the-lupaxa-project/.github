@@ -1,4 +1,4 @@
-name: Report a Bug
+name: 🐞 Report a bug
 description: Found a bug? Tell us what went wrong so we can fix it.
 title: "[Bug]: "
 labels: ["type: bug", "state: triage"]

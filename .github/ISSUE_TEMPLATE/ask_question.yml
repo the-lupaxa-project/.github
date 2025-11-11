@@ -1,4 +1,4 @@
-name: Ask a Question
+name: 💬 Ask a general question
 description: Have a question that isn't a bug or feature request? Ask here!
 title: "[Question]: "
 labels: ["type: question", "state: triage"]

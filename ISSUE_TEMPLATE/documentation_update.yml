@@ -1,4 +1,4 @@
-name: Documentation Update
+name: 📄 Documentation update
 description: Suggest an update or correction to README, docs, or project policies.
 title: "[Docs]: "
 labels: ["type: docs", "state: triage"]

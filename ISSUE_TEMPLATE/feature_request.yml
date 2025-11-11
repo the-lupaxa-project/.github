@@ -1,4 +1,4 @@
-name: Request a Feature
+name: 🛠 Feature request
 description: Got an idea for an improvement or new feature? Let us know!
 title: "[Feature]: "
 labels: ["type: feature", "state: triage"]
