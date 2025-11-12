@@ -1,0 +1,110 @@
+name: Dependabot Pull Request Approve & Merge
+
+on:
+  workflow_call:
+    inputs:
+      allowed-update-types:
+        description: >
+          Comma-separated list of Dependabot update types that should be
+          considered for auto-approve/auto-merge.
+          Default: patch + minor.
+        required: false
+        type: string
+        default: "version-update:semver-patch,version-update:semver-minor"
+
+      auto-approve:
+        description: "Automatically approve allowed Dependabot PRs."
+        required: false
+        type: boolean
+        default: true
+
+      auto-merge:
+        description: "Automatically merge allowed Dependabot PRs."
+        required: false
+        type: boolean
+        default: true
+
+      handle-major:
+        description: "Comment and label on major updates instead of auto-merging."
+        required: false
+        type: boolean
+        default: true
+
+      label-auto-approve:
+        description: "Label to apply when a PR is auto-approved."
+        required: false
+        type: string
+        default: "dependabot: auto approve"
+
+      label-auto-merge:
+        description: "Label to apply when a PR is auto-merged."
+        required: false
+        type: string
+        default: "dependabot: auto merge"
+
+      label-manual-merge:
+        description: "Label to apply when a major update needs manual review."
+        required: false
+        type: string
+        default: "dependabot: manual merge"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions: read-all
+
+jobs:
+  dependabot:
+    name: Dependabot
+    # Only run for Dependabot PRs
+    if: ${{ github.actor == 'dependabot[bot]' && github.event_name == 'pull_request' }}
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Fetch Metadata
+        id: dependabot-metadata
+        uses: dependabot/fetch-metadata@d7267f607e9d3fb96fc2fbe83e0af444713e90b7 # v2.3.0
+        with:
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Approve PR
+        if: >
+          inputs.auto-approve == true &&
+          contains(inputs.allowed-update-types, steps.dependabot-metadata.outputs.update-type)
+        run: |
+          gh pr review --approve "${PR_URL}" -b "I'm **approving** this pull request because it includes an allowed (patch or minor) dependency update."
+          gh pr edit "${PR_URL}" --add-label "${LABEL_AUTO_APPROVE}"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          LABEL_AUTO_APPROVE: ${{ inputs.label-auto-approve }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Auto-Merge Non-Major Updates
+        if: >
+          inputs.auto-merge == true &&
+          contains(inputs.allowed-update-types, steps.dependabot-metadata.outputs.update-type)
+        run: |
+          gh pr comment "${PR_URL}" --body "I'm automatically merging this PR because it includes an allowed (patch or minor) dependency update."
+          gh pr merge --auto --squash --delete-branch "${PR_URL}"
+          gh pr edit "${PR_URL}" --add-label "${LABEL_AUTO_MERGE}"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          LABEL_AUTO_MERGE: ${{ inputs.label-auto-merge }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Comment & Label Major Updates
+        if: >
+          inputs.handle-major == true &&
+          steps.dependabot-metadata.outputs.update-type == 'version-update:semver-major'
+        run: |
+          gh pr comment "${PR_URL}" --body "I'm **NOT** automatically merging this PR because it includes a major dependency update. Please review and merge manually."
+          gh pr edit "${PR_URL}" --add-label "${LABEL_MANUAL_MERGE}"
+        env:
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          LABEL_MANUAL_MERGE: ${{ inputs.label-manual-merge }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

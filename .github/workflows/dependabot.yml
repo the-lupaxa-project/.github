@@ -1,0 +1,12 @@
+name: Dependabot Auto Approve & Merge (Self)
+
+on:
+  pull_request:
+
+jobs:
+  dependabot-auto-merge:
+    uses: ./.github/workflows/reusable-dependabot.yml
+    permissions:
+      contents: write
+      pull-requests: write
+    secrets: inherit

@@ -1,0 +1,47 @@
+version: 2
+
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "04:00"
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "chore:"
+    labels:
+      - "dependabot: ecosystem : github actions"
+      - "dependabot: dependencies"
+    assignees:
+      - "Lupraxus"
+
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "05:00"
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "chore:"
+    labels:
+      - "dependabot: ecosystem : pip"
+      - "dependabot: dependencies"
+    assignees:
+      - "Lupraxus"
+
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+      day: "monday"
+      time: "06:00"
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "chore:"
+    labels:
+      - "dependabot: ecosystem : npm"
+      - "dependabot: dependencies"
+    assignees:
+      - "Lupraxus"
