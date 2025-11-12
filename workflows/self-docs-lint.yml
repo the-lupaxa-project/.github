@@ -1,13 +1,14 @@
 name: Docs Lint (Markdown + YAML)
 
 on:
-  pull_request:
   push:
-    branches: [ main, master ]
+    branches: ['**']          # run on any branch push
+  pull_request:               # run on PRs
+  workflow_dispatch:          # add a Run Workflow button
 
 jobs:
   docs:
-    uses: ./.github/.github/workflows/reusable-docs-lint.yml
+    uses: ./.github/workflows/reusable-docs-lint.yml
     permissions:
       contents: read
     with:
