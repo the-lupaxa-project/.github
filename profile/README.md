@@ -29,11 +29,40 @@ Lupaxa is where **exploration meets precision**, and where **the untamed meets t
 - Open-source tools, libraries, and frameworks
 - Clean, purposeful solutions designed for clarity and reusability
 
-Everything we release is built and maintained by people who **code for the joy of building** — not for clients, not for profit, but for shared utility and community value.
+Everything we release is built and maintained by people who **code for the joy of building** — not for clients, not for profit, but for
+shared utility and community value.
+
+### Our Projects
+
+We group our repositories into logical domains, each managed as a dedicated GitHub organization. This structure helps us keep related tools
+together, simplify discovery, and maintain a clear separation of focus.
+
+| Project                                                                  | Description                                                                                            |
+| :----------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------- |
+| [Actions Toolbox](https://github.com/lapaxa-actions-toolbox)             | A curated collection of reusable GitHub Actions.                                                       |
+| [AWS Toolbox](https://github.com/lupaxa-api-extractor-toolbox)           | A curated suite of API extraction and transformation tools for structured data collection.             |
+| [API Extractor Toolbox](https://github.com/lupaxa-aws-toolbox)           | A curated collection of automation tools and utilities for Amazon Web Services (AWS).                  |
+| [Azure Toolbox](https://github.com/lupaxa-azure-toolbox)                 | A curated collection of tools and scripts for Microsoft Azure cloud management.                        |
+| [CI/CD Toolbox](https://github.com/lupaxa-cicd-toolbox)                  | A curated set of components, linters, and helpers for CI/CD pipelines.                                 |
+| [Code Playground](https://github.com/lupaxa-code-playground)             | An uncurated collection of experimental projects exploring new languages and programming techniques.   |
+| [Database Toolbox](https://github.com/lupaxa-database-toolbox)           | A curated set of database tools and scripts for analysis, migration, and automation.                   |
+| [Developers Toolbox](https://github.com/lupaxa-developers-toolbox)       | A curated collection of developer utilities and productivity-enhancing scripts.                        |
+| [DevOps Toolbox](https://github.com/lupaxa-devops-toolbox)               | A curated suite of DevOps automation tools for infrastructure and workflow management.                 |
+| [Docker Toolbox](https://github.com/lupaxa-docker-toolbox)               | A curated collection of Docker containers, base images, and supporting utilities.                      |
+| [GCP Toolbox](https://github.com/lupaxa-gcp-toolbox)                     | A curated collection of tools and scripts for Google Cloud Platform (GCP).                             |
+| [GitHub Toolbox](https://github.com/lupaxa-gh-toolbox)                   | A curated collection of utilities for managing GitHub organizations, repositories, and workflows.      |
+| [Git Hooks Toolbox](https://github.com/lupaxa-git-hooks-toolbox)         | A curated set of Git hooks for linting, testing, security, and enforcing code quality.                 |
+| [Git Toolbox](https://github.com/lupaxa-git-toolbox)                     | A curated collection of Git scripts, aliases, and workflow optimisations.                              |
+| [Monitoring Toolbox](https://github.com/lupaxa-monitoring-toolbox)       | A curated set of monitoring and observability tools for system visibility.                             |
+| [Notifications Toolbox](https://github.com/lupaxa-notifications-toolbox) | A curated collection of notification and messaging tools for automation and alerts.                    |
+| [Security Toolbox](https://github.com/lupaxa-security-toolbox)           | A curated suite of security-focused tools for scanning, auditing, and hardening.                       |
+| [Spider Toolbox](https://github.com/lupaxa-spider-toolbox)               | A curated collection of web spiders and crawlers for data collection and analysis.                     |
+| [SRE Toolbox](https://github.com/lupaxa-sre-toolbox)                     | A curated toolkit for Site Reliability Engineers, focused on availability, resilience and performance. |
+| [Terraform Toolbox](https://github.com/lupaxa-terraform-toolbox)         | A curated library of Terraform modules and Infrastructure-as-Code resources.                           |
 
 ### Who We Are (and Who We’re Not)
 
-We are **not a company**.  
+We are **not a company**.
 There’s no office, no boardroom, and no business model.
 
 Lupaxa is an **informal collective** of independent developers and open-source contributors.
