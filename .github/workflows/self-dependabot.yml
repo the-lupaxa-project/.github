@@ -1,4 +1,4 @@
-name: Dependabot Auto Approve & Merge (Self)
+name: Dependabot (Auto Approve & Merge)
 
 on:
   pull_request:

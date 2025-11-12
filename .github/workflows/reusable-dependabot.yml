@@ -1,4 +1,4 @@
-name: Dependabot Pull Request Approve & Merge
+name: Reusable Dependabot (Auto Approve & Merge)
 
 on:
   workflow_call:
