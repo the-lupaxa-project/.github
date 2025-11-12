@@ -1,15 +1,17 @@
 # Markdownlint configuration
-# This version mirrors the JSONC version but uses YAML for consistency
+# YAML format for consistency across all linting configs
 
 default: true
 
+# Relaxed line length limits for readability and prose
 MD013:
-  line_length: 200              # default 80 → relaxed for prose
-  code_block_line_length: 300   # allow long lines in code blocks
-  tables: false                 # ignore long table rows
+  line_length: 200
+  code_block_line_length: 300
+  tables: false
   headings: true
   headers: true
 
+# Allow inline HTML for logos, footers, etc.
 MD033:
   allowed_elements:
     - hr
@@ -23,8 +25,21 @@ MD033:
     - em
     - strong
 
-MD041: false        # allow content before first H1 (like logo block)
+# Allow pre-header content (e.g., logos or HTML blocks)
+MD041: false
+
+# Consistent list indentation
 MD007:
-  indent: 2          # consistent list indentation
-MD029:
-  style: one         # ordered lists increment by 1
+  indent: 2
+
+# Disable enforcement of ordered list numbering style
+MD029: false
+
+# Allow punctuation in headings (e.g., "What's new?")
+MD026: false
+
+# Disable reference link validation (common for shared docs)
+MD052: false
+
+# Allow mixed emphasis styles (*asterisk* and _underscore_)
+MD049: false

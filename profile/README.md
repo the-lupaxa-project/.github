@@ -12,7 +12,7 @@
 <hr style="width: 50%; height: 1px; margin: 1em auto 0.5em;">
 <!-- markdownlint-enable -->
 
-### The Spirit of Lupaxa 🐺 
+### The Spirit of Lupaxa 🐺
 
 At **The Lupaxa Project**, we’re guided by the belief that the best ideas are born at the intersection of **wild instinct** and **structured intelligence**.  
 
