@@ -8,7 +8,7 @@ on:
 
 jobs:
   docs:
-    uses: ./.github/workflows/reusable/docs-lint.yml
+    uses: ./.github/workflows/reusable-docs-lint.yml
     permissions:
       contents: read
     with:
