@@ -51,7 +51,7 @@ updates:
       - dependency-name: "crates-io"
     rebase-strategy: "disabled"
 
-  - package-ecosystem: "docker"
+  - package-ecosystem: "composer"
     directory: "/"
     schedule:
       interval: "weekly"
@@ -61,7 +61,37 @@ updates:
     commit-message:
       prefix: "chore:"
     labels:
+      - "dependabot: ecosystem : php"
+      - "dependabot: dependencies"
+    assignees:
+      - "Lupraxus"
+
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "chore:"
+    labels:
       - "dependabot: ecosystem : docker"
+      - "dependabot: dependencies"
+    assignees:
+      - "Lupraxus"
+
+  - package-ecosystem: "gomod"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:30"
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "chore:"
+    labels:
+      - "dependabot: ecosystem : go"
       - "dependabot: dependencies"
     assignees:
       - "Lupraxus"
@@ -71,7 +101,7 @@ updates:
     schedule:
       interval: "monthly"
       day: "monday"
-      time: "06:00"
+      time: "07:00"
     open-pull-requests-limit: 10
     commit-message:
       prefix: "chore:"
@@ -86,12 +116,27 @@ updates:
     schedule:
       interval: "weekly"
       day: "monday"
-      time: "06:30"
+      time: "07:30"
     open-pull-requests-limit: 10
     commit-message:
       prefix: "chore:"
     labels:
       - "dependabot: ecosystem : pip"
+      - "dependabot: dependencies"
+    assignees:
+      - "Lupraxus"
+
+  - package-ecosystem: "terraform"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "08:00"
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "chore:"
+    labels:
+      - "dependabot: ecosystem : terraform"
       - "dependabot: dependencies"
     assignees:
       - "Lupraxus"
