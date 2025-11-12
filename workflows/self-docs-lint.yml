@@ -7,12 +7,11 @@ on:
 
 jobs:
   docs:
-    uses: ./.github/workflows/reuse-docs-lint.yml
+    uses: ./.github/.github/workflows/reusable-docs-lint.yml
     permissions:
       contents: read
     with:
-      md_globs: |
-        **/*.md
+      md_globs: "**/*.md"
       yml_globs: |
         **/*.yml
         **/*.yaml
