@@ -1,0 +1,14 @@
+name: Lint Markdown & YAML (self)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  docs-lint:
+    uses: the-lupaxa-project/.github/.github/workflows/reuse-docs-lint.yml@main
+    with:
+      md_globs: "**/*.md"
+      yml_globs: "**/*.yml,**/*.yaml"
+    secrets: inherit
