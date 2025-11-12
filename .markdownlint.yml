@@ -1,0 +1,30 @@
+# Markdownlint configuration
+# This version mirrors the JSONC version but uses YAML for consistency
+
+default: true
+
+MD013:
+  line_length: 200              # default 80 → relaxed for prose
+  code_block_line_length: 300   # allow long lines in code blocks
+  tables: false                 # ignore long table rows
+  headings: true
+  headers: true
+
+MD033:
+  allowed_elements:
+    - hr
+    - br
+    - a
+    - img
+    - h1
+    - h2
+    - h3
+    - p
+    - em
+    - strong
+
+MD041: false        # allow content before first H1 (like logo block)
+MD007:
+  indent: 2          # consistent list indentation
+MD029:
+  style: one         # ordered lists increment by 1

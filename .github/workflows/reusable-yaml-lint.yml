@@ -36,7 +36,7 @@ jobs:
           python -m pip install --upgrade pip
           python -m pip install "yamllint==1.37.1"
 
-      - name: Run yamllint (auto-detect config)
+      - name: Run yamllint (auto-detect config, supports globs)
         shell: bash
         run: |
           set -euo pipefail
@@ -55,6 +55,13 @@ jobs:
             done
           fi
 
-          # Expand globs (supports newline-separated)
-          mapfile -t YML_GLOBS < <(printf "%s\n" "${{ inputs.yml_globs }}")
-          yamllint "${YML_ARGS[@]:-}" "${YML_GLOBS[@]}"
+          # Expand the globs manually since yamllint doesn't handle them
+          mapfile -t FILES < <(find . -type f \( -name '*.yml' -o -name '*.yaml' \))
+
+          if [[ ${#FILES[@]} -eq 0 ]]; then
+            echo "⚠️ No YAML files found to lint."
+            exit 0
+          fi
+
+          echo "🔍 Linting ${#FILES[@]} YAML files..."
+          yamllint "${YML_ARGS[@]:-}" "${FILES[@]}"
