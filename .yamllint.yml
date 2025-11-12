@@ -1,0 +1,29 @@
+# Yamllint configuration (shared between VS Code and GitHub Actions)
+
+extends: default
+
+rules:
+  # Disable overly strict line-length checks — readability over rigidity
+  line-length: disable
+
+  # Enforce consistent 2-space indentation, even for sequences
+  indentation:
+    indent-sequences: consistent
+    spaces: 2
+
+  # Disable document start '---' requirement
+  document-start: disable
+
+  # Avoid warnings for trailing spaces (Markdown often ends blocks with them)
+  trailing-spaces: disable
+
+  # Allow flexible boolean style (don't force 'true'/'false' casing)
+  truthy:
+    check-keys: false
+
+  # Optionally enforce newline at EOF for cleaner diffs
+  new-line-at-end-of-file: enable
+
+  # Allow comments anywhere
+  comments:
+    min-spaces-from-content: 1

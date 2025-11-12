@@ -1,5 +1,4 @@
-# Markdownlint configuration
-# YAML format for consistency across all linting configs
+# Markdownlint configuration (YAML)
 
 default: true
 
@@ -13,36 +12,13 @@ MD013:
   code_block_line_length: 300
   tables: false
   headings: true
-  headers: true
 
-# Allow punctuation in headings (e.g., "What's new?")
+# Disable trailing-punctuation-in-headings (allows ":" etc.)
 MD026:
-  no-trailing-punctuation: false
+  punctuation: ""
 
 # Disable enforcement of ordered list numbering style
 MD029: false
 
-# Allow inline HTML for logos, footers, etc.
-MD033:
-  allowed_elements:
-    - hr
-    - br
-    - a
-    - img
-    - h1
-    - h2
-    - h3
-    - p
-    - em
-    - strong
-
-# Allow pre-header content (e.g., logos or HTML blocks)
+# Allow content before first H1 (e.g., logo block)
 MD041: false
-
-# Allow mixed emphasis styles (*asterisk* and _underscore_)
-MD049:
-  emphasis-style: false
-
-# Disable reference link validation (common for shared docs)
-MD052:
-  reference-links-images: false

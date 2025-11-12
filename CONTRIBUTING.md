@@ -48,6 +48,11 @@ Explain *why* the feature is valuable and include use cases or examples where po
 - [Squash Related Commits Together][3] before opening your PR.
 - Open a [Pull Request][4] focused on a single, clear change — with a descriptive title and full sentences.
 
+[1]: http://gun.io/blog/how-to-github-fork-branch-and-pull-request
+[2]: http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
+[3]: http://gitready.com/advanced/2009/02/10/squashing-commits-with-rebase.html
+[4]: https://help.github.com/articles/about-pull-requests/
+
 > **Note:** We reserve the right to request changes or reject pull requests that don’t meet these standards.
 > We will always provide constructive feedback to help you align with our practices.
 

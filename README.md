@@ -42,7 +42,7 @@ GitHub automatically recognizes and applies certain files from the organization�
 
 | File / Folder          | Purpose                                          |
 | :--------------------- | :----------------------------------------------- |
-| profile/README.md	     | Appears on the organization’s public profile.    |
+| profile/README.md      | Appears on the organization’s public profile.    |
 | CODE_OF_CONDUCT.md     | Linked automatically in all repositories.        |
 | CONTRIBUTING.md        | Used as the default contribution guide.          |
 | SECURITY.md            | Linked under "Report a vulnerability".           |
@@ -56,6 +56,7 @@ Individual repositories can override any of these by including their own copies.
 
 Projects within The Lupaxa Project inherit these organizational files automatically.
 However, maintainers can override or extend them when necessary:
+
 - Custom CONTRIBUTING.md — add repo-specific contribution steps or testing rules.
 - Custom SECURITY.md — define scope-limited vulnerability handling or additional contact options.
 - Additional issue templates — for specialized tools, frameworks, or language-specific reporting.
@@ -70,9 +71,10 @@ Example:
 ### Community Standards
 
 All repositories under The Lupaxa Project follow these shared principles:
- - Code of Conduct￼
- - Contributing Guidelines￼
- - Security Policy￼
+
+- Code of Conduct￼
+- Contributing Guidelines￼
+- Security Policy￼
 
 These documents define how we collaborate respectfully, build securely, and contribute effectively across every Lupaxa project.
 

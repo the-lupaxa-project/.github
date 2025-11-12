@@ -61,7 +61,7 @@ There are no product pitches, pipelines, or roadmaps here — just code, shared 
 
 ### Why “Lupaxa”?
 
-The name fuses **_lupus_** (Latin for *wolf*) with a modern, tech-flavoured suffix.
+The name fuses ***lupus*** (Latin for *wolf*) with a modern, tech-flavoured suffix.
 It reflects both the **primal and the systematic** — a name that captures our balance between creative instinct and technical precision.
 
 <!-- markdownlint-disable -->
