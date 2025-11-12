@@ -35,12 +35,12 @@ jobs:
   markdown:
     uses: ./.github/workflows/reusable-markdown-lint.yml
     with:
-      md_globs:  ${{ inputs.md_globs }}
+      md_globs: ${{ inputs.md_globs }}
       md_config: ${{ inputs.md_config }}
       md_ignore: ${{ inputs.md_ignore }}
 
   yaml:
     uses: ./.github/workflows/reusable-yaml-lint.yml
     with:
-      yml_globs:  ${{ inputs.yml_globs }}
+      yml_globs: ${{ inputs.yml_globs }}
       yml_config: ${{ inputs.yml_config }}
