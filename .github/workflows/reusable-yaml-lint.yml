@@ -4,21 +4,26 @@ on:
   workflow_call:
     inputs:
       yml_globs:
-        description: "YAML globs"
+        description: "YAML file globs (newline-separated or single glob)"
         required: false
         type: string
         default: |
           **/*.yml
-          **/*.yaml"
+          **/*.yaml
+      yml_config:
+        description: "Explicit yamllint config path (overrides auto-detect)"
+        required: false
+        type: string
+        default: ""
 
 jobs:
-  yaml:
+  yamllint:
     name: YAML Lint
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
+    permissions: { contents: read }
+
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
       - name: Setup Python
@@ -28,9 +33,28 @@ jobs:
 
       - name: Install yamllint
         run: |
-          pip install --upgrade pip
-          pip install "yamllint==1.37.1"
+          python -m pip install --upgrade pip
+          python -m pip install "yamllint==1.37.1"
 
-      - name: Run yamllint
+      - name: Run yamllint (auto-detect config)
+        shell: bash
         run: |
-          yamllint "${{ inputs.yml_globs }}"
+          set -euo pipefail
+          YML_ARGS=()
+
+          # Prefer explicit config if provided
+          if [[ -n "${{ inputs.yml_config }}" ]]; then
+            YML_ARGS+=("-c" "${{ inputs.yml_config }}")
+          else
+            # Auto-detect common config files at repo root (priority)
+            for CANDIDATE in ".yamllint.yaml" ".yamllint.yml" ".yamllint"; do
+              if [[ -f "$CANDIDATE" ]]; then
+                YML_ARGS+=("-c" "$CANDIDATE")
+                break
+              fi
+            done
+          fi
+
+          # Expand globs (supports newline-separated)
+          mapfile -t YML_GLOBS < <(printf "%s\n" "${{ inputs.yml_globs }}")
+          yamllint "${YML_ARGS[@]:-}" "${YML_GLOBS[@]}"

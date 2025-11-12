@@ -14,49 +14,33 @@ on:
         type: string
         default: |
           **/*.yml
-          **/*.yaml"
+          **/*.yaml
+      md_config:
+        description: "Explicit markdownlint config path (optional)"
+        required: false
+        type: string
+        default: ""
+      md_ignore:
+        description: "Explicit markdownlint ignore path (optional)"
+        required: false
+        type: string
+        default: ""
+      yml_config:
+        description: "Explicit yamllint config path (optional)"
+        required: false
+        type: string
+        default: ""
 
 jobs:
   markdown:
-    name: Markdown Lint
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-
-      - name: Setup Node.js
-        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
-        with:
-          node-version: "lts/*"
-
-      - name: Install markdownlint-cli
-        run: npm install -g markdownlint-cli@0.45.0
-
-      - name: Run markdownlint
-        run: |
-          markdownlint "${{ inputs.md_globs }}"
+    uses: ./.github/workflows/reusable-markdown-lint.yml
+    with:
+      md_globs:  ${{ inputs.md_globs }}
+      md_config: ${{ inputs.md_config }}
+      md_ignore: ${{ inputs.md_ignore }}
 
   yaml:
-    name: YAML Lint
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-
-      - name: Setup Python
-        uses: actions/setup-python@e797f83bcb11b83ae66e0230d6156d7c80228e7c # v6.0.0
-        with:
-          python-version: "3.13"
-
-      - name: Install yamllint
-        run: |
-          pip install --upgrade pip
-          pip install "yamllint==1.37.1"
-
-      - name: Run yamllint
-        run: |
-          yamllint "${{ inputs.yml_globs }}"
+    uses: ./.github/workflows/reusable-yaml-lint.yml
+    with:
+      yml_globs:  ${{ inputs.yml_globs }}
+      yml_config: ${{ inputs.yml_config }}

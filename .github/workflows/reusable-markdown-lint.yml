@@ -4,19 +4,29 @@ on:
   workflow_call:
     inputs:
       md_globs:
-        description: "Markdown globs"
+        description: "Markdown file globs (newline-separated or single glob)"
         required: false
         type: string
         default: "**/*.md"
+      md_config:
+        description: "Explicit markdownlint config path (overrides auto-detect)"
+        required: false
+        type: string
+        default: ""
+      md_ignore:
+        description: "Explicit markdownlint ignore path (overrides auto-detect)"
+        required: false
+        type: string
+        default: ""
 
 jobs:
   markdown:
     name: Markdown Lint
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
+    permissions: { contents: read }
+
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
       - name: Setup Node.js
@@ -27,6 +37,32 @@ jobs:
       - name: Install markdownlint-cli
         run: npm install -g markdownlint-cli@0.45.0
 
-      - name: Run markdownlint
+      - name: Run markdownlint (auto-detect config)
+        shell: bash
         run: |
-          markdownlint "${{ inputs.md_globs }}"
+          set -euo pipefail
+          MD_ARGS=()
+
+          # Prefer explicit config if provided
+          if [[ -n "${{ inputs.md_config }}" ]]; then
+            MD_ARGS+=("-c" "${{ inputs.md_config }}")
+          else
+            # Auto-detect common config files at repo root (priority)
+            for CANDIDATE in ".markdownlint.jsonc" ".markdownlint.json" ".markdownlint.yaml" ".markdownlint.yml"; do
+              if [[ -f "$CANDIDATE" ]]; then
+                MD_ARGS+=("-c" "$CANDIDATE")
+                break
+              fi
+            done
+          fi
+
+          # Optional ignore file
+          if [[ -n "${{ inputs.md_ignore }}" ]]; then
+            MD_ARGS+=("-i" "${{ inputs.md_ignore }}")
+          elif [[ -f ".markdownlintignore" ]]; then
+            MD_ARGS+=("-i" ".markdownlintignore")
+          fi
+
+          # Expand globs (supports newline-separated)
+          mapfile -t MD_GLOBS < <(printf "%s\n" "${{ inputs.md_globs }}")
+          markdownlint "${MD_GLOBS[@]}" "${MD_ARGS[@]:-}"
