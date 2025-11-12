@@ -3,6 +3,10 @@
 
 default: true
 
+# Consistent list indentation
+MD007:
+  indent: 2
+
 # Relaxed line length limits for readability and prose
 MD013:
   line_length: 200
@@ -10,6 +14,13 @@ MD013:
   tables: false
   headings: true
   headers: true
+
+# Allow punctuation in headings (e.g., "What's new?")
+MD026:
+  no-trailing-punctuation: false
+
+# Disable enforcement of ordered list numbering style
+MD029: false
 
 # Allow inline HTML for logos, footers, etc.
 MD033:
@@ -28,18 +39,10 @@ MD033:
 # Allow pre-header content (e.g., logos or HTML blocks)
 MD041: false
 
-# Consistent list indentation
-MD007:
-  indent: 2
-
-# Disable enforcement of ordered list numbering style
-MD029: false
-
-# Allow punctuation in headings (e.g., "What's new?")
-MD026: false
+# Allow mixed emphasis styles (*asterisk* and _underscore_)
+MD049:
+  emphasis-style: false
 
 # Disable reference link validation (common for shared docs)
-MD052: false
-
-# Allow mixed emphasis styles (*asterisk* and _underscore_)
-MD049: false
+MD052:
+  reference-links-images: false

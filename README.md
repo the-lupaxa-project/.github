@@ -14,7 +14,7 @@
 
 ### Overview
 
-This repository defines the **shared standards, documentation, and automation resources** used across all repositories in  
+This repository defines the **shared standards, documentation, and automation resources** used across all repositories in
 **The Lupaxa Project** organization.
 
 It serves as the **central hub** for community policies, contribution guidelines, security practices, and optional CI/CD workflows that embody our
