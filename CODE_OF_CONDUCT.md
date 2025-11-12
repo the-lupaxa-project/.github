@@ -23,6 +23,7 @@ Every interaction within our projects should reflect the same principles we valu
 ### Our Standards
 
 #### Examples of positive behaviour include:
+
 - Demonstrating empathy and kindness toward others  
 - Respecting differing opinions, experiences, and perspectives  
 - Gracefully accepting constructive feedback  
@@ -30,6 +31,7 @@ Every interaction within our projects should reflect the same principles we valu
 - Recognizing and valuing each contributor’s effort and expertise  
 
 #### Examples of unacceptable behaviour include:
+
 - The use of sexualized language or imagery  
 - Personal attacks, insults, or derogatory comments  
 - Trolling, excessive negativity, or sustained disruption  
