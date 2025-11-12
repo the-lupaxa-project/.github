@@ -16,7 +16,22 @@ updates:
     assignees:
       - "Lupraxus"
 
-  - package-ecosystem: "pip"
+  - package-ecosystem: "bundler"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "04:30"
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "chore:"
+    labels:
+      - "dependabot: ecosystem : ruby"
+      - "dependabot: dependencies"
+    assignees:
+      - "Lupraxus"
+
+  - package-ecosystem: "cargo"
     directory: "/"
     schedule:
       interval: "weekly"
@@ -26,7 +41,27 @@ updates:
     commit-message:
       prefix: "chore:"
     labels:
-      - "dependabot: ecosystem : pip"
+      - "dependabot: ecosystem : github actions"
+      - "dependabot: dependencies"
+    assignees:
+      - "Lupraxus"
+    ignore:
+      # These are peer deps of Cargo and should not be automatically bumped
+      - dependency-name: "semver"
+      - dependency-name: "crates-io"
+    rebase-strategy: "disabled"
+
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "05:30"
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "chore:"
+    labels:
+      - "dependabot: ecosystem : docker"
       - "dependabot: dependencies"
     assignees:
       - "Lupraxus"
@@ -42,6 +77,21 @@ updates:
       prefix: "chore:"
     labels:
       - "dependabot: ecosystem : npm"
+      - "dependabot: dependencies"
+    assignees:
+      - "Lupraxus"
+
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:30"
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "chore:"
+    labels:
+      - "dependabot: ecosystem : pip"
       - "dependabot: dependencies"
     assignees:
       - "Lupraxus"
