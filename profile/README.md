@@ -69,6 +69,7 @@ Lupaxa is an **informal collective** of independent developers and open-source c
 Some of us are hobbyists, others professionals — but all collaborate voluntarily, outside the bounds of employment or commercial obligation.
 
 There are no customers, no shareholders — only peers and creators.
+There are no product pitches, pipelines, or roadmaps here — just code, shared openly and responsibly.
 
 ### Our Philosophy
 
@@ -86,7 +87,6 @@ Lupaxa exists to honour that balance.
 Whether you fork a repo, report an issue, or use one of our tools, you’re part of what we’re building.
 
 We care about craftsmanship, clarity, and composability — not complexity for its own sake.
-There are no product pitches, pipelines, or roadmaps here — just code, shared openly and responsibly.
 
 ### Why “Lupaxa”?
 
