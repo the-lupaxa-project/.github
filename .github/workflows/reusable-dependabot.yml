@@ -1,108 +1,90 @@
-name: Reusable Dependabot (Auto Approve & Merge)
+name: Reusable Dependabot Automation (Approve, Comment, Merge)
 
 on:
   workflow_call:
     inputs:
-      allowed-update-types:
-        description: >
-          Comma-separated list of Dependabot update types that should be
-          considered for auto-approve/auto-merge.
-          Default: patch + minor.
-        required: false
-        type: string
-        default: "version-update:semver-patch,version-update:semver-minor"
-
       auto-approve:
-        description: "Automatically approve allowed Dependabot PRs."
+        description: "Automatically approve patch and minor updates"
         required: false
         type: boolean
         default: true
-
       auto-merge:
-        description: "Automatically merge allowed Dependabot PRs."
+        description: "Automatically merge patch and minor updates"
         required: false
         type: boolean
         default: true
-
       handle-major:
-        description: "Comment and label on major updates instead of auto-merging."
+        description: "Comment and label major updates (no auto-merge)"
         required: false
         type: boolean
         default: true
-
       label-auto-approve:
-        description: "Label to apply when a PR is auto-approved."
+        description: "Label to apply to auto-approved PRs"
         required: false
         type: string
         default: "dependabot: auto approve"
-
       label-auto-merge:
-        description: "Label to apply when a PR is auto-merged."
+        description: "Label to apply to auto-merged PRs"
         required: false
         type: string
         default: "dependabot: auto merge"
-
       label-manual-merge:
-        description: "Label to apply when a major update needs manual review."
+        description: "Label to apply to PRs needing manual review"
         required: false
         type: string
         default: "dependabot: manual merge"
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
-permissions: read-all
-
 jobs:
   dependabot:
-    name: Dependabot
+    name: Dependabot Handler
+    runs-on: ubuntu-latest
     # Only run for Dependabot PRs
     if: ${{ github.actor == 'dependabot[bot]' && github.event_name == 'pull_request' }}
-    runs-on: ubuntu-latest
 
     permissions:
       contents: write
       pull-requests: write
 
     steps:
-      - name: Fetch Metadata
+      - name: Fetch Dependabot metadata
         id: dependabot-metadata
-        uses: dependabot/fetch-metadata@d7267f607e9d3fb96fc2fbe83e0af444713e90b7  # v2.3.0
+        uses: dependabot/fetch-metadata@d7267f607e9d3fb96fc2fbe83e0af444713e90b7 # v2.3.0
         with:
           github-token: "${{ secrets.GITHUB_TOKEN }}"
 
-      - name: Approve PR
+      - name: Approve patch/minor updates
         if: >
           inputs.auto-approve == true &&
-          contains(inputs.allowed-update-types, steps.dependabot-metadata.outputs.update-type)
+          (steps.dependabot-metadata.outputs.update-type == 'version-update:semver-patch' ||
+           steps.dependabot-metadata.outputs.update-type == 'version-update:semver-minor')
         run: |
-          gh pr review --approve "${PR_URL}" -b "I'm **approving** this pull request because it includes an allowed (patch or minor) dependency update."
+          gh pr review "${PR_URL}" --approve --body "Automatically approving this Dependabot pull request (patch/minor update)."
           gh pr edit "${PR_URL}" --add-label "${LABEL_AUTO_APPROVE}"
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}
           LABEL_AUTO_APPROVE: ${{ inputs.label-auto-approve }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Auto-Merge Non-Major Updates
+      - name: Auto-merge patch/minor updates
         if: >
           inputs.auto-merge == true &&
-          contains(inputs.allowed-update-types, steps.dependabot-metadata.outputs.update-type)
+          (steps.dependabot-metadata.outputs.update-type == 'version-update:semver-patch' ||
+           steps.dependabot-metadata.outputs.update-type == 'version-update:semver-minor')
         run: |
-          gh pr comment "${PR_URL}" --body "I'm automatically merging this PR because it includes an allowed (patch or minor) dependency update."
-          gh pr merge --auto --squash --delete-branch "${PR_URL}"
+          gh pr comment "${PR_URL}" --body "Automatically merging this Dependabot pull request (patch/minor update)."
+          gh pr merge "${PR_URL}" --auto --squash --delete-branch
           gh pr edit "${PR_URL}" --add-label "${LABEL_AUTO_MERGE}"
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}
           LABEL_AUTO_MERGE: ${{ inputs.label-auto-merge }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Comment & Label Major Updates
+      - name: Comment & label major updates
         if: >
           inputs.handle-major == true &&
           steps.dependabot-metadata.outputs.update-type == 'version-update:semver-major'
         run: |
-          gh pr comment "${PR_URL}" --body "I'm **NOT** automatically merging this PR because it includes a major dependency update. Please review and merge manually."
+          gh pr comment "${PR_URL}" --body "This Dependabot PR includes a **major** dependency update and has **not** been auto-merged. Please review and merge manually."
           gh pr edit "${PR_URL}" --add-label "${LABEL_MANUAL_MERGE}"
         env:
           PR_URL: ${{ github.event.pull_request.html_url }}

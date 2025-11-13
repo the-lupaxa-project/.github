@@ -1,46 +1,52 @@
-name: Reusable Docs Lint (Markdown + YAML)
+name: Reusable Documentation Lint (Markdown + YAML)
 
 on:
   workflow_call:
     inputs:
       md_globs:
-        description: "Markdown globs"
+        description: "Glob(s) for Markdown files"
         required: false
         type: string
         default: "**/*.md"
       yml_globs:
-        description: "YAML globs"
+        description: "Glob(s) for YAML files"
         required: false
         type: string
         default: |
           **/*.yml
           **/*.yaml
-      md_config:
-        description: "Explicit markdownlint config path (optional)"
+      report_only:
+        description: "Do not fail the build even if errors occur"
         required: false
         type: string
-        default: ""
-      md_ignore:
-        description: "Explicit markdownlint ignore path (optional)"
+        default: "false"
+      show_errors:
+        description: "Show detailed error output"
         required: false
         type: string
-        default: ""
-      yml_config:
-        description: "Explicit yamllint config path (optional)"
-        required: false
-        type: string
-        default: ""
+        default: "true"
 
 jobs:
   markdown:
+    name: Markdown Lint
     uses: ./.github/workflows/reusable-markdown-lint.yml
+    permissions:
+      contents: read
     with:
-      md_globs: ${{ inputs.md_globs }}
-      md_config: ${{ inputs.md_config }}
-      md_ignore: ${{ inputs.md_ignore }}
+      include_files: ${{ inputs.md_globs }}
+      exclude_files: ""
+      report_only: ${{ inputs.report_only }}
+      show_errors: ${{ inputs.show_errors }}
+    secrets: inherit
 
   yaml:
+    name: YAML Lint
     uses: ./.github/workflows/reusable-yaml-lint.yml
+    permissions:
+      contents: read
     with:
-      yml_globs: ${{ inputs.yml_globs }}
-      yml_config: ${{ inputs.yml_config }}
+      include_files: ${{ inputs.yml_globs }}
+      exclude_files: ""
+      report_only: ${{ inputs.report_only }}
+      show_errors: ${{ inputs.show_errors }}
+    secrets: inherit

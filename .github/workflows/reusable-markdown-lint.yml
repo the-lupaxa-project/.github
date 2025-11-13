@@ -1,69 +1,48 @@
-name: Reusable Markdown Lint
+name: Reusable Markdown Lint (MD Style & Quality)
 
 on:
   workflow_call:
     inputs:
-      md_globs:
-        description: "Markdown file globs (newline-separated or single glob)"
-        required: false
-        type: string
-        default: "**/*.md"
-      md_config:
-        description: "Explicit markdownlint config path (overrides auto-detect)"
+      include_files:
+        description: "Comma-separated list or regex patterns to include"
         required: false
         type: string
         default: ""
-      md_ignore:
-        description: "Explicit markdownlint ignore path (overrides auto-detect)"
+      exclude_files:
+        description: "Comma-separated list or regex patterns to exclude"
         required: false
         type: string
         default: ""
+      report_only:
+        description: "Do not fail the build even if errors occur"
+        required: false
+        type: string
+        default: "false"
+      show_errors:
+        description: "Show detailed error output"
+        required: false
+        type: string
+        default: "true"
 
 jobs:
-  markdown:
+  markdown-lint:
     name: Markdown Lint
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
+      - name: Checkout repository
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
 
-      - name: Setup Node.js
-        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903  # v6.0.0
+      - name: Setup Node 22
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
-          node-version: "lts/*"
+          node-version: "22"
 
-      - name: Install markdownlint-cli
-        run: npm install -g markdownlint-cli@0.45.0
-
-      - name: Run markdownlint (auto-detect config)
-        shell: bash
+      - name: Run markdown-lint (CICDToolbox)
+        env:
+          INCLUDE_FILES: ${{ inputs.include_files }}
+          EXCLUDE_FILES: ${{ inputs.exclude_files }}
+          REPORT_ONLY: ${{ inputs.report_only }}
+          SHOW_ERRORS: ${{ inputs.show_errors }}
         run: |
-          set -euo pipefail
-          MD_ARGS=()
-
-          # Prefer explicit config if provided
-          if [[ -n "${{ inputs.md_config }}" ]]; then
-            MD_ARGS+=("-c" "${{ inputs.md_config }}")
-          else
-            # Auto-detect common config files at repo root (priority)
-            for CANDIDATE in ".markdownlint.jsonc" ".markdownlint.json" ".markdownlint.yaml" ".markdownlint.yml"; do
-              if [[ -f "$CANDIDATE" ]]; then
-                MD_ARGS+=("-c" "$CANDIDATE")
-                break
-              fi
-            done
-          fi
-
-          # Optional ignore file
-          if [[ -n "${{ inputs.md_ignore }}" ]]; then
-            MD_ARGS+=("-i" "${{ inputs.md_ignore }}")
-          elif [[ -f ".markdownlintignore" ]]; then
-            MD_ARGS+=("-i" ".markdownlintignore")
-          fi
-
-          # Expand globs (supports newline-separated)
-          mapfile -t MD_GLOBS < <(printf "%s\n" "${{ inputs.md_globs }}")
-          markdownlint "${MD_GLOBS[@]}" "${MD_ARGS[@]:-}"
+          bash <(curl -s https://raw.githubusercontent.com/CICDToolbox/markdown-lint/master/pipeline.sh)

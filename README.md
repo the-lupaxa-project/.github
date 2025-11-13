@@ -34,39 +34,255 @@ The `.github` repository provides:
   The public [organization profile README](https://github.com/the-lupaxa-project) displayed on GitHub.
 
 - **Reusable automation**  
-  Global GitHub Actions, workflow templates, or composite actions for consistent CI/CD pipelines.
+  Global GitHub Actions, workflow templates, and composite actions for consistent CI/CD pipelines across every project.
 
 ### How GitHub Uses This Repo
 
-GitHub automatically recognizes and applies certain files from the organization’s .github repository across all repos:
+GitHub automatically recognizes and applies certain files from the organization’s `.github` repository across all repos:
 
 | File / Folder          | Purpose                                          |
 | :--------------------- | :----------------------------------------------- |
 | profile/README.md      | Appears on the organization’s public profile.    |
 | CODE_OF_CONDUCT.md     | Linked automatically in all repositories.        |
 | CONTRIBUTING.md        | Used as the default contribution guide.          |
-| SECURITY.md            | Linked under "Report a vulnerability".           |
-| ISSUE_TEMPLATE/        | Provides shared issue templates.                 |
-| PULL_REQUEST_TEMPLATE/ | Provides shared PR templates.                    |
-| .github/workflows/     | Can host shared or reusable workflows for CI/CD. |
+| SECURITY.md            | Linked under “Report a vulnerability”.           |
+| ISSUE_TEMPLATE/        | Shared issue templates for the entire org.       |
+| PULL_REQUEST_TEMPLATE/ | Shared PR templates for consistent submissions.  |
+| .github/workflows/     | Provides reusable workflows for CI/CD.           |
 
 Individual repositories can override any of these by including their own copies.
+
+---
+
+### Reusable CI/CD Workflows
+
+This `.github` repository also acts as a **central catalog of reusable workflows** for linting, security scanning, and general CI hygiene.
+
+There are three layers:
+
+1. **Reusable workflows (per tool)**  
+   - Live in this repo: `.github/workflows/reusable-*.yml`  
+   - Called by other repos via `uses: the-lupaxa-project/.github/...@<COMMIT_SHA>`
+
+2. **Local workflows (per tool)**  
+   - Live in **each** repo that wants a direct one-off job: `.github/workflows/local-*.yml`  
+   - Use `uses: ./.github/workflows/reusable-*.yml` to call the shared logic.
+
+3. **Combined “bundle” workflows**  
+   - For example, a “docs lint” bundle that runs Markdown, YAML, and shell checks together.
+
+### SHA Pinning Policy
+
+All Lupaxa organizations enforce a rule that **reusable workflows must be referenced using a full commit SHA**, never a branch or tag.
+
+**Within this `.github` repo** (self-use):
+
+```yaml
+jobs:
+  markdown:
+    uses: ./.github/workflows/reusable-markdown-lint.yml
+```
+
+From other repositories (remote use):
+
+```yaml
+jobs:
+  markdown:
+    uses: the-lupaxa-project/.github/.github/workflows/reusable-markdown-lint.yml@<COMMIT_SHA>
+```
+
+> Replace <COMMIT_SHA> with the commit hash of this .github repository that you wish to pin to (for example, from git rev-parse HEAD or the GitHub UI).
+
+### Workflow Catalog (CICDToolbox Tools)
+
+The following reusable workflows wrap tools from the CICDToolbox￼ organization.
+Each one runs the tool’s pipeline.sh script and shares a common interface.
+
+#### Common Inputs
+
+All per-tool reusable workflows accept the same core inputs:
+
+- include_files — optional, comma-separated list of paths/globs/regex to include.
+- exclude_files — optional, comma-separated list of paths/globs/regex to exclude.
+- report_only — true/false, report issues without failing the job.
+- show_errors — true/false, show detailed errors.
+- show_skipped — true/false, show skipped/ignored files.
+ no_color — true/false, disable coloured output.
+
+These map to environment variables like INCLUDE_FILES, EXCLUDE_FILES, REPORT_ONLY, SHOW_ERRORS, SHOW_SKIPPED, NO_COLOR that all CICDToolbox tools understand.
+
+#### Catalog Overview
+
+| Tool / Domain       | CICDToolbox Repo        | Reusable Workflow File               | Typical include_files                |
+| :------------------ | :---------------------- | :----------------------------------- | :----------------------------------- |
+| GitHub Actions      | action-lint             | reusable-action-lint.yml             | .github/workflows/*.yml              |
+| Links in Markdown   | awesomebot              | reusable-awesomebot.yml              | **/*.md                              |
+| Python security     | bandit                  | reusable-bandit.yml                  | **/*.py                              |
+| Dockerfiles         | hadolint                | reusable-hadolint.yml                | Dockerfile,**/Dockerfile*            |
+| JSON config         | json-lint               | reusable-json-lint.yml               | **/*.json                            |
+| Markdown            | markdown-lint           | reusable-markdown-lint.yml           | **/*.md                              |
+| Perl                | perl-lint               | reusable-perl-lint.yml               | **/*.pl,**/*.pm                      |
+| PHP                 | php-lint                | reusable-php-lint.yml                | **/*.php                             |
+| Puppet              | puppet-lint             | reusable-puppet-lint.yml             | **/*.pp                              |
+| Python requirements | pur                     | reusable-pur.yml                     | requirements.txt                     |
+| Python style        | pycodestyle             | reusable-pycodestyle.yml             | **/*.py                              |
+| Python docstrings   | pydocstyle              | reusable-pydocstyle.yml              | **/*.py                              |
+| Python meta-linter  | pylama                  | reusable-pylama.yml                  | **/*.py                              |
+| Python linting      | pylint                  | reusable-pylint.yml                  | **/*.py                              |
+| Ruby code smells    | reek                    | reusable-reek.yml                    | **/*.rb                              |
+| Ruby style          | rubocop                 | reusable-rubocop.yml                 | **/*.rb                              |
+| Shell scripts       | shellcheck              | reusable-shellcheck.yml              | **/*.sh,**/*.bash,**/*.ksh,**/*.dash |
+| Citation metadata   | validate-citations-file | reusable-validate-citations-file.yml | CITATION.cff                         |
+| YAML config         | yaml-lint               | reusable-yaml-lint.yml               | **/*.yml,**/*.yaml                   |
+
+### Examples (Reusable + Local + Combined)
+
+#### Example 1 — Using a reusable workflow from another repo
+
+In any repo under The Lupaxa Project, you can call a reusable workflow like this:
+
+```yaml
+name: Docs Lint
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  markdown:
+    name: Markdown Lint
+    uses: the-lupaxa-project/.github/.github/workflows/reusable-markdown-lint.yml@<COMMIT_SHA>
+    permissions:
+      contents: read
+    with:
+      include_files: "**/*.md"
+      report_only: false
+      show_errors: true
+
+  yaml:
+    name: YAML Lint
+    uses: the-lupaxa-project/.github/.github/workflows/reusable-yaml-lint.yml@<COMMIT_SHA>
+    permissions:
+      contents: read
+    with:
+      include_files: |
+        **/*.yml
+        **/*.yaml"
+      report_only: false
+```
+
+You can add as many jobs as you like for different tools:
+
+```yaml
+  shellcheck:
+    name: ShellCheck
+    uses: the-lupaxa-project/.github/.github/workflows/reusable-shellcheck.yml@<COMMIT_SHA>
+    permissions:
+      contents: read
+    with:
+      include_files: |
+        **/*.sh
+        **/*.bash
+        **/*.dash
+        **/*.ksh
+```
+
+#### Example 2 — Local workflow that calls the shared ones
+
+Sometimes you want a single repo-local workflow file that orchestrates several tools.
+In that case, your repo can have:
+
+```yaml
+name: Local Docs Lint
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  markdown:
+    uses: the-lupaxa-project/.github/.github/workflows/reusable-markdown-lint.yml@<COMMIT_SHA>
+    permissions:
+      contents: read
+    with:
+      include_files: "**/*.md"
+
+  yaml:
+    uses: the-lupaxa-project/.github/.github/workflows/reusable-yaml-lint.yml@<COMMIT_SHA>
+    permissions:
+      contents: read
+    with:
+      include_files: |
+        **/*.yml
+        **/*.yaml
+```
+
+You might also create repo-specific variants like local-python-quality.yml that call reusable-bandit.yml and reusable-pylint.yml in a similar fashion.
+
+#### Example 3 — Combined “all linters” workflow
+
+In the .github repo itself, you can maintain a combined reusable bundle, for example:
+
+- reusable-docs-lint.yml — orchestrates Markdown, YAML, and Shellcheck.
+- reusable-python-quality.yml — orchestrates Bandit, Pylint, Pydocstyle, etc.
+- reusable-ruby-quality.yml — orchestrates Rubocop + Reek.
+- reusable-all-linters.yml — runs everything for “belt and braces” checks.
+
+Other repos then call them like this:
+
+```yaml
+name: Full Quality Gate
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  docs:
+    uses: the-lupaxa-project/.github/.github/workflows/reusable-docs-lint.yml@<COMMIT_SHA>
+    permissions:
+      contents: read
+
+  python:
+    uses: the-lupaxa-project/.github/.github/workflows/reusable-python-quality.yml@<COMMIT_SHA>
+    permissions:
+      contents: read
+
+  ruby:
+    uses: the-lupaxa-project/.github/.github/workflows/reusable-ruby-quality.yml@<COMMIT_SHA>
+    permissions:
+      contents: read
+```
+
+The exact set of combined workflows (and their filenames) is intentionally flexible; the .github repo is the place where those “house styles” live.
 
 ### Extending or Overriding Defaults
 
 Projects within The Lupaxa Project inherit these organizational files automatically.
 However, maintainers can override or extend them when necessary:
 
-- Custom CONTRIBUTING.md — add repo-specific contribution steps or testing rules.
-- Custom SECURITY.md — define scope-limited vulnerability handling or additional contact options.
-- Additional issue templates — for specialized tools, frameworks, or language-specific reporting.
-- Custom workflows — for language-specific CI/CD pipelines that build on, but do not replace, shared templates.
+- Custom CONTRIBUTING.md — additional testing or workflow steps.
+- Custom SECURITY.md — defining project-specific scope or contact options.
+- Extra issue templates — for highly specialized tools.
+- Repo-specific workflows — custom build/test pipelines layered on top of reusable ones.
+- Per-repo lint configs (for example .markdownlint.yaml, .yamllint.yaml) — to fine-tune local rules.
 
-Whenever overrides exist, repositories should retain references back to the organization-wide versions to preserve visibility and consistency.
+Repositories overriding central files should retain references back to the organization-wide versions to preserve visibility and intent.
 
-Example:
+#### Example:
 
-> This repository extends the [Lupaxa Project Contributing Guidelines](https://github.com/the-lupaxa-project/.github/blob/master/CONTRIBUTING.md).
+```text
+This repository extends the Lupaxa Project Contributing Guidelines.
+```
 
 ### Community Standards
 
@@ -83,6 +299,8 @@ These documents define how we collaborate respectfully, build securely, and cont
 All files within this repository are provided under the MIT License, unless otherwise noted in specific project repositories.
 
 <!-- markdownlint-disable -->
+
+
 <hr style="width: 50%; height: 1px; margin: 1em auto 0.5em;">
 <p align="center">
     <em>

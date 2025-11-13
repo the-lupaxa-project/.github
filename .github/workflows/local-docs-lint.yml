@@ -1,10 +1,11 @@
-name: Docs Lint (Markdown + YAML)
+name: Documentation Lint (Markdown + YAML)
 
 on:
   push:
-    branches: ['**']          # run on any branch push
-  pull_request:               # run on PRs
-  workflow_dispatch:          # add a Run Workflow button
+    branches:
+      - "**"          # run on any branch push
+  pull_request:       # run on PRs
+  workflow_dispatch:  # add a Run Workflow button
 
 jobs:
   docs:
@@ -15,4 +16,7 @@ jobs:
       md_globs: "**/*.md"
       yml_globs: |
         **/*.yml
-        **/*.yaml
+        **/*.yaml"
+      report_only: "false"
+      show_errors: "true"
+    secrets: inherit
