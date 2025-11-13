@@ -1,0 +1,19 @@
+name: Purge Deprecated Workflow Runs
+
+on:
+  workflow_dispatch:
+
+  schedule:
+    - cron: '33 3 * * 1'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  actions: write
+
+jobs:
+  purge-deprecated-workflows:
+    name: Purge Deprecated Workflow Runs
+    uses: ./.github/workflows/reusable-purge-deprecated-workflow-runs.yml
