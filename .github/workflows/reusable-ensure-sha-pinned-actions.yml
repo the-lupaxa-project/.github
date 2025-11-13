@@ -1,0 +1,37 @@
+name: Reusable Ensure SHA-Pinned GitHub Actions
+
+on:
+  workflow_call:
+    inputs:
+      allowlist:
+        description: >
+          Optional newline-separated list of owner[/repo] patterns that are
+          allowed to use non-SHA refs (e.g. "the-lupaxa-project/.github").
+          Each line should be either "owner/" or "owner/repo".
+        required: false
+        type: string
+      dry_run:
+        description: >
+          If true, only report unpinned actions but do not fail the job.
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  ensure-sha-pinned:
+    name: Ensure SHA-pinned GitHub Actions
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
+
+      - name: Ensure SHA-pinned GitHub Actions
+        uses: zgosalvez/github-actions-ensure-sha-pinned-actions@9e9574ef04ea69da568d6249bd69539ccc704e74  # v4.0.0
+        with:
+          allowlist: |
+            the-lupaxa-project/.github
+            ${{ inputs.allowlist }}
+          dry_run: ${{ inputs.dry_run }}

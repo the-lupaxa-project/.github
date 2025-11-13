@@ -14,7 +14,7 @@
 
 ### Overview
 
-This repository defines the **shared standards, documentation, and automation resources** used across all repositories in
+This repository defines the **shared standards, documentation, and automation resources** used across all **public repositories** in
 **The Lupaxa Project** organization.
 
 It serves as the **central hub** for community policies, contribution guidelines, security practices, and optional CI/CD workflows that embody our
@@ -25,34 +25,32 @@ It serves as the **central hub** for community policies, contribution guidelines
 The `.github` repository provides:
 
 - **Organization-wide defaults**  
-  Issue templates, PR templates, and global documentation automatically inherited by all Lupaxa repositories.
+  Issue templates, PR templates, and global documentation automatically inherited by all Lupaxa **public repositories**.
 
 - **Centralized policies**  
-  The official Code of Conduct, Contributing Guide, and Security Policy shared across every project.
+  The official Code of Conduct, Contributing Guide, and Security Policy shared across every **public project**.
 
 - **Organization profile**  
   The public [organization profile README](https://github.com/the-lupaxa-project) displayed on GitHub.
 
 - **Reusable automation**  
-  Global GitHub Actions, workflow templates, and composite actions for consistent CI/CD pipelines across every project.
+  Global GitHub Actions, workflow templates, and composite actions for consistent CI/CD pipelines across every **public project**.
 
 ### How GitHub Uses This Repo
 
-GitHub automatically recognizes and applies certain files from the organization’s `.github` repository across all repos:
+GitHub automatically recognizes and applies certain files from the organization’s `.github` repository across all **public repositories**:
 
 | File / Folder          | Purpose                                          |
 | :--------------------- | :----------------------------------------------- |
 | profile/README.md      | Appears on the organization’s public profile.    |
 | CODE_OF_CONDUCT.md     | Linked automatically in all repositories.        |
 | CONTRIBUTING.md        | Used as the default contribution guide.          |
-| SECURITY.md            | Linked under “Report a vulnerability”.           |
+| SECURITY.md            | Linked under "Report a vulnerability".           |
 | ISSUE_TEMPLATE/        | Shared issue templates for the entire org.       |
 | PULL_REQUEST_TEMPLATE/ | Shared PR templates for consistent submissions.  |
 | .github/workflows/     | Provides reusable workflows for CI/CD.           |
 
 Individual repositories can override any of these by including their own copies.
-
----
 
 ### Reusable CI/CD Workflows
 

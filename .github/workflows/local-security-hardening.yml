@@ -1,0 +1,25 @@
+name: Ensure SHA-Pinned GitHub Actions
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/*.yml"
+      - ".github/workflows/*.yaml"
+  push:
+    branches:
+      - "**"
+    paths:
+      - ".github/workflows/*.yml"
+      - ".github/workflows/*.yaml"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  ensure-sha-pinned:
+    uses: ./.github/workflows/reusable-ensure-sha-pinned-actions.yml
