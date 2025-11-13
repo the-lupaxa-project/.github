@@ -1,0 +1,22 @@
+name: Greetings
+
+on:
+  pull_request:
+  issues:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  greetings:
+    uses: ./.github/workflows/reusable-greetings.yml
+    permissions:
+      issues: write
+      pull-requests: write
+    secrets:
+      repo-token: ${{ secrets.GITHUB_TOKEN }}

@@ -7,16 +7,13 @@ on:
   pull_request:       # run on PRs
   workflow_dispatch:  # add a Run Workflow button
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   docs:
     uses: ./.github/workflows/reusable-docs-lint.yml
     permissions:
       contents: read
-    with:
-      md_globs: "**/*.md"
-      yml_globs: |
-        **/*.yml
-        **/*.yaml"
-      report_only: "false"
-      show_errors: "true"
     secrets: inherit

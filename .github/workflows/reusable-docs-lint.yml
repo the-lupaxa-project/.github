@@ -4,27 +4,42 @@ on:
   workflow_call:
     inputs:
       md_globs:
-        description: "Glob(s) for Markdown files"
+        description: "Glob(s) / patterns for Markdown files (comma-separated)"
         required: false
         type: string
-        default: "**/*.md"
       yml_globs:
-        description: "Glob(s) for YAML files"
+        description: "Glob(s) / patterns for YAML files (comma-separated)"
         required: false
         type: string
-        default: |
-          **/*.yml
-          **/*.yaml
+      exclude_files:
+        description: >
+          Optional comma-separated list of regex patterns to exclude from all lint steps.
+        required: false
+        type: string
+
       report_only:
         description: "Do not fail the build even if errors occur"
         required: false
-        type: string
-        default: "false"
+        type: boolean
+        default: false
+
       show_errors:
         description: "Show detailed error output"
         required: false
-        type: string
-        default: "true"
+        type: boolean
+        default: true
+
+      show_skipped:
+        description: "Show skipped / ignored files in the output"
+        required: false
+        type: boolean
+        default: false
+
+      no_color:
+        description: "Disable ANSI colours."
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   markdown:
@@ -34,9 +49,11 @@ jobs:
       contents: read
     with:
       include_files: ${{ inputs.md_globs }}
-      exclude_files: ""
+      exclude_files: ${{ inputs.exclude_files }}
       report_only: ${{ inputs.report_only }}
       show_errors: ${{ inputs.show_errors }}
+      show_skipped: ${{ inputs.show_skipped }}
+      no_color: ${{ inputs.no_color }}
     secrets: inherit
 
   yaml:
@@ -46,7 +63,9 @@ jobs:
       contents: read
     with:
       include_files: ${{ inputs.yml_globs }}
-      exclude_files: ""
+      exclude_files: ${{ inputs.exclude_files }}
       report_only: ${{ inputs.report_only }}
       show_errors: ${{ inputs.show_errors }}
+      show_skipped: ${{ inputs.show_skipped }}
+      no_color: ${{ inputs.no_color }}
     secrets: inherit

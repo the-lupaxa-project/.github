@@ -3,6 +3,10 @@ name: Dependabot Automation (Approve, Comment, Merge)
 on:
   pull_request:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   dependabot-auto-merge:
     uses: ./.github/workflows/reusable-dependabot.yml

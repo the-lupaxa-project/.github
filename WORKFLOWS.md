@@ -92,6 +92,8 @@ These map to environment variables expected by pipeline.sh.
 
 ### Catalog Overview
 
+#### CI/CD Toolbox
+
 | Workflow file                        | CICDToolbox repo        | Purpose                          |
 | ------------------------------------ | ----------------------- | -------------------------------- |
 | reusable-action-lint.yml             | action-lint             | Lint GitHub Actions workflows.   |
@@ -113,6 +115,15 @@ These map to environment variables expected by pipeline.sh.
 | reusable-shellcheck.yml              | shellcheck              | Shell script linting.            |
 | reusable-validate-citations-file.yml | validate-citations-file | Validate CITATION.cff files.     |
 | reusable-yaml-lint.yml               | yaml-lint               | YAML linting.                    |
+
+#### Other Reusable Workflows
+
+| Workflow file           | Source                                                            | Purpose                                                              |
+| ----------------------- | ----------------------------------------------------------------- | -------------------------------------------------------------------- |
+| reusable-dependabot.yml | N/A                                                               | Automatic dependency updates.                                        |
+| reusable-docs-lint.yml  | N/A                                                               | Wrapper for Markdown + Yaml.                                         |
+| reusable-greetings.yml  | [first-interaction](https://github.com/actions/first-interaction) | Filter (PRs) and issues from first-time contributors.                |
+| reusable-stale-lint.yml | [stale](https://github.com/actions/stale)                         | Marks issues and pull requests that have not had recent interaction. |
 
 ### Usage Examples
 
@@ -138,14 +149,6 @@ jobs:
       include_files: **/*.yml,**/*.yaml
 ```
 
-#### Action Lint
-
-```yaml
-jobs:
-  actionlint:
-    uses: the-lupaxa-project/.github/.github/workflows/reusable-action-lint.yml@<COMMIT_SHA>
-```
-
 #### ShellCheck
 
 ```yaml
@@ -164,14 +167,6 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-bandit.yml@<COMMIT_SHA>
 ```
 
-#### JSON Lint
-
-```yaml
-jobs:
-  json:
-    uses: the-lupaxa-project/.github/.github/workflows/reusable-json-lint.yml@<COMMIT_SHA>
-```
-
 #### Rubocop
 
 ```yaml
@@ -186,16 +181,6 @@ jobs:
 jobs:
   reek:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-reek.yml@<COMMIT_SHA>
-```
-
-#### Citation File Validation
-
-```yaml
-jobs:
-  citation:
-    uses: the-lupaxa-project/.github/.github/workflows/reusable-validate-citations-file.yml@<COMMIT_SHA>
-    with:
-      include_files: CITATION.cff
 ```
 
 ### Bundle Workflows

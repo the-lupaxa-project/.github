@@ -7,22 +7,35 @@ on:
         description: "Comma-separated list or regex patterns to include"
         required: false
         type: string
-        default: ""
+
       exclude_files:
         description: "Comma-separated list or regex patterns to exclude"
         required: false
         type: string
-        default: ""
+
       report_only:
         description: "Do not fail the build even if errors occur"
         required: false
-        type: string
-        default: "false"
+        type: boolean
+        default: false
+
       show_errors:
         description: "Show detailed error output"
         required: false
-        type: string
-        default: "true"
+        type: boolean
+        default: true
+
+      show_skipped:
+        description: "Show skipped / ignored files in the output"
+        required: false
+        type: boolean
+        default: false
+
+      no_color:
+        description: "Disable ANSI colours."
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   yaml-lint:
@@ -44,5 +57,7 @@ jobs:
           EXCLUDE_FILES: ${{ inputs.exclude_files }}
           REPORT_ONLY: ${{ inputs.report_only }}
           SHOW_ERRORS: ${{ inputs.show_errors }}
+          SHOW_SKIPPED: ${{ inputs.show_skipped }}
+          NO_COLOR: ${{ inputs.no_color }}
         run: |
           bash <(curl -s https://raw.githubusercontent.com/CICDToolbox/yaml-lint/master/pipeline.sh)

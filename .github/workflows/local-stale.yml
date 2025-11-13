@@ -1,0 +1,20 @@
+name: Stale Issue & PR Handler
+
+on:
+  schedule:
+    - cron: "35 5 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions: read-all
+
+jobs:
+  stale:
+    uses: ./.github/workflows/reusable-stale.yml
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
