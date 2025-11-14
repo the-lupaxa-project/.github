@@ -13,6 +13,8 @@ MD013:
   tables: false
   headings: true
 
+MD024: false
+
 # Disable trailing-punctuation-in-headings (allows ":" etc.)
 MD026:
   punctuation: ""
