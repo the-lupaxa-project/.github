@@ -162,15 +162,16 @@ These workflows are not CICDToolbox-based, but provide core services like depend
 
 #### Catalog — Core Workflows
 
-| Workflow file                                     | Purpose                                                                                             | Example                                   |
-| :------------------------------------------------ | :-------------------------------------------------------------------------------------------------- | :---------------------------------------: |
-| [reusable-codeql.yml][20]                         | CodeQL security and quality scanning.                                                               | [Example](#codeql-security-and-quality)   |
-| [reusable-dependabot.yml][21]                     | Wrapper to standardise Dependabot config across repos.                                              | [Example](#dependabot-standardisation)    |
-| [reusable-docs-lint.yml][22]                      | Bundle: Markdown + YAML docs linting.                                                               | [Example](#docs-bundle-markdown-and-yaml) |
-| [reusable-ensure-sha-pinned-actions.yml][23]      | Enforce SHA-pinned actions, with an allow-list for the-lupaxa-project/.github workflows on @master. | [Example](#enforce-sha-pinned-actions)    |
-| [reusable-greetings.yml][24]                      | Greet first-time issue and PR authors.                                                              | [Example](#first-interaction-greetings)   |
-| [reusable-purge-deprecated-workflow-runs.yml][25] | Purge obsolete / cancelled / failed / skipped workflow runs.                                        | [Example](#purge-old-workflow-runs)       |
-| [reusable-stale.yml][26]                          | Mark and close stale issues/PRs.                                                                    | [Example](#stale-issues-and-prs)          |
+| Workflow file                                     | Purpose                                                                                             | Example                                         |
+| :------------------------------------------------ | :-------------------------------------------------------------------------------------------------- | :---------------------------------------------: |
+| [reusable-codeql.yml][20]                         | CodeQL security and quality scanning.                                                               | [Example](#codeql-security-and-quality)         |
+| [reusable-dependabot.yml][21]                     | Wrapper to standardise Dependabot config across repos.                                              | [Example](#dependabot-standardisation)          |
+| [reusable-docs-lint.yml][22]                      | Bundle: Markdown + YAML docs linting.                                                               | [Example](#docs-bundle-markdown-and-yaml)       |
+| [reusable-ensure-sha-pinned-actions.yml][23]      | Enforce SHA-pinned actions, with an allow-list for the-lupaxa-project/.github workflows on @master. | [Example](#enforce-sha-pinned-actions)          |
+| [reusable-greetings.yml][24]                      | Greet first-time issue and PR authors.                                                              | [Example](#first-interaction-greetings)         |
+| [reusable-purge-deprecated-workflow-runs.yml][25] | Purge obsolete / cancelled / failed / skipped workflow runs.                                        | [Example](#purge-old-workflow-runs)             |
+| [reusable-slack-workflow-status.yml][26]          | Posts final workflow status to Slack via webhook.                                                   | [Example](#slack-workflow-status-notifications) |
+| [reusable-stale.yml][27]                          | Mark and close stale issues/PRs.                                                                    | [Example](#stale-issues-and-prs)                |
 
 [20]: https://github.com/the-lupaxa-project/.github/tree/master/.github/workflows/reusable-codeql.yml
 [21]: https://github.com/the-lupaxa-project/.github/tree/master/.github/workflows/reusable-dependabot.yml
@@ -178,7 +179,8 @@ These workflows are not CICDToolbox-based, but provide core services like depend
 [23]: https://github.com/the-lupaxa-project/.github/tree/master/.github/workflows/reusable-ensure-sha-pinned-actions.yml
 [24]: https://github.com/the-lupaxa-project/.github/tree/master/.github/workflows/reusable-greetings.yml
 [25]: https://github.com/the-lupaxa-project/.github/tree/master/.github/workflows/reusable-purge-deprecated-workflow-runs.yml
-[26]: https://github.com/the-lupaxa-project/.github/tree/master/.github/workflows/reusable-stale.yml
+[26]: https://github.com/the-lupaxa-project/.github/tree/master/.github/workflows/reusable-slack-workflow-status.yml
+[27]: https://github.com/the-lupaxa-project/.github/tree/master/.github/workflows/reusable-stale.yml
 
 ### Detailed Usage Examples (Alphabetical by Workflow File)
 
@@ -824,6 +826,105 @@ permissions:
 jobs:
   shellcheck:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-shellcheck.yml@master
+```
+
+#### Slack Workflow Status Notifications
+
+This reusable workflow intentionally contains no guardrails. Its philosophy is simple:
+
+`If you called me, you meant it.`
+
+All logic and guardrails around if we should send the message to slack comes from the consuming workflow.
+Below is a detailed (and commented) example with a selection of guardrails that can be used.
+
+Guardrail List:
+
+- Ensure Slack is globally enabled
+- Ensure webhook secret exists
+- Skip notify on PRs from forks
+- Skip notify when commit message contains “[no-slack]”
+- Skip notify when PR title contains “[no-slack]”
+- Skip notify when manually dispatched AND manually disabled
+- Skip notify for tag builds
+- Always run (using strong guardrails)
+- Has access to secrets
+
+```yaml
+name: Example CI with Slack
+
+on:
+  push:
+    branches:
+      - "**"
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      enable_slack:
+        description: "Send Slack notification for this manual run?"
+        required: false
+        type: boolean
+        default: true
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  SLACK_ENABLED: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Do build / tests
+        run: echo "Build goes here"
+
+  slack-workflow-status:
+    name: Slack Workflow Status
+    needs:
+      - build
+
+  if: >
+    always() &&                          # Always evaluate this block, even if earlier jobs fail.
+    env.SLACK_ENABLED == true &&         # Global toggle set by the repo author.
+    secrets.SLACK_WEBHOOK_URL != '' &&   # Skip if webhook isn't configured at repo/org level.
+    
+    # --- Prevent Slack for pull requests coming from forks ---
+    # Forks should NEVER have access to internal Slack systems.
+    (
+      github.event_name != 'pull_request' ||
+      github.event.pull_request.head.repo.full_name == github.repository
+    ) &&
+
+    # --- Allow manual workflow_dispatch to turn Slack on/off ---
+    # If this is a manually-triggered run, only notify Slack if the user opted in.
+    (
+      github.event_name != 'workflow_dispatch' ||
+      github.event.inputs.enable_slack == true
+    ) &&
+
+    # --- Skip Slack notifications when commit message contains “[no-slack]” ---
+    # Developers can prevent Slack noise on minor commits.
+    (
+      github.event_name != 'push' ||
+      !contains(github.event.head_commit.message, '[no-slack]')
+    ) &&
+
+    # --- Skip Slack on PRs when title contains “[no-slack]” ---
+    (
+      github.event_name != 'pull_request' ||
+      !contains(github.event.pull_request.title, '[no-slack]')
+    ) &&
+
+    # --- Skip tag builds (commonly used for release tagging) ---
+    (
+      github.ref == '' ||
+      !startsWith(github.ref, 'refs/tags/')
+    )
+  
+    uses: the-lupaxa-project/.github/.github/workflows/reusable-slack-workflow-status.yml@master
+    secrets:
+      slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
 ```
 
 #### Stale Issues and PRs
