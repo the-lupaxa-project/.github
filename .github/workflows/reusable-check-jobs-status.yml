@@ -1,25 +1,24 @@
-name: Reusable Check Job Statuses
+name: Reusable Check Jobs Status
 
 on:
   workflow_call:
     inputs:
-      needs_json:
-        description: >
-          JSON representation of upstream jobs, usually from `toJson(needs)`
-          in the calling workflow.
+      jobs_json:
+        description: "JSON representation of the 'needs' context from the caller workflow."
         required: true
         type: string
 
+permissions:
+  contents: read
+
 jobs:
-  check-jobs:
-    name: Check Upstream Job Statuses
+  check-jobs-status:
+    name: Check Jobs Status
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
 
     steps:
-      - name: Checkout the Repository
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
-
-      - name: Run upstream job status checker
-        run: .github/scripts/check-jobs.sh '${{ inputs.needs_json }}'
+      - name: Run central check-jobs.sh
+        run: |
+          bash <(curl -fsSL \
+            "https://raw.githubusercontent.com/the-lupaxa-project/.github/master/.github/scripts/check-jobs.sh") \
+            '${{ inputs.jobs_json }}'
