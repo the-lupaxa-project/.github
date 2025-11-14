@@ -302,9 +302,9 @@ The workflow:
 <summary><strong>Click to expand: Inputs Accepted by this workflow</strong></summary>
 <br>
 
-| Input            | Type    | Required | Default | Description                              |
-| :--------------- | :------ | :------- | :------ | :--------------------------------------- |
-| job_results_json | string  | Yes      |         | JSON string of job results to aggregate. |
+| Input     | Type    | Required | Default | Description                              |
+| :-------- | :------ | :------- | :------ | :--------------------------------------- |
+| jobs_json | string  | Yes      |         | JSON string of job results to aggregate. |
 
 <br>
 </details>
@@ -342,7 +342,9 @@ jobs:
     needs:
       - markdown
       - yaml
-  uses: the-lupaxa-project/.github/.github/workflows/reusable-check-job-status.yml@master
+    uses: the-lupaxa-project/.github/.github/workflows/reusable-check-job-status.yml@master
+    with:
+      jobs_json: ${{ toJson(needs) }}
 ```
 
 #### CodeQL Security and Quality
