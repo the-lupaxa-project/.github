@@ -34,5 +34,5 @@ jobs:
     # 🔴 IMPORTANT: this is a *job-level* uses, not under steps:
     uses: ./.github/workflows/reusable-check-jobs-status.yml
     with:
-      needs_json: ${{ toJson(needs) }}
+      jobs_json: ${{ toJson(needs) }}
 
