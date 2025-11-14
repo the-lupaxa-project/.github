@@ -213,6 +213,10 @@ Reusable wrapper for the CICDToolbox awesomebot pipeline, checking Markdown link
 <br>
 </details>
 
+<details>
+<summary><strong>Click to expand: Minimal usage example</strong></summary>
+<br>
+
 ```yaml
 name: Markdown Link Check
 
@@ -238,6 +242,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-awesomebot.yml@master
 ```
 
+<br>
+</details>
+
 #### Python Security (Bandit)
 
 Runs the CICDToolbox bandit pipeline to perform static security analysis on Python code, flagging common vulnerabilities and insecure patterns.
@@ -257,6 +264,10 @@ Runs the CICDToolbox bandit pipeline to perform static security analysis on Pyth
 
 <br>
 </details>
+
+<details>
+<summary><strong>Click to expand: Minimal usage example</strong></summary>
+<br>
 
 ```yaml
 name: Python Security (Bandit)
@@ -283,6 +294,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-bandit.yml@master
 ```
 
+<br>
+</details>
+
 #### Check Job Status
 
 Summarises the results of upstream jobs (success, failure, skipped, cancelled, timed_out) and fails the workflow if any required job did not succeed,
@@ -308,6 +322,10 @@ The workflow:
 
 <br>
 </details>
+
+<details>
+<summary><strong>Click to expand: Minimal usage example</strong></summary>
+<br>
 
 ```yaml
 name: Example with job status summary
@@ -347,6 +365,9 @@ jobs:
       jobs_json: ${{ toJson(needs) }}
 ```
 
+<br>
+</details>
+
 #### CodeQL Security and Quality
 
 Standardised CodeQL security analysis workflow with a language matrix, suitable for running GitHub’s code scanning across one or more supported languages in a consistent way.
@@ -363,6 +384,10 @@ Standardised CodeQL security analysis workflow with a language matrix, suitable 
 
 <br>
 </details>
+
+<details>
+<summary><strong>Click to expand: Minimal usage example</strong></summary>
+<br>
 
 ```yaml
 name: CodeQL Analysis
@@ -399,11 +424,18 @@ jobs:
       languages: "python,javascript"
 ```
 
+<br>
+</details>
+
 #### Dependabot Standardisation
 
 Centralised Dependabot configuration runner that can be triggered from other workflows to ensure dependency update checks are applied consistently across all supported ecosystems.
 
 > This workflow does not expose any inputs; all behaviour is defined in the workflow.
+
+<details>
+<summary><strong>Click to expand: Minimal usage example</strong></summary>
+<br>
 
 ```yaml
 name: Dependabot
@@ -419,6 +451,9 @@ jobs:
   dependabot:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-dependabot.yml@master
 ```
+
+<br>
+</details>
 
 #### Docs Bundle (Markdown and YAML)
 
@@ -440,6 +475,10 @@ jobs:
 
 <br>
 </details>
+
+<details>
+<summary><strong>Click to expand: Minimal usage example</strong></summary>
+<br>
 
 ```yaml
 name: Documentation Lint (Markdown + YAML)
@@ -463,6 +502,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-docs-lint.yml@master
 ```
 
+<br>
+</details>
+
 #### Enforce SHA-Pinned Actions
 
 Security-hardening workflow that inspects all workflow files and enforces SHA-pinned actions, allowing a controlled allow-list
@@ -479,6 +521,10 @@ Security-hardening workflow that inspects all workflow files and enforces SHA-pi
 
 <br>
 </details>
+
+<details>
+<summary><strong>Click to expand: Minimal usage example</strong></summary>
+<br>
 
 ```yaml
 name: Ensure SHA-Pinned Actions
@@ -501,6 +547,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-ensure-sha-pinned-actions.yml@master
 ```
 
+<br>
+</details>
+
 #### Generate Release
 
 Generic GitHub release creator that takes a tag, generates a changelog, and creates a GitHub Release via softprops/action-gh-release,
@@ -520,7 +569,9 @@ so any repo can get consistent, documented releases.
 <br>
 </details>
 
-##### Generate a release
+<details>
+<summary><strong>Click to expand: Minimal usage example (Production Release)</strong></summary>
+<br>
 
 ```yaml
 name: Generate Release
@@ -537,20 +588,16 @@ permissions:
 jobs:
   create-release:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-github-release.yml@master
-    with:
-      # Optional overrides:
-      # tag: "refs/tags/v1.2.3"
-      # release_name: "Custom Release Title"
-      draft: false
-      prerelease: false
-
     secrets:
       github-token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
+<br>
 </details>
 
-##### Generate a test release
+<details>
+<summary><strong>Click to expand: Minimal usage example (Test Release)</strong></summary>
+<br>
 
 ```yaml
 name: Generate Test Release
@@ -566,16 +613,12 @@ permissions:
 jobs:
   create-release:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-github-release.yml@master
-    with:
-      # Optional overrides:
-      # tag: "refs/tags/v1.2.3"
-      # release_name: "Custom Release Title"
-      draft: false
-      prerelease: false
-
     secrets:
       github-token: ${{ secrets.GITHUB_TOKEN }}
 ```
+
+<br>
+</details>
 
 #### First Interaction Greetings
 
@@ -592,6 +635,10 @@ Reusable wrapper around actions/first-interaction to post a friendly, standardis
 
 <br>
 </details>
+
+<details>
+<summary><strong>Click to expand: Minimal usage example</strong></summary>
+<br>
 
 ```yaml
 name: Greetings
@@ -616,6 +663,9 @@ jobs:
       repo-token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
+<br>
+</details>
+
 #### Dockerfile Linting (Hadolint)
 
 Runs the CICDToolbox hadolint pipeline to lint Dockerfiles and Docker-related build files for best practices, portability, and common mistakes.
@@ -635,6 +685,10 @@ Runs the CICDToolbox hadolint pipeline to lint Dockerfiles and Docker-related bu
 
 <br>
 </details>
+
+<details>
+<summary><strong>Click to expand: Minimal usage example</strong></summary>
+<br>
 
 ```yaml
 name: Dockerfile Lint (Hadolint)
@@ -663,6 +717,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-hadolint.yml@master
 ```
 
+<br>
+</details>
+
 #### JSON Linting
 
 Invokes the CICDToolbox json-lint pipeline to validate JSON files, catching syntax errors and formatting issues in configuration and data files.
@@ -682,6 +739,10 @@ Invokes the CICDToolbox json-lint pipeline to validate JSON files, catching synt
 
 <br>
 </details>
+
+<details>
+<summary><strong>Click to expand: Minimal usage example</strong></summary>
+<br>
 
 ```yaml
 name: JSON Lint
@@ -708,6 +769,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-json-lint.yml@master
 ```
 
+<br>
+</details>
+
 #### Markdown Linting
 
 Standard Markdown linting workflow using the CICDToolbox markdown-lint pipeline and the shared .markdownlint.yml configuration for consistent prose and formatting rules.
@@ -727,6 +791,10 @@ Standard Markdown linting workflow using the CICDToolbox markdown-lint pipeline 
 
 <br>
 </details>
+
+<details>
+<summary><strong>Click to expand: Minimal usage example</strong></summary>
+<br>
 
 ```yaml
 name: Markdown Lint
@@ -753,6 +821,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-markdown-lint.yml@master
 ```
 
+<br>
+</details>
+
 #### Perl Linting
 
 Uses the CICDToolbox perl-lint pipeline to run linting checks over Perl scripts and modules, enforcing style and catching common issues.
@@ -772,6 +843,10 @@ Uses the CICDToolbox perl-lint pipeline to run linting checks over Perl scripts 
 
 <br>
 </details>
+
+<details>
+<summary><strong>Click to expand: Minimal usage example</strong></summary>
+<br>
 
 ```yaml
 name: Perl Lint
@@ -800,6 +875,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-perl-lint.yml@master
 ```
 
+<br>
+</details>
+
 #### PHP Linting
 
 Runs the CICDToolbox php-lint pipeline to syntax-check and lint PHP files, helping keep PHP projects clean and error-free.
@@ -819,6 +897,10 @@ Runs the CICDToolbox php-lint pipeline to syntax-check and lint PHP files, helpi
 
 <br>
 </details>
+
+<details>
+<summary><strong>Click to expand: Minimal usage example</strong></summary>
+<br>
 
 ```yaml
 name: PHP Lint
@@ -845,6 +927,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-php-lint.yml@master
 ```
 
+<br>
+</details>
+
 #### Puppet Manifest Linting
 
 Wraps the CICDToolbox puppet-lint pipeline to validate Puppet manifests, enforcing style and best practices for configuration management code.
@@ -864,6 +949,10 @@ Wraps the CICDToolbox puppet-lint pipeline to validate Puppet manifests, enforci
 
 <br>
 </details>
+
+<details>
+<summary><strong>Click to expand: Minimal usage example</strong></summary>
+<br>
 
 ```yaml
 name: Puppet Lint
@@ -890,6 +979,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-puppet-lint.yml@master
 ```
 
+<br>
+</details>
+
 #### Python Requirements Updates (pur)
 
 Uses the CICDToolbox pur pipeline to update Python requirements*.txt files, ensuring dependencies are brought up to date in a controlled way before commit or release.
@@ -909,6 +1001,10 @@ Uses the CICDToolbox pur pipeline to update Python requirements*.txt files, ensu
 
 <br>
 </details>
+
+<details>
+<summary><strong>Click to expand: Minimal usage example</strong></summary>
+<br>
 
 ```yaml
 name: Python Requirements (pur)
@@ -937,6 +1033,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-pur.yml@master
 ```
 
+<br>
+</details>
+
 #### Purge Old Workflow Runs
 
 Reusable wrapper around otto-de/purge-deprecated-workflow-runs to clean up old, obsolete, cancelled, failed, or skipped workflow runs, keeping repository Actions history tidy.
@@ -956,6 +1055,10 @@ Reusable wrapper around otto-de/purge-deprecated-workflow-runs to clean up old, 
 
 <br>
 </details>
+
+<details>
+<summary><strong>Click to expand: Minimal usage example</strong></summary>
+<br>
 
 ```yaml
 name: Purge Deprecated Workflow Runs
@@ -977,6 +1080,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-purge-deprecated-workflow-runs.yml@master
 ```
 
+<br>
+</details>
+
 #### Python Style (pycodestyle)
 
 Runs the CICDToolbox pycodestyle pipeline to enforce PEP 8-style guidelines on Python code, catching layout and style violations.
@@ -996,6 +1102,10 @@ Runs the CICDToolbox pycodestyle pipeline to enforce PEP 8-style guidelines on P
 
 <br>
 </details>
+
+<details>
+<summary><strong>Click to expand: Minimal usage example</strong></summary>
+<br>
 
 ```yaml
 name: Python Style (pycodestyle)
@@ -1022,6 +1132,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-pycodestyle.yml@master
 ```
 
+<br>
+</details>
+
 #### Python Docstrings (pydocstyle)
 
 Invokes the CICDToolbox pydocstyle pipeline to check Python docstrings against a configured convention, improving API documentation consistency.
@@ -1041,6 +1154,10 @@ Invokes the CICDToolbox pydocstyle pipeline to check Python docstrings against a
 
 <br>
 </details>
+
+<details>
+<summary><strong>Click to expand: Minimal usage example</strong></summary>
+<br>
 
 ```yaml
 name: Python Docstrings (pydocstyle)
@@ -1067,6 +1184,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-pydocstyle.yml@master
 ```
 
+<br>
+</details>
+
 #### Python Meta-Linting (Pylama)
 
 Uses the CICDToolbox pylama pipeline as a meta-linter that combines multiple Python linters into a single, unified quality gate.
@@ -1086,6 +1206,10 @@ Uses the CICDToolbox pylama pipeline as a meta-linter that combines multiple Pyt
 
 <br>
 </details>
+
+<details>
+<summary><strong>Click to expand: Minimal usage example</strong></summary>
+<br>
 
 ```yaml
 name: Python Meta Lint (Pylama)
@@ -1112,6 +1236,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-pylama.yml@master
 ```
 
+<br>
+</details>
+
 #### Python Linting (Pylint)
 
 Runs the CICDToolbox pylint pipeline to perform deep static analysis on Python code, enforcing coding standards and catching a wide range of potential issues.
@@ -1131,6 +1258,10 @@ Runs the CICDToolbox pylint pipeline to perform deep static analysis on Python c
 
 <br>
 </details>
+
+<details>
+<summary><strong>Click to expand: Minimal usage example</strong></summary>
+<br>
 
 ```yaml
 name: Python Lint (Pylint)
@@ -1157,6 +1288,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-pylint.yml@master
 ```
 
+<br>
+</details>
+
 #### Ruby Code Smells (Reek)
 
 Wraps the CICDToolbox reek pipeline to detect "code smells" in Ruby code, helping highlight complexity and maintainability problems.
@@ -1176,6 +1310,10 @@ Wraps the CICDToolbox reek pipeline to detect "code smells" in Ruby code, helpin
 
 <br>
 </details>
+
+<details>
+<summary><strong>Click to expand: Minimal usage example</strong></summary>
+<br>
 
 ```yaml
 name: Ruby Code Smells (Reek)
@@ -1202,6 +1340,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-reek.yml@master
 ```
 
+<br>
+</details>
+
 #### Ruby Linting (Rubocop)
 
 Runs the CICDToolbox rubocop pipeline to provide Ruby linting and auto-formatting checks according to a shared configuration.
@@ -1221,6 +1362,10 @@ Runs the CICDToolbox rubocop pipeline to provide Ruby linting and auto-formattin
 
 <br>
 </details>
+
+<details>
+<summary><strong>Click to expand: Minimal usage example</strong></summary>
+<br>
 
 ```yaml
 name: Ruby Lint (Rubocop)
@@ -1247,6 +1392,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-rubocop.yml@master
 ```
 
+<br>
+</details>
+
 #### Shell Script Linting
 
 Invokes the CICDToolbox shellcheck pipeline to lint shell scripts (.sh, .bash, etc.), catching unsafe constructs and portability problems.
@@ -1266,6 +1414,10 @@ Invokes the CICDToolbox shellcheck pipeline to lint shell scripts (.sh, .bash, e
 
 <br>
 </details>
+
+<details>
+<summary><strong>Click to expand: Minimal usage example</strong></summary>
+<br>
 
 ```yaml
 name: ShellCheck
@@ -1297,6 +1449,9 @@ jobs:
   shellcheck:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-shellcheck.yml@master
 ```
+
+<br>
+</details>
 
 #### Slack Workflow Status Notifications
 
@@ -1332,6 +1487,10 @@ Guardrail List:
 
 <br>
 </details>
+
+<details>
+<summary><strong>Click to expand: Minimal usage example</strong></summary>
+<br>
 
 ```yaml
 name: Example CI with Slack
@@ -1411,6 +1570,9 @@ jobs:
       slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
 ```
 
+<br>
+</details>
+
 #### Stale Issues and PRs
 
 Reusable wrapper around actions/stale to automatically mark and optionally close stale issues and pull requests, using organisation-standard labels and timeouts.
@@ -1439,6 +1601,10 @@ Reusable wrapper around actions/stale to automatically mark and optionally close
 <br>
 </details>
 
+<details>
+<summary><strong>Click to expand: Minimal usage example</strong></summary>
+<br>
+
 ```yaml
 name: Stale Issue & PR Handler
 
@@ -1461,6 +1627,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-stale.yml@master
 ```
 
+<br>
+</details>
+
 #### CITATION File Validation
 
 Runs the CICDToolbox validate-citations-file pipeline to validate CITATION.cff files, ensuring project citation metadata is present and correctly structured.
@@ -1480,6 +1649,10 @@ Runs the CICDToolbox validate-citations-file pipeline to validate CITATION.cff f
 
 <br>
 </details>
+
+<details>
+<summary><strong>Click to expand: Minimal usage example</strong></summary>
+<br>
 
 ```yaml
 name: Citation File Validation
@@ -1506,6 +1679,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-validate-citations-file.yml@master
 ```
 
+<br>
+</details>
+
 #### YAML Linting
 
 Standard YAML linting workflow using the CICDToolbox yaml-lint pipeline and the shared .yamllint.yml configuration, enforcing consistent YAML style and spacing.
@@ -1525,6 +1701,10 @@ Standard YAML linting workflow using the CICDToolbox yaml-lint pipeline and the 
 
 <br>
 </details>
+
+<details>
+<summary><strong>Click to expand: Minimal usage example</strong></summary>
+<br>
 
 ```yaml
 name: YAML Lint
