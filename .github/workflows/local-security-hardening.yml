@@ -19,7 +19,9 @@ concurrency:
 
 permissions:
   contents: read
+  pull-requests: write
 
 jobs:
   ensure-sha-pinned:
+    name: Run Ensure SHA-Pinned GitHub Actions (Reusable)
     uses: ./.github/workflows/reusable-ensure-sha-pinned-actions.yml

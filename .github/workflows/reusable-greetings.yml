@@ -18,13 +18,15 @@ on:
         description: "Token with permission to comment on issues and pull requests"
         required: true
 
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
 jobs:
   greetings:
     name: First-time Contributor Greetings
     runs-on: ubuntu-latest
-    permissions:
-      issues: write
-      pull-requests: write
 
     steps:
       - name: Handle Greetings

@@ -15,5 +15,5 @@ permissions:
 
 jobs:
   purge-deprecated-workflows:
-    name: Purge Deprecated Workflow Runs
+    name: Run Purge Deprecated Workflow Runs (Reusable)
     uses: ./.github/workflows/reusable-purge-deprecated-workflow-runs.yml

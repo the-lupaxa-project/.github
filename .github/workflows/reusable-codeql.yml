@@ -10,14 +10,15 @@ on:
         required: true
         type: string
 
+permissions:
+  actions: read
+  contents: read
+  security-events: write
+
 jobs:
   codeql-analyze:
     name: CodeQL Analyze
     runs-on: ubuntu-latest
-    permissions:
-      actions: read
-      contents: read
-      security-events: write
 
     steps:
       - name: Checkout the Repository

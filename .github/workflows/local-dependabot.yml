@@ -7,10 +7,12 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   dependabot-auto-merge:
+    name: Run Dependabot Automation (Reusable)
     uses: ./.github/workflows/reusable-dependabot.yml
-    permissions:
-      contents: write
-      pull-requests: write
     secrets: inherit

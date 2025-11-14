@@ -37,6 +37,9 @@ on:
         type: boolean
         default: false
 
+permissions:
+  contents: read
+
 jobs:
   yaml-lint:
     name: YAML Lint
@@ -51,7 +54,7 @@ jobs:
         with:
           python-version: "3.x"
 
-      - name: Run yaml-lint (CICDToolbox)
+      - name: Run yaml lint
         env:
           INCLUDE_FILES: ${{ inputs.include_files }}
           EXCLUDE_FILES: ${{ inputs.exclude_files }}

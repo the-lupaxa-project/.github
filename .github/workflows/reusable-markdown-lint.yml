@@ -36,6 +36,9 @@ on:
         type: boolean
         default: false
 
+permissions:
+  contents: read
+
 jobs:
   markdown-lint:
     name: Markdown Lint
@@ -50,7 +53,7 @@ jobs:
         with:
           node-version: "24"
 
-      - name: Run markdown-lint (CICDToolbox)
+      - name: Run markdown lint
         env:
           INCLUDE_FILES: ${{ inputs.include_files }}
           EXCLUDE_FILES: ${{ inputs.exclude_files }}

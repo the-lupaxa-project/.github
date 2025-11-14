@@ -41,12 +41,13 @@ on:
         type: boolean
         default: false
 
+permissions:
+  contents: read
+
 jobs:
-  markdown:
+  markdown-lint:
     name: Markdown Lint
     uses: ./.github/workflows/reusable-markdown-lint.yml
-    permissions:
-      contents: read
     with:
       include_files: ${{ inputs.md_globs }}
       exclude_files: ${{ inputs.exclude_files }}
@@ -56,11 +57,9 @@ jobs:
       no_color: ${{ inputs.no_color }}
     secrets: inherit
 
-  yaml:
+  yaml-lint:
     name: YAML Lint
     uses: ./.github/workflows/reusable-yaml-lint.yml
-    permissions:
-      contents: read
     with:
       include_files: ${{ inputs.yml_globs }}
       exclude_files: ${{ inputs.exclude_files }}

@@ -32,8 +32,11 @@ on:
         type: boolean
         default: false
 
+permissions:
+  contents: read
+
 jobs:
-  json_lint:
+  json-lint:
     name: JSON Lint
     runs-on: ubuntu-latest
 

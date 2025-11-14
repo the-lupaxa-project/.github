@@ -46,6 +46,7 @@ on:
 
 permissions:
   actions: write
+  contents: read
 
 jobs:
   purge-deprecated-workflows:
@@ -53,7 +54,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Purge Deprecated Workflow Runs
+      - name: Run Purge Deprecated Workflow Runs
         uses: otto-de/purge-deprecated-workflow-runs@fae5062e7f4854fcb04c09ab468637a066405c9f  # v4.0.2
         with:
           token: ${{ inputs.token || github.token }}

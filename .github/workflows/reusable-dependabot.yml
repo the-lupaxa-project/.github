@@ -34,17 +34,16 @@ on:
         type: string
         default: "dependabot: manual merge"
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   dependabot:
-    name: Dependabot Handler
+    name: Dependabot
     runs-on: ubuntu-latest
     # Only run for Dependabot PRs
     if: ${{ github.actor == 'dependabot[bot]' && github.event_name == 'pull_request' }}
-
-    permissions:
-      contents: write
-      pull-requests: write
-
     steps:
       - name: Fetch Dependabot metadata
         id: dependabot-metadata

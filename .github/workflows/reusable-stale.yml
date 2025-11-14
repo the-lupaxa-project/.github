@@ -80,14 +80,15 @@ on:
         description: "Slack webhook URL for workflow failure notifications (optional)"
         required: false
 
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
 jobs:
   stale:
     name: Handle Stale Issues & PRs
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      issues: write
-      pull-requests: write
 
     steps:
       - name: Handle Stale Issues & PRs

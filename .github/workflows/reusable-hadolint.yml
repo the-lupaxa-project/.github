@@ -32,16 +32,19 @@ on:
         type: boolean
         default: false
 
+permissions:
+  contents: read
+
 jobs:
-  run-tool:
-    name: Run <Nice Tool Name>
+  hadolint:
+    name: Hadolint
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
 
-      - name: Run <Nice Tool Name>
+      - name: Run Hadolint
         env:
           INCLUDE_FILES: ${{ inputs.include_files }}
           EXCLUDE_FILES: ${{ inputs.exclude_files }}
