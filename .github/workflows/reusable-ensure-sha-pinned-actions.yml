@@ -34,5 +34,5 @@ jobs:
         with:
           allowlist: |
             the-lupaxa-project/.github
-            ${{ inputs.allowlist }}
+            ${{ inputs.allow_list }}
           dry_run: ${{ inputs.dry_run }}
