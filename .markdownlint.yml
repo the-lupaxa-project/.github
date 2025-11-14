@@ -36,8 +36,11 @@ MD033:
     - hr
     - img
     - p
+    - span
     - strong
+    - sub
     - summary
+    - sup
 
 # Allow content before first H1 (e.g., logo block)
 MD041: false

@@ -20,43 +20,43 @@ It covers:
 - The branch / SHA policy for reusable workflows.
 - Naming conventions for reusable and local workflows.
 - A catalog of CICDToolbox-based and core governance / maintenance workflows.
-- Detailed, copy-paste-ready usage examples for every reusable workflow.
+- Detailed, copy-paste-ready minimal usage examples for every reusable workflow.
 
 All workflows are designed to be:
 
-- Reusable across all Lupaxa repositories and organizations.
+- Reusable across all Lupaxa Project repositories and organisations.
 - Secure by default, with strong controls around third-party actions.
-- Consistent with organizational linting, documentation, and security standards.
+- Consistent with organisational linting, documentation, and security standards.
 
 ### Branch / SHA Policy and Security Hardening
 
 #### General policy
 
-Across most Lupaxa repositories, we require external actions to be pinned to a specific commit SHA.
+Across **ALL** Lupaxa Project repositories, we require **ALL 3<sup>rd</sup> party actions** to be pinned to a specific commit SHA.
 
 To help enforce this, we provide:
 
-- reusable-ensure-sha-pinned-actions.yml — a reusable workflow powered by zgosalvez/github-actions-ensure-sha-pinned-actions.
+- reusable-ensure-sha-pinned-actions.yml to check and validate **ALL** actions are pinned correctly.
 - Local security-hardening workflows in consuming repos that call this reusable workflow.
 
 These security-hardening workflows:
 
 - Scan all workflow files under .github/workflows/.
 - Fail the build if they detect uses: entries that:
-  - Point to external repos without @&lt;SHA&gt;, or
+  - Point to 3<sup>rd</sup> actions without @&lt;SHA&gt;, or
   - Use @main, @master, or version tags that are not allow-listed.
 
-There is one deliberate exception:
+**There is one deliberate exception:**
 
-Calls to the-lupaxa-project/.github/.github/workflows/*.yml are explicitly allow-listed in the security-hardening configuration.
+Calls to the-lupaxa-project/.github/.github/workflows/*.yml are **explicitly** allow-listed in the security-hardening configuration.
 
-This allows all Lupaxa repos to reference organization workflows using @master, for example:
+This allows all Lupaxa Project repos to reference organisation workflows using @master, for example:
 
 ```yml
   uses: the-lupaxa-project/.github/.github/workflows/reusable-markdown-lint.yml@master
 ```
 
-This gives you:
+This provides:
 
 - Automatic updates to shared workflows via the .github repo.
 - Strong SHA pinning for all other third-party actions.
@@ -65,8 +65,8 @@ This gives you:
 
 #### Reusable workflows
 
-- Location: .github/workflows/
-- Naming pattern: reusable-NAME.yml
+- Location: the-lupaxa-project/.github/.github/workflows/
+- Naming pattern: reusable-&lt;NAME&gt;.yml
 - Purpose: reusable primitives and bundles that other repos call.
 
 ##### Reusable Example:
@@ -75,23 +75,23 @@ This gives you:
 - reusable-yaml-lint.yml
 - reusable-codeql.yml
 
-#### Local workflows
+#### Consuming workflows
 
 - Location: .github/workflows/ in a consuming repository.
-- Naming pattern: local-NAME.yml
+- Naming pattern: &lt;NAME&gt;.yml
 - Purpose: thin orchestration wrappers that:
 - Define triggers (on:),
 - Group jobs logically,
 - Call one or more reusable-*.yml workflows via uses:.
 
-##### Local Example:
+##### Consumption Example:
 
-- local-docs-lint.yml
-- local-security-hardening.yml
+- docs-lint.yml
+- security-hardening.yml
 
 ### CICDToolbox-based Reusable Workflows
 
-These workflows wrap tools from the CICDToolbox￼ GitHub organization￼ and all follow the same pattern:
+These workflows wrap tools from the [Lupaxa CI/CD Toolbox](https://github.com/lapaxa-actions-toolbox)￼GitHub organisation and all follow the same pattern:
 
 - They call the tool’s pipeline.sh via curl | bash.
 - They accept the standard inputs:
@@ -111,28 +111,28 @@ These map to environment variables used by CICDToolbox pipelines:
 - SHOW_SKIPPED
 - NO_COLOR
 
-#### Catalog — CICDToolbox-based Workflows
+#### Catalog — CI/CD Toolbox based Workflows
 
-| Workflow file                              | Purpose                                | Example                                       |
-| :----------------------------------------- | :------------------------------------- | :-------------------------------------------: |
-| [reusable-awesomebot.yml][1]               | Check Markdown links.                  | [Example](#markdown-link-checking-awesomebot) |
-| [reusable-bandit.yml][2]                   | Python security scanning.              | [Example](#python-security-bandit)            |
-| [reusable-hadolint.yml][3]                 | Dockerfile linting.                    | [Example](#dockerfile-linting-hadolint)       |
-| [reusable-json-lint.yml][4]                | JSON linting.                          | [Example](#json-linting)                      |
-| [reusable-markdown-lint.yml][5]            | Markdown linting.                      | [Example](#markdown-linting)                  |
-| [reusable-perl-lint.yml][6]                | Perl linting.                          | [Example](#perl-linting)                      |
-| [reusable-php-lint.yml][7]                 | PHP linting.                           | [Example](#php-linting)                       |
-| [reusable-puppet-lint.yml][8]              | Puppet manifest linting.               | [Example](#puppet-manifest-linting)           |
-| [reusable-pur.yml][9]                      | Update Python requirements.            | [Example](#python-requirements-updates-pur)   |
-| [reusable-pycodestyle.yml][10]             | Python style checking (PEP 8).         | [Example](#python-style-pycodestyle)          |
-| [reusable-pydocstyle.yml][11]              | Python docstring style checking.       | [Example](#python-docstrings-pydocstyle)      |
-| [reusable-pylama.yml][12]                  | Python meta-linting (Pylama).          | [Example](#python-meta-linting-pylama)        |
-| [reusable-pylint.yml][13]                  | Python linting (Pylint).               | [Example](#python-linting-pylint)             |
-| [reusable-reek.yml][14]                    | Ruby code smell analysis.              | [Example](#ruby-code-smells-reek)             |
-| [reusable-rubocop.yml][15]                 | Ruby linting and formatting.           | [Example](#ruby-linting-rubocop)              |
-| [reusable-shellcheck.yml][16]              | Shell script linting.                  | [Example](#shell-script-linting)              |
-| [reusable-validate-citations-file.yml][17] | Validate CITATION.cff metadata files.  | [Example](#citation-file-validation)          |
-| [reusable-yaml-lint.yml][18]               | YAML linting.                          | [Example](#yaml-linting)                      |
+| Workflow file                              | Purpose                                | Example                                      |
+| :----------------------------------------- | :------------------------------------- | :------------------------------------------: |
+| [reusable-awesomebot.yml][1]               | Check Markdown links.                  | [Example](#reusable-awesomebot)              |
+| [reusable-bandit.yml][2]                   | Python security scanning.              | [Example](#reusable-bandit)                  |
+| [reusable-hadolint.yml][3]                 | Dockerfile linting.                    | [Example](#reusable-hadolint)                |
+| [reusable-json-lint.yml][4]                | JSON linting.                          | [Example](#reusable-json-lint)               |
+| [reusable-markdown-lint.yml][5]            | Markdown linting.                      | [Example](#reusable-markdown-lint)           |
+| [reusable-perl-lint.yml][6]                | Perl linting.                          | [Example](#reusable-perl-lint)               |
+| [reusable-php-lint.yml][7]                 | PHP linting.                           | [Example](#reusable-php-lint)                |
+| [reusable-puppet-lint.yml][8]              | Puppet manifest linting.               | [Example](#reusable-puppet-lint)             |
+| [reusable-pur.yml][9]                      | Update Python requirements.            | [Example](#reusable-pur)                     |
+| [reusable-pycodestyle.yml][10]             | Python style checking (PEP 8).         | [Example](#reusable-pycodestyle)             |
+| [reusable-pydocstyle.yml][11]              | Python docstring style checking.       | [Example](#reusable-pydocstyle)              |
+| [reusable-pylama.yml][12]                  | Python meta-linting (Pylama).          | [Example](#reusable-pylama)                  |
+| [reusable-pylint.yml][13]                  | Python linting (Pylint).               | [Example](#reusable-pylint)                  |
+| [reusable-reek.yml][14]                    | Ruby code smell analysis.              | [Example](#reusable-reek)                    |
+| [reusable-rubocop.yml][15]                 | Ruby linting and formatting.           | [Example](#reusable-rubocop)                 |
+| [reusable-shellcheck.yml][16]              | Shell script linting.                  | [Example](#reusable-shellcheck)              |
+| [reusable-validate-citations-file.yml][17] | Validate CITATION.cff metadata files.  | [Example](#reusable-validate-citations-file) |
+| [reusable-yaml-lint.yml][18]               | YAML linting.                          | [Example](#reusable-yaml-lint)               |
 
 [1]: https://github.com/the-lupaxa-project/.github/tree/master/.github/workflows/reusable-awesomebot.yml
 [2]: https://github.com/the-lupaxa-project/.github/tree/master/.github/workflows/reusable-bandit.yml
@@ -155,22 +155,22 @@ These map to environment variables used by CICDToolbox pipelines:
 
 ### Core Governance & Maintenance Workflows
 
-These workflows are not CICDToolbox-based, but provide core services like dependency updates, stale handling, CodeQL analysis, and security-hardening.
+These workflows are not CI/CD Toolbox based, but provide core services like dependency updates, stale handling, CodeQL analysis, and security-hardening.
 
 #### Catalog — Core Workflows
 
-| Workflow file                                     | Purpose                                                                                             | Example                                         |
-| :------------------------------------------------ | :-------------------------------------------------------------------------------------------------- | :---------------------------------------------: |
-| [reusable-check-job-status.yml][20]               | Validates results of upstream jobs and fails the run if any did not succeed.                        | [Example](#check-job-status)                    |
-| [reusable-codeql.yml][21]                         | CodeQL security and quality scanning.                                                               | [Example](#codeql-security-and-quality)         |
-| [reusable-dependabot.yml][22]                     | Wrapper to standardise Dependabot config across repos.                                              | [Example](#dependabot-standardisation)          |
-| [reusable-docs-lint.yml][23]                      | Bundle: Markdown + YAML docs linting.                                                               | [Example](#docs-bundle-markdown-and-yaml)       |
-| [reusable-ensure-sha-pinned-actions.yml][24]      | Enforce SHA-pinned actions, with an allow-list for the-lupaxa-project/.github workflows on @master. | [Example](#enforce-sha-pinned-actions)          |
-| [reusable-generate-release.yml][25]               | Create GitHub Releases with changelog.                                                              | [Example](#generate-release)                    |
-| [reusable-greetings.yml][26]                      | Greet first-time issue and PR authors.                                                              | [Example](#first-interaction-greetings)         |
-| [reusable-purge-deprecated-workflow-runs.yml][27] | Purge obsolete / cancelled / failed / skipped workflow runs.                                        | [Example](#purge-old-workflow-runs)             |
-| [reusable-slack-workflow-status.yml][28]          | Posts final workflow status to Slack via webhook.                                                   | [Example](#slack-workflow-status-notifications) |
-| [reusable-stale.yml][29]                          | Mark and close stale issues/PRs.                                                                    | [Example](#stale-issues-and-prs)                |
+| Workflow file                                     | Purpose                                                                                             | Example                                             |
+| :------------------------------------------------ | :-------------------------------------------------------------------------------------------------- | :-------------------------------------------------: |
+| [reusable-check-job-status.yml][20]               | Validates results of upstream jobs and fails the run if any did not succeed.                        | [Example](#reusable-check-job-status)               |
+| [reusable-codeql.yml][21]                         | CodeQL security and quality scanning.                                                               | [Example](#reusable-codeql)                         |
+| [reusable-dependabot.yml][22]                     | Wrapper to standardise Dependabot config across repos.                                              | [Example](#reusable-dependabot)                     |
+| [reusable-docs-lint.yml][23]                      | Bundle: Markdown + YAML docs linting.                                                               | [Example](#reusable-docs-lint)                      |
+| [reusable-ensure-sha-pinned-actions.yml][24]      | Enforce SHA-pinned actions, with an allow-list for the-lupaxa-project/.github workflows on @master. | [Example](#reusable-ensure-sha-pinned-actions)      |
+| [reusable-generate-release.yml][25]               | Create GitHub Releases with changelog.                                                              | [Example](#reusable-generate-release)               |
+| [reusable-greetings.yml][26]                      | Greet first-time issue and PR authors.                                                              | [Example](#reusable-greetings)                      |
+| [reusable-purge-deprecated-workflow-runs.yml][27] | Purge obsolete / cancelled / failed / skipped workflow runs.                                        | [Example](#reusable-purge-deprecated-workflow-runs) |
+| [reusable-slack-workflow-status.yml][28]          | Posts final workflow status to Slack via webhook.                                                   | [Example](#reusable-slack-workflow-status)          |
+| [reusable-stale.yml][29]                          | Mark and close stale issues/PRs.                                                                    | [Example](#reusable-stale)                          |
 
 [20]: https://github.com/the-lupaxa-project/.github/tree/master/.github/workflows/reusable-check-job-status.yml
 [21]: https://github.com/the-lupaxa-project/.github/tree/master/.github/workflows/reusable-codeql.yml
@@ -183,19 +183,21 @@ These workflows are not CICDToolbox-based, but provide core services like depend
 [28]: https://github.com/the-lupaxa-project/.github/tree/master/.github/workflows/reusable-slack-workflow-status.yml
 [29]: https://github.com/the-lupaxa-project/.github/tree/master/.github/workflows/reusable-stale.yml
 
-### Detailed Usage Examples (Alphabetical by Workflow File)
+### Minimal Usage Examples (Alphabetical by Workflow File)
 
-All examples assume you are calling from another repo in the organization and using:
+All examples assume you are calling from another (consuming) repo in the organisation and using:
 
 ```yaml
 uses: the-lupaxa-project/.github/.github/workflows/<reusable-workflow>.yml@master
 ```
 
+> This is the standard way to consume these reuable workflows.
+
 You can adapt triggers (on:), paths, and inputs for your specific project.
 
-#### Markdown Link Checking (Awesomebot)
+<span id="reusable-awesomebot"></span>
 
-Reusable wrapper for the CICDToolbox awesomebot pipeline, checking Markdown links (internal and external) for breakage and basic formatting issues across your docs.
+#### Markdown Link Checking (reusable-awesomebot.yml)
 
 <details>
 <summary><strong>Click to expand: Inputs Accepted by this workflow</strong></summary>
@@ -240,9 +242,11 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-awesomebot.yml@master
 ```
 
-#### Python Security (Bandit)
+<span id="reusable-bandit"></span>
 
-Runs the CICDToolbox bandit pipeline to perform static security analysis on Python code, flagging common vulnerabilities and insecure patterns.
+#### Python Security (reusable-bandit.yml)
+
+Reusable wrapper for the `reusable-bandit.yml` to perform static security analysis on Python code, flagging common vulnerabilities and insecure patterns.
 
 <details>
 <summary><strong>Click to expand: Inputs Accepted by this workflow</strong></summary>
@@ -287,10 +291,12 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-bandit.yml@master
 ```
 
-#### Check Job Status
+<span id="reusable-check-job-status"></span>
 
-Summarises the results of upstream jobs (success, failure, skipped, cancelled, timed_out) and fails the workflow if any required job did not succeed,
-giving a single, consolidated status report.
+#### Check Job Status (reusable-check-job-status.yml)
+
+Reusable wrapper for the `reusable-check-job-status.yml` to summarise the results of upstream jobs (success, failure, skipped, cancelled, timed_out) and fails the workflow
+if any required job did not succeed, giving a single, consolidated status report.
 
 The workflow:
 
@@ -353,9 +359,12 @@ jobs:
       jobs_json: ${{ toJson(needs) }}
 ```
 
-#### CodeQL Security and Quality
+<span id="reusable-codeql"></span>
 
-Standardised CodeQL security analysis workflow with a language matrix, suitable for running GitHub’s code scanning across one or more supported languages in a consistent way.
+#### CodeQL Security and Quality (reusable-codeql.yml)
+
+Reusable wrapper for the `reusable-codeql.yml` to standardise CodeQL security analysis workflow with a language matrix, suitable for running GitHub’s
+code scanning across one or more supported languages in a consistent way.
 
 <details>
 <summary><strong>Click to expand: Inputs Accepted by this workflow</strong></summary>
@@ -407,9 +416,12 @@ jobs:
       languages: "python,javascript"
 ```
 
-#### Dependabot Standardisation
+<span id="reusable-dependabot"></span>
 
-Centralised Dependabot configuration runner that can be triggered from other workflows to ensure dependency update checks are applied consistently across all supported ecosystems.
+#### Dependabot (reusable-dependabot.yml)
+
+Reusable wrapper for the `reusable-dependabot.yml` to centralise Dependabot configuration that can be triggered from other workflows to ensure dependency
+update checks are applied consistently across all supported ecosystems.
 
 <details>
 <summary><strong>Click to expand: Inputs Accepted by this workflow</strong></summary>
@@ -438,9 +450,12 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-dependabot.yml@master
 ```
 
-#### Docs Bundle (Markdown and YAML)
+<span id="reusable-docs-lint"></span>
 
-"Docs quality bundle" that orchestrates Markdown and YAML linting (and optionally more later) via the underlying CICDToolbox workflows, giving a single job for documentation hygiene.
+#### Docs Bundle (reusable-docs-lint.yml)
+
+Reusable wrapper for the `reusable-docs-lint.yml` to orchestrate Markdown and YAML linting (and optionally more later) via the underlying workflows, giving a
+single job for documentation hygiene.
 
 <details>
 <summary><strong>Click to expand: Inputs Accepted by this workflow</strong></summary>
@@ -483,9 +498,11 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-docs-lint.yml@master
 ```
 
-#### Enforce SHA-Pinned Actions
+<span id="reusable-ensure-sha-pinned-actions"></span>
 
-Security-hardening workflow that inspects all workflow files and enforces SHA-pinned actions, allowing a controlled allow-list
+#### Enforce SHA-Pinned Actions (reusable-ensure-sha-pinned-actions.yml)
+
+Reusable wrapper for the `reusable-ensire-sha-pinned-action.yml` that inspects all workflow files and enforces SHA-pinned actions, allowing a controlled allow-list
 (such as the-lupaxa-project/.github) while blocking branch/tag references elsewhere.
 
 <details>
@@ -523,10 +540,12 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-ensure-sha-pinned-actions.yml@master
 ```
 
-#### Generate Release
+<span id="reusable-generate-release"></span>
 
-Generic GitHub release creator that takes a tag, generates a changelog, and creates a GitHub Release via softprops/action-gh-release,
-so any repo can get consistent, documented releases.
+#### Generate Release (reusable-generate-release.yml)
+
+Reusable wrapper for the `reusable-generate-release.yml` to create generic GitHub releases that takes a tag, generates a changelog, and creates a GitHub
+Release via softprops/action-gh-release, so any repo can get consistent, documented releases.
 
 <details>
 <summary><strong>Click to expand: Inputs Accepted by this workflow</strong></summary>
@@ -583,7 +602,9 @@ jobs:
       github-token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-#### First Interaction Greetings
+<span id="reusable-greetings"></span>
+
+#### First Interaction Greetings (reusable-greetings.yml)
 
 Reusable wrapper around actions/first-interaction to post a friendly, standardised greeting on a contributor’s first issue and/or pull request in a repository.
 
@@ -624,7 +645,9 @@ jobs:
       repo-token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-#### Dockerfile Linting (Hadolint)
+<span id="reusable-hadolint"></span>
+
+#### Dockerfile Linting (reusable-hadolint.yml)
 
 Runs the CICDToolbox hadolint pipeline to lint Dockerfiles and Docker-related build files for best practices, portability, and common mistakes.
 
@@ -673,7 +696,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-hadolint.yml@master
 ```
 
-#### JSON Linting
+<span id="reusable-json-lint"></span>
+
+#### JSON Linting (reusable-json-lint.yml)
 
 Invokes the CICDToolbox json-lint pipeline to validate JSON files, catching syntax errors and formatting issues in configuration and data files.
 
@@ -720,7 +745,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-json-lint.yml@master
 ```
 
-#### Markdown Linting
+<span id="reusable-markdown-lint"></span>
+
+#### Markdown Linting (reusable-markdown-lint.yml)
 
 Standard Markdown linting workflow using the CICDToolbox markdown-lint pipeline and the shared .markdownlint.yml configuration for consistent prose and formatting rules.
 
@@ -767,7 +794,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-markdown-lint.yml@master
 ```
 
-#### Perl Linting
+<span id="reusable-perl-lint"></span>
+
+#### Perl Linting (reusable-perl-lint.yml)
 
 Uses the CICDToolbox perl-lint pipeline to run linting checks over Perl scripts and modules, enforcing style and catching common issues.
 
@@ -816,7 +845,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-perl-lint.yml@master
 ```
 
-#### PHP Linting
+<span id="reusable-php-lint"></span>
+
+#### PHP Linting (reusable-php-lint.yml)
 
 Runs the CICDToolbox php-lint pipeline to syntax-check and lint PHP files, helping keep PHP projects clean and error-free.
 
@@ -863,7 +894,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-php-lint.yml@master
 ```
 
-#### Puppet Manifest Linting
+<span id="reusable-puppet-lint"></span>
+
+#### Puppet Manifest Linting (reusable-puppet-lint.yaml)
 
 Wraps the CICDToolbox puppet-lint pipeline to validate Puppet manifests, enforcing style and best practices for configuration management code.
 
@@ -910,7 +943,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-puppet-lint.yml@master
 ```
 
-#### Python Requirements Updates (pur)
+<span id="reusable-pur"></span>
+
+#### Python Requirements Updates (reusable-pur.yml)
 
 Uses the CICDToolbox pur pipeline to update Python requirements*.txt files, ensuring dependencies are brought up to date in a controlled way before commit or release.
 
@@ -959,7 +994,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-pur.yml@master
 ```
 
-#### Purge Old Workflow Runs
+<span id="reusable-purge-deprecated-workflow-runs"></span>
+
+#### Purge Old Workflow Runs (reusable-purge-deprecated-workflow-runs.yml)
 
 Reusable wrapper around otto-de/purge-deprecated-workflow-runs to clean up old, obsolete, cancelled, failed, or skipped workflow runs, keeping repository Actions history tidy.
 
@@ -1001,7 +1038,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-purge-deprecated-workflow-runs.yml@master
 ```
 
-#### Python Style (pycodestyle)
+<span id="reusable-pycodestyle"></span>
+
+#### Python Style (reusable-pycodestyle.yml)
 
 Runs the CICDToolbox pycodestyle pipeline to enforce PEP 8-style guidelines on Python code, catching layout and style violations.
 
@@ -1048,7 +1087,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-pycodestyle.yml@master
 ```
 
-#### Python Docstrings (pydocstyle)
+<span id="reusable-pydocstyle"></span>
+
+#### Python Docstrings (reusable-pydocstyle.yml)
 
 Invokes the CICDToolbox pydocstyle pipeline to check Python docstrings against a configured convention, improving API documentation consistency.
 
@@ -1095,7 +1136,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-pydocstyle.yml@master
 ```
 
-#### Python Meta-Linting (Pylama)
+<span id="reusable-pylama"></span>
+
+#### Python Meta-Linting (reusable-pylama.yml)
 
 Uses the CICDToolbox pylama pipeline as a meta-linter that combines multiple Python linters into a single, unified quality gate.
 
@@ -1142,7 +1185,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-pylama.yml@master
 ```
 
-#### Python Linting (Pylint)
+<span id="reusable-pylint"></span>
+
+#### Python Linting (reusable-pylint.yml)
 
 Runs the CICDToolbox pylint pipeline to perform deep static analysis on Python code, enforcing coding standards and catching a wide range of potential issues.
 
@@ -1189,7 +1234,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-pylint.yml@master
 ```
 
-#### Ruby Code Smells (Reek)
+<span id="reusable-reek"></span>
+
+#### Ruby Code Smells (reusable-reek.yml)
 
 Wraps the CICDToolbox reek pipeline to detect "code smells" in Ruby code, helping highlight complexity and maintainability problems.
 
@@ -1236,7 +1283,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-reek.yml@master
 ```
 
-#### Ruby Linting (Rubocop)
+<span id="reusable-rubocop"></span>
+
+#### Ruby Linting (reusable-rubocop.yml)
 
 Runs the CICDToolbox rubocop pipeline to provide Ruby linting and auto-formatting checks according to a shared configuration.
 
@@ -1283,7 +1332,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-rubocop.yml@master
 ```
 
-#### Shell Script Linting
+<span id="reusable-shellcheck"></span>
+
+#### Shell Script Linting (reusable-shellcheck.yml)
 
 Invokes the CICDToolbox shellcheck pipeline to lint shell scripts (.sh, .bash, etc.), catching unsafe constructs and portability problems.
 
@@ -1336,7 +1387,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-shellcheck.yml@master
 ```
 
-#### Slack Workflow Status Notifications
+<span id="reusable-slack-workflow-status"></span>
+
+#### Slack Workflow Status Notifications (reusable-slack-workflow-status.yml)
 
 Posts a Slack notification summarising workflow status using Gamesight/slack-workflow-status, with support for toggles like manual opt-out, "no-slack" markers, and tag-run skipping.
 
@@ -1508,7 +1561,9 @@ jobs:
       slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
 ```
 
-#### Stale Issues and PRs
+<span id="reusable-stale"></span>
+
+#### Stale Issues and PRs (reusable-stale.yml)
 
 Reusable wrapper around actions/stale to automatically mark and optionally close stale issues and pull requests, using organisation-standard labels and timeouts.
 
@@ -1560,7 +1615,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-stale.yml@master
 ```
 
-#### CITATION File Validation
+<span id="reusable-validate-citations-file"></span>
+
+#### CITATION File Validation (reusable-validate-citations-file.yml)
 
 Runs the CICDToolbox validate-citations-file pipeline to validate CITATION.cff files, ensuring project citation metadata is present and correctly structured.
 
@@ -1607,7 +1664,9 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-validate-citations-file.yml@master
 ```
 
-#### YAML Linting
+<span id="reusable-yaml-lint"></span>
+
+#### YAML Linting (reusable-yaml-lint.yml)
 
 Standard YAML linting workflow using the CICDToolbox yaml-lint pipeline and the shared .yamllint.yml configuration, enforcing consistent YAML style and spacing.
 

@@ -1,4 +1,3 @@
-<!-- markdownlint-disable -->
 <p align="center">
     <a href="https://github.com/the-lupaxa-project">
         <img src="https://raw.githubusercontent.com/the-lupaxa-project/org-logos/master/orgs/the-lupaxa-project/readme-logo.png" alt="The Lupaxa Project Logo" width="256" />
@@ -10,7 +9,6 @@
 </h3>
 
 <hr style="width: 50%; height: 1px; margin: 1em auto 0.5em;">
-<!-- markdownlint-enable -->
 
 ### The Spirit of Lupaxa 🐺
 
@@ -21,20 +19,49 @@ Inspired by the mythos of the wolf — independent yet collaborative, intuitive 
 We believe that great tools don’t emerge from bureaucracy or rigid frameworks, but from the freedom to create and the discipline to refine.
 Lupaxa is where **exploration meets precision**, and where **the untamed meets the engineered**.
 
+### Who We Are (and Who We’re Not)
+
+We are **not a company**.
+There’s no office, no boardroom, and no business model.
+
+Lupaxa is an **informal collective** of independent developers and open-source contributors.
+Some of us are hobbyists, others professionals — but all collaborate voluntarily, outside the bounds of employment or commercial obligation.
+
+There are no customers, no shareholders — only peers and creators.
+There are no product pitches, pipelines, or roadmaps here — just code, shared openly and responsibly.
+
 ### What We Do
 
 **The Lupaxa Project** is a living collection of:
 
-- Developer-focused automation scripts and utilities
-- Open-source tools, libraries, and frameworks
-- Clean, purposeful solutions designed for clarity and reusability
+- Developer-focused automation scripts and utilities.
+- Open-source tools, libraries, and frameworks.
+- Security tools to help examine and improve your security posture.
+- Clean, purposeful solutions designed for clarity and reusability.
 
 Everything we release is built and maintained by people who **code for the joy of building** — not for clients, not for profit, but for
 shared utility and community value.
 
+### Our Philosophy
+
+- **Instinct** means trusting curiosity, embracing experimentation, and following creative impulses.
+- **Intelligence** ensures thoughtful design, clean code, and meaningful architecture.
+- **Autonomy** drives us to build tools that are elegant, dependable, and self-contained.
+- **Transparency** means every script, fix, or feature is open — for use, reuse, or reinvention.
+- **Security by Design** means we build defensively from the start — prioritizing privacy, minimal attack surfaces, secure defaults, and hardened code, even in the smallest tools.
+
+We believe that **freedom and structure are not opposites** — they’re partners.
+Lupaxa exists to honour that balance.
+
+### Built by Developers, for Developers
+
+Whether you fork a repo, report an issue, or use one of our tools, you’re part of what we’re building.
+
+We care about craftsmanship, clarity, and composability — not complexity for its own sake.
+
 ### Our Projects
 
-We group our repositories into logical domains, each managed as a dedicated GitHub organization. This structure helps us keep related tools
+We group our repositories into logical domains, each managed as a dedicated GitHub organisation. This structure helps us keep related tools
 together, simplify discovery, and maintain a clear separation of focus.
 
 | Project                                                                  | Description                                                                                            |
@@ -60,44 +87,14 @@ together, simplify discovery, and maintain a clear separation of focus.
 | [SRE Toolbox](https://github.com/lupaxa-sre-toolbox)                     | A curated toolkit for Site Reliability Engineers, focused on availability, resilience and performance. |
 | [Terraform Toolbox](https://github.com/lupaxa-terraform-toolbox)         | A curated library of Terraform modules and Infrastructure-as-Code resources.                           |
 
-### Who We Are (and Who We’re Not)
-
-We are **not a company**.
-There’s no office, no boardroom, and no business model.
-
-Lupaxa is an **informal collective** of independent developers and open-source contributors.
-Some of us are hobbyists, others professionals — but all collaborate voluntarily, outside the bounds of employment or commercial obligation.
-
-There are no customers, no shareholders — only peers and creators.
-There are no product pitches, pipelines, or roadmaps here — just code, shared openly and responsibly.
-
-### Our Philosophy
-
-- **Instinct** means trusting curiosity, embracing experimentation, and following creative impulses.
-- **Intelligence** ensures thoughtful design, clean code, and meaningful architecture.
-- **Autonomy** drives us to build tools that are elegant, dependable, and self-contained.
-- **Transparency** means every script, fix, or feature is open — for use, reuse, or reinvention.
-- **Security by Design** means we build defensively from the start — prioritizing privacy, minimal attack surfaces, secure defaults, and hardened code, even in the smallest tools.
-
-We believe that **freedom and structure are not opposites** — they’re partners.
-Lupaxa exists to honour that balance.
-
-### Built by Developers, for Developers
-
-Whether you fork a repo, report an issue, or use one of our tools, you’re part of what we’re building.
-
-We care about craftsmanship, clarity, and composability — not complexity for its own sake.
-
 ### Why “Lupaxa”?
 
 The name fuses ***lupus*** (Latin for *wolf*) with a modern, tech-flavoured suffix.
 It reflects both the **primal and the systematic** — a name that captures our balance between creative instinct and technical precision.
 
-<!-- markdownlint-disable -->
 <hr style="width: 50%; height: 1px; margin: 1em auto 0.5em;">
 <p align="center">
     <em>
         The Lupaxa Project — Open Source, Secure by Design, Guided by Integrity.
     </em>
 </p>
-<!-- markdownlint-enable -->

@@ -1,4 +1,3 @@
-<!-- markdownlint-disable -->
 <p align="center">
     <a href="https://github.com/the-lupaxa-project">
         <img src="https://raw.githubusercontent.com/the-lupaxa-project/org-logos/master/orgs/the-lupaxa-project/readme-logo.png" alt="The Lupaxa Project Logo" width="256" />
@@ -10,7 +9,6 @@
 </h3>
 
 <hr style="width: 50%; height: 1px; margin: 1em auto 0.5em;">
-<!-- markdownlint-enable -->
 
 ### Overview
 
@@ -34,7 +32,7 @@ If you discover a potential security issue:
    - Potential impact
    - Any suggested mitigations
 
-We will acknowledge receipt within **48 hours** and provide regular updates until the issue is resolved.
+We aim to acknowledge receipt within **48 hours** and provide regular updates until the issue is resolved.
 
 ### Scope
 
@@ -48,7 +46,7 @@ If you are unsure whether a project is in scope, please ask — we will confirm.
 
 ### Our Commitments
 
-- We will triage and verify all valid reports within **five business days**.
+- We aim to triage and verify all valid reports within **five business days**.
 - A fix or mitigation plan will be communicated before public disclosure.
 - Credit will be given to reporters who follow responsible disclosure practices.
 - We will work collaboratively to ensure any identified risks are resolved quickly and transparently.

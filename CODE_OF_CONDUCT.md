@@ -1,4 +1,3 @@
-<!-- markdownlint-disable -->
 <p align="center">
     <a href="https://github.com/the-lupaxa-project">
         <img src="https://raw.githubusercontent.com/the-lupaxa-project/org-logos/master/orgs/the-lupaxa-project/readme-logo.png" alt="The Lupaxa Project Logo" width="256" />
@@ -10,7 +9,6 @@
 </h3>
 
 <hr style="width: 50%; height: 1px; margin: 1em auto 0.5em;">
-<!-- markdownlint-enable -->
 
 ### Our Pledge
 
@@ -70,11 +68,9 @@ This Code of Conduct is adapted from the
 [Contributor Covenant v2.1](https://www.contributor-covenant.org/version/2/1/code_of_conduct.html),
 with modifications for **The Lupaxa Project’s** open-source and security-first philosophy.
 
-<!-- markdownlint-disable -->
 <hr style="width: 50%; height: 1px; margin: 1em auto 0.5em;">
 <p align="center">
     <em>
         The Lupaxa Project — Open Source, Secure by Design, Guided by Integrity.
     </em>
 </p>
-<!-- markdownlint-enable -->

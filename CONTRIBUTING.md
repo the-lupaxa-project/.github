@@ -1,4 +1,3 @@
-<!-- markdownlint-disable -->
 <p align="center">
     <a href="https://github.com/the-lupaxa-project">
         <img src="https://raw.githubusercontent.com/the-lupaxa-project/org-logos/master/orgs/the-lupaxa-project/readme-logo.png" alt="The Lupaxa Project Logo" width="256" />
@@ -6,11 +5,10 @@
 </p>
 
 <h3 align="center">
-    Contributing to The Lupaxa Project
+    The Lupaxa Project: Making a Contribution
 </h3>
 
 <hr style="width: 50%; height: 1px; margin: 1em auto 0.5em;">
-<!-- markdownlint-enable -->
 
 ### Overview
 
@@ -66,18 +64,16 @@ To sign your commits:
 git commit -S -m "Your descriptive commit message"
 ```
 
-For details, see GitHub’s Guide to Signing Commits.
+For details, see [GitHub’s Guide to Signing Commits](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits).
 
 ### Code of Conduct
 
-This organization follows a Code of Conduct.
+This organization follows a [Code of Conduct](CODE_OF_CONDUCT.md).
 By participating in any repository, discussion, or community under The Lupaxa Project, you agree to uphold these principles.
 
-<!-- markdownlint-disable -->
 <hr style="width: 50%; height: 1px; margin: 1em auto 0.5em;">
 <p align="center">
     <em>
         The Lupaxa Project — Open Source, Secure by Design, Guided by Integrity.
     </em>
 </p>
-<!-- markdownlint-enable -->
