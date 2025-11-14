@@ -4,20 +4,24 @@
     </a>
 </p>
 
-<h3 align="center">
+<h1 style="text-align: center; border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 2em; font-weight: 600;">
     The Lupaxa Project: Security Policy
-</h3>
+</h1>
 
-<hr style="width: 50%; height: 1px; margin: 1em auto 0.5em;">
+<div style="width: 75%; height: 2px; background: #203959; margin: 1.2em auto; border-radius: 4px;"></div>
 
-### Overview
+<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+    Overview
+</h2>
 
 The Lupaxa Project follows a **Security by Design** philosophy across all open-source and internal projects.
 We take vulnerabilities seriously and deeply value responsible disclosure from the community.
 
 We believe that transparency, collaboration, and defensive design are essential for maintaining trust in open source.
 
-### Reporting a Vulnerability
+<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+    Reporting a Vulnerability
+</h2>
 
 If you discover a potential security issue:
 
@@ -34,7 +38,9 @@ If you discover a potential security issue:
 
 We aim to acknowledge receipt within **48 hours** and provide regular updates until the issue is resolved.
 
-### Scope
+<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+    Scope
+</h2>
 
 This policy covers:
 
@@ -44,14 +50,18 @@ This policy covers:
 
 If you are unsure whether a project is in scope, please ask — we will confirm.
 
-### Our Commitments
+<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+    Our Commitments
+</h2>
 
 - We aim to triage and verify all valid reports within **five business days**.
 - A fix or mitigation plan will be communicated before public disclosure.
 - Credit will be given to reporters who follow responsible disclosure practices.
 - We will work collaboratively to ensure any identified risks are resolved quickly and transparently.
 
-### Responsible Disclosure Guidelines
+<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+    Responsible Disclosure Guidelines
+</h2>
 
 We ask that you:
 
@@ -61,11 +71,10 @@ We ask that you:
 
 Following these principles helps us maintain a secure environment for everyone who uses our projects.
 
-<!-- markdownlint-disable -->
-<hr style="width: 50%; height: 1px; margin: 1em auto 0.5em;">
+<div style="width: 75%; height: 2px; background: #203959; margin: 1.2em auto; border-radius: 4px;"></div>
+
 <p align="center">
     <em>
         The Lupaxa Project — Open Source, Secure by Design, Guided by Integrity.
     </em>
 </p>
-<!-- markdownlint-enable -->

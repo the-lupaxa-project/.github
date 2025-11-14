@@ -4,13 +4,15 @@
     </a>
 </p>
 
-<h3 align="center">
+<h1 style="text-align: center; border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 2em; font-weight: 600;">
     The Lupaxa Project — .github Repository
-</h3>
+</h1>
 
-<hr style="width: 50%; height: 1px; margin: 1em auto 0.5em;">
+<div style="width: 75%; height: 2px; background: #203959; margin: 1.2em auto; border-radius: 4px;"></div>
 
-### Overview
+<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+    Overview
+</h2>
 
 This repository defines the **shared standards, documentation, and automation resources** used across all repositories in **The Lupaxa Project** organisation.
 
@@ -19,7 +21,9 @@ This repository defines the **shared standards, documentation, and automation re
 It serves as the **central hub** for community policies, contribution guidelines, security practices, and optional CI/CD workflows that embody our
 *Security by Design* and *Open Source with Integrity* principles.
 
-### Purpose
+<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+    Purpose
+</h2>
 
 This repository provides:
 
@@ -35,7 +39,9 @@ This repository provides:
 - **Reusable automation**  
   Global GitHub Actions, workflow templates, and composite actions for consistent CI/CD pipelines.
 
-### How GitHub Uses This Repo
+<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+    How GitHub Uses This Repo
+</h2>
 
 GitHub automatically recognises and applies certain files from the organisation’s `.github` repository across all its **public repositories**:
 
@@ -49,7 +55,9 @@ GitHub automatically recognises and applies certain files from the organisation�
 | PULL_REQUEST_TEMPLATE/ | Shared PR templates for consistent submissions.  |
 | .github/workflows/     | Provides reusable workflows for CI/CD.           |
 
-#### Extending or Overriding Defaults
+<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+    Extending or Overriding Defaults
+</h3>
 
 Projects within The Lupaxa Project inherit these organizational files automatically.
 However, maintainers can override or extend them when necessary:
@@ -62,13 +70,17 @@ However, maintainers can override or extend them when necessary:
 
 Repositories overriding central files should retain references back to the organization-wide versions to preserve visibility and intent.
 
-##### Example:
+<h4 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1em; font-weight: 600;">
+    Example:
+</h4>
 
 ```text
 This repository extends the Lupaxa Project Contributing Guidelines.
 ```
 
-### Reusable CI/CD Workflows
+<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+    Reusable CI/CD Workflows
+</h2>
 
 This repository also acts as a **central catalog of reusable workflows** for linting, security scanning, and general CI hygiene.
 
@@ -85,7 +97,9 @@ There are three layers:
 3. **Combined "bundle" workflows**
    - For example, a "docs lint" bundle that runs Markdown, YAML, and shell checks together.
 
-### SHA Pinning Policy
+<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+    SHA Pinning Policy
+</h2>
 
 All Lupaxa Project organisations enforce a rule that **3<sup>rd</sup> party workflows must be referenced using a full commit SHA**, never a branch or tag.
 
@@ -104,11 +118,15 @@ This gives you:
 - Automatic updates to shared workflows via the .github repo, which is in turn updated automatically by dependabot.
 - Strong SHA pinning for all other third-party actions.
 
-### Workflow Catalog
+<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+    Workflow Catalog
+</h2>
 
 Please refer to [WORKFLOWS.md](WORKFLOWS.md) for details on all the available reusable workflows.
 
-### Community Standards
+<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+    Community Standards
+</h2>
 
 All repositories under The Lupaxa Project follow these shared principles:
 
@@ -118,11 +136,14 @@ All repositories under The Lupaxa Project follow these shared principles:
 
 These documents define how we collaborate respectfully, build securely, and contribute effectively across every Lupaxa project.
 
-### License
+<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+    License
+</h2>
 
 All files within The Lupaxa Project are provided under the [MIT License](LICENSE.md), unless otherwise noted in specific project repositories.
 
-<hr style="width: 50%; height: 1px; margin: 1em auto 0.5em;">
+<div style="width: 75%; height: 2px; background: #203959; margin: 1.2em auto; border-radius: 4px;"></div>
+
 <p align="center">
     <em>
         The Lupaxa Project — Open Source, Secure by Design, Guided by Integrity.

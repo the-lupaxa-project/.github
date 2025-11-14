@@ -4,13 +4,15 @@
     </a>
 </p>
 
-<h3 align="center">
+<h1 style="text-align: center; border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 2em; font-weight: 600;">
     The Lupaxa Project: Making a Contribution
-</h3>
+</h1>
 
-<hr style="width: 50%; height: 1px; margin: 1em auto 0.5em;">
+<div style="width: 75%; height: 2px; background: #203959; margin: 1.2em auto; border-radius: 4px;"></div>
 
-### Overview
+<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+    Overview
+</h2>
 
 We welcome contributions of all kinds — whether it’s fixing a bug, improving documentation, or adding new functionality.
 
@@ -18,7 +20,9 @@ If you discover issues, have ideas for improvements, or would like to propose ne
 
 Please follow the guidelines below when doing so.
 
-### Issue Reporting
+<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+    Issue Reporting
+</h2>
 
 Before submitting an issue:
 
@@ -29,13 +33,17 @@ Before submitting an issue:
 - **Include details** — specify the version, environment, or configuration used.
 - **Provide examples** — minimal code samples or reproduction steps help us diagnose faster.
 
-### Feature Requests
+<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+    Feature Requests
+</h2>
 
 If you have an idea for a new feature or improvement that you’d like to see but don’t plan to implement yourself, please open an issue using the **Feature Request** template.
 
 Explain *why* the feature is valuable and include use cases or examples where possible.
 
-### Pull Requests
+<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+    Pull Requests
+</h2>
 
 - Read [How to Properly Contribute to Open Source Projects on GitHub][1].
 - Fork the project and create a **feature branch** (not `main` or `master`).
@@ -54,7 +62,9 @@ Explain *why* the feature is valuable and include use cases or examples where po
 > **Note:** We reserve the right to request changes or reject pull requests that don’t meet these standards.
 > We will always provide constructive feedback to help you align with our practices.
 
-### Signed Commits
+<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+    Signed Commits
+</h2>
 
 All commits **must be GPG- or SSH-signed** to verify the developer’s identity. Unsigned commits will be rejected automatically.
 
@@ -66,12 +76,15 @@ git commit -S -m "Your descriptive commit message"
 
 For details, see [GitHub’s Guide to Signing Commits](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits).
 
-### Code of Conduct
+<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+    Code of Conduct
+</h2>
 
 This organization follows a [Code of Conduct](CODE_OF_CONDUCT.md).
 By participating in any repository, discussion, or community under The Lupaxa Project, you agree to uphold these principles.
 
-<hr style="width: 50%; height: 1px; margin: 1em auto 0.5em;">
+<div style="width: 75%; height: 2px; background: #203959; margin: 1.2em auto; border-radius: 4px;"></div>
+
 <p align="center">
     <em>
         The Lupaxa Project — Open Source, Secure by Design, Guided by Integrity.

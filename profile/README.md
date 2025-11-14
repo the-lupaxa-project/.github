@@ -4,13 +4,15 @@
     </a>
 </p>
 
-<h3 align="center">
+<h1 style="text-align: center; border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 2em; font-weight: 600;">
     Welcome to The Lupaxa Project
-</h3>
+</h1>
 
-<hr style="width: 50%; height: 1px; margin: 1em auto 0.5em;">
+<div style="width: 75%; height: 2px; background: #203959; margin: 1.2em auto; border-radius: 4px;"></div>
 
-### The Spirit of Lupaxa 🐺
+<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+    The Spirit of Lupaxa 🐺
+</h2>
 
 At **The Lupaxa Project**, we’re guided by the belief that the best ideas are born at the intersection of **wild instinct** and **structured intelligence**.
 
@@ -19,7 +21,9 @@ Inspired by the mythos of the wolf — independent yet collaborative, intuitive 
 We believe that great tools don’t emerge from bureaucracy or rigid frameworks, but from the freedom to create and the discipline to refine.
 Lupaxa is where **exploration meets precision**, and where **the untamed meets the engineered**.
 
-### Who We Are (and Who We’re Not)
+<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+    Who We Are (and Who We’re Not)
+</h2>
 
 We are **not a company**.
 There’s no office, no boardroom, and no business model.
@@ -30,7 +34,9 @@ Some of us are hobbyists, others professionals — but all collaborate voluntari
 There are no customers, no shareholders — only peers and creators.
 There are no product pitches, pipelines, or roadmaps here — just code, shared openly and responsibly.
 
-### What We Do
+<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+    What We Do
+</h2>
 
 **The Lupaxa Project** is a living collection of:
 
@@ -42,7 +48,9 @@ There are no product pitches, pipelines, or roadmaps here — just code, shared 
 Everything we release is built and maintained by people who **code for the joy of building** — not for clients, not for profit, but for
 shared utility and community value.
 
-### Our Philosophy
+<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+    Our Philosophy
+</h2>
 
 - **Instinct** means trusting curiosity, embracing experimentation, and following creative impulses.
 - **Intelligence** ensures thoughtful design, clean code, and meaningful architecture.
@@ -53,13 +61,17 @@ shared utility and community value.
 We believe that **freedom and structure are not opposites** — they’re partners.
 Lupaxa exists to honour that balance.
 
-### Built by Developers, for Developers
+<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+    Built by Developers, for Developers
+</h2>
 
 Whether you fork a repo, report an issue, or use one of our tools, you’re part of what we’re building.
 
 We care about craftsmanship, clarity, and composability — not complexity for its own sake.
 
-### Our Projects
+<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+    Our Projects
+</h2>
 
 We group our repositories into logical domains, each managed as a dedicated GitHub organisation. This structure helps us keep related tools
 together, simplify discovery, and maintain a clear separation of focus.
@@ -87,12 +99,15 @@ together, simplify discovery, and maintain a clear separation of focus.
 | [SRE Toolbox](https://github.com/lupaxa-sre-toolbox)                     | A curated toolkit for Site Reliability Engineers, focused on availability, resilience and performance. |
 | [Terraform Toolbox](https://github.com/lupaxa-terraform-toolbox)         | A curated library of Terraform modules and Infrastructure-as-Code resources.                           |
 
-### Why “Lupaxa”?
+<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+    Why “Lupaxa”?
+</h2>
 
 The name fuses ***lupus*** (Latin for *wolf*) with a modern, tech-flavoured suffix.
 It reflects both the **primal and the systematic** — a name that captures our balance between creative instinct and technical precision.
 
-<hr style="width: 50%; height: 1px; margin: 1em auto 0.5em;">
+<div style="width: 75%; height: 2px; background: #203959; margin: 1.2em auto; border-radius: 4px;"></div>
+
 <p align="center">
     <em>
         The Lupaxa Project — Open Source, Secure by Design, Guided by Integrity.
