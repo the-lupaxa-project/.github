@@ -1,4 +1,4 @@
-name: Dependabot Automation (Approve, Comment, Merge)
+name: Dependabot (Approve, Comment, Merge)
 
 on:
   pull_request:
@@ -12,7 +12,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  dependabot-auto-merge:
-    name: Run Dependabot Automation (Reusable)
+  dependabot:
+    name: Dependabot (Reusable)
     uses: ./.github/workflows/reusable-dependabot.yml
     secrets: inherit

@@ -1,0 +1,25 @@
+name: Reusable Check Job Statuses
+
+on:
+  workflow_call:
+    inputs:
+      needs_json:
+        description: >
+          JSON representation of upstream jobs, usually from `toJson(needs)`
+          in the calling workflow.
+        required: true
+        type: string
+
+jobs:
+  check-jobs:
+    name: Check Upstream Job Statuses
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout the Repository
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8  # v5.0.0
+
+      - name: Run upstream job status checker
+        run: .github/scripts/check-jobs.sh '${{ inputs.needs_json }}'

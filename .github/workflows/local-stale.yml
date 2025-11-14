@@ -16,5 +16,5 @@ permissions:
 
 jobs:
   stale:
-    name: Run Stale Issue & PR Handler (Reusable)
+    name: Run Stale Issue & PR Handler
     uses: ./.github/workflows/reusable-stale.yml

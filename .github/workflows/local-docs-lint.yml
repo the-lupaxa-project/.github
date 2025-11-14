@@ -15,7 +15,21 @@ permissions:
   contents: read
 
 jobs:
-  docs:
-    name: Run Documentation Lint (Reusable)
+  docs-lint:
+    name: Run Documentation Lint
     uses: ./.github/workflows/reusable-docs-lint.yml
     secrets: inherit
+
+  status-check:
+    name: Check Lint Job Statuses
+    needs:
+      - docs-lint
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Check upstream job statuses via reusable workflow
+        uses: ./.github/workflows/reusable-check-jobs-status.yml
+        with:
+          needs_json: ${{ toJson(needs) }}

@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   greetings:
-    name: Run Greetings (Reusable)
+    name: Run Greetings
     uses: ./.github/workflows/reusable-greetings.yml
     secrets:
       repo-token: ${{ secrets.GITHUB_TOKEN }}
