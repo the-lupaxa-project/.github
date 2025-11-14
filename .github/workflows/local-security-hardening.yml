@@ -25,3 +25,14 @@ jobs:
   ensure-sha-pinned:
     name: Run Ensure SHA-Pinned GitHub Actions (Reusable)
     uses: ./.github/workflows/reusable-ensure-sha-pinned-actions.yml
+
+  status-check:
+    name: Check Lint Job Statuses
+    needs:
+      - ensure-sha-pinned
+
+    # 🔴 IMPORTANT: this is a *job-level* uses, not under steps:
+    uses: ./.github/workflows/reusable-check-jobs-status.yml
+    with:
+      needs_json: ${{ toJson(needs) }}
+

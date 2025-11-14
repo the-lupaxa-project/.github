@@ -20,5 +20,22 @@ MD026:
 # Disable enforcement of ordered list numbering style
 MD029: false
 
+MD033:
+  allowed_elements:
+    - a
+    - br
+    - details
+    - em
+    - h1
+    - h2
+    - h3
+    - h4
+    - h5
+    - hr
+    - img
+    - p
+    - strong
+    - summary
+
 # Allow content before first H1 (e.g., logo block)
 MD041: false

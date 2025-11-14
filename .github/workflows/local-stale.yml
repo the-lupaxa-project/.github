@@ -18,3 +18,13 @@ jobs:
   stale:
     name: Run Stale Issue & PR Handler
     uses: ./.github/workflows/reusable-stale.yml
+
+  status-check:
+    name: Check Lint Job Statuses
+    needs:
+      - stale
+
+    # 🔴 IMPORTANT: this is a *job-level* uses, not under steps:
+    uses: ./.github/workflows/reusable-check-jobs-status.yml
+    with:
+      needs_json: ${{ toJson(needs) }}

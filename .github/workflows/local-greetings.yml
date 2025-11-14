@@ -20,3 +20,14 @@ jobs:
     uses: ./.github/workflows/reusable-greetings.yml
     secrets:
       repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+  status-check:
+    name: Check Lint Job Statuses
+    needs:
+      - greetings
+
+    # 🔴 IMPORTANT: this is a *job-level* uses, not under steps:
+    uses: ./.github/workflows/reusable-check-jobs-status.yml
+    with:
+      needs_json: ${{ toJson(needs) }}
+

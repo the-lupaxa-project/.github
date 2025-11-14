@@ -3,7 +3,7 @@ name: Reusable Ensure SHA-Pinned GitHub Actions
 on:
   workflow_call:
     inputs:
-      allowlist:
+      allow_list:
         description: >
           Optional newline-separated list of owner[/repo] patterns that are
           allowed to use non-SHA refs (e.g. "the-lupaxa-project/.github").
