@@ -4,13 +4,11 @@
     </a>
 </p>
 
-<h1 align="center" style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 2em; font-weight: 600;">
+<h1 align="center">
     The Lupaxa Project — Workflow Catalog
 </h1>
 
-<div style="width: 75%; height: 2px; background: #203959; margin: 1.2em auto; border-radius: 4px;"></div>
-
-<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+<h2>
     Overview
 </h2>
 
@@ -30,11 +28,11 @@ All workflows are designed to be:
 - Secure by default, with strong controls around third-party actions.
 - Consistent with organisational linting, documentation, and security standards.
 
-<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+<h2>
     Branch / SHA Policy and Security Hardening
 </h2>
 
-<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+<h3>
     General policy
 </h3>
 
@@ -67,11 +65,11 @@ This provides:
 - Automatic updates to shared workflows via the .github repo.
 - Strong SHA pinning for all other third-party actions.
 
-<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+<h2>
     Naming Conventions
 </h2>
 
-<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+<h3>
     Reusable workflows
 </h3>
 
@@ -79,7 +77,7 @@ This provides:
 - Naming pattern: reusable-&lt;NAME&gt;.yml
 - Purpose: reusable primitives and bundles that other repos call.
 
-<h4 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1em; font-weight: 600;">
+<h4>
     Examples:
 </h4>
 
@@ -87,7 +85,7 @@ This provides:
 - reusable-yaml-lint.yml
 - reusable-codeql.yml
 
-<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+<h3>
     Consuming workflows
 </h3>
 
@@ -98,14 +96,14 @@ This provides:
 - Group jobs logically,
 - Call one or more reusable-*.yml workflows via uses:.
 
-<h4 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1em; font-weight: 600;">
+<h4>
     Consumption Example:
 </h4>
 
 - docs-lint.yml
 - security-hardening.yml
 
-<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+<h2>
     CI/CD Toolbox based Reusable Workflows
 </h2>
 
@@ -129,7 +127,7 @@ These map to environment variables used by CICDToolbox pipelines:
 - SHOW_SKIPPED
 - NO_COLOR
 
-<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+<h3>
     Catalog — CI/CD Toolbox based Workflows
 </h3>
 
@@ -173,13 +171,13 @@ These map to environment variables used by CICDToolbox pipelines:
 [17]: https://github.com/the-lupaxa-project/.github/tree/master/.github/workflows/reusable-validate-citations-file.yml
 [18]: https://github.com/the-lupaxa-project/.github/tree/master/.github/workflows/reusable-yaml-lint.yml
 
-<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+<h2>
     Core Governance & Maintenance Workflows
 </h2>
 
 These workflows are not CI/CD Toolbox based, but provide core services like dependency updates, stale handling, CodeQL analysis, and security-hardening.
 
-<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+<h3>
     Catalog — Core Workflows
 </h3>
 
@@ -207,7 +205,7 @@ These workflows are not CI/CD Toolbox based, but provide core services like depe
 [28]: https://github.com/the-lupaxa-project/.github/tree/master/.github/workflows/reusable-slack-workflow-status.yml
 [29]: https://github.com/the-lupaxa-project/.github/tree/master/.github/workflows/reusable-stale.yml
 
-<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+<h2>
     Minimal Usage Examples (Alphabetical by Workflow File)
 </h2>
 
@@ -223,7 +221,7 @@ You can adapt triggers (on:), paths, and inputs for your specific project.
 
 <span id="reusable-awesomebot"></span>
 
-<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+<h3>
     Markdown Link Checking (reusable-awesomebot.yml)
 </h3>
 
@@ -243,7 +241,7 @@ You can adapt triggers (on:), paths, and inputs for your specific project.
 <br>
 </details>
 
-<h4 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1em; font-weight: 600;">
+<h4>
     Minimal Usage Example
 </h4>
 
@@ -274,7 +272,7 @@ jobs:
 
 <span id="reusable-bandit"></span>
 
-<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+<h3>
     Python Security (reusable-bandit.yml)
 </h3>
 
@@ -296,7 +294,7 @@ Reusable wrapper for the `reusable-bandit.yml` to perform static security analys
 <br>
 </details>
 
-<h4 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1em; font-weight: 600;">
+<h4>
     Minimal Usage Example
 </h4>
 
@@ -327,7 +325,7 @@ jobs:
 
 <span id="reusable-check-job-status"></span>
 
-<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+<h3>
     Check Job Status (reusable-check-job-status.yml)
 </h3>
 
@@ -355,7 +353,7 @@ The workflow:
 <br>
 </details>
 
-<h4 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1em; font-weight: 600;">
+<h4>
     Minimal Usage Example
 </h4>
 
@@ -399,7 +397,7 @@ jobs:
 
 <span id="reusable-codeql"></span>
 
-<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+<h3>
     CodeQL Security and Quality (reusable-codeql.yml)
 </h3>
 
@@ -419,7 +417,7 @@ code scanning across one or more supported languages in a consistent way.
 <br>
 </details>
 
-<h4 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1em; font-weight: 600;">
+<h4>
     Minimal Usage Example
 </h4>
 
@@ -460,7 +458,7 @@ jobs:
 
 <span id="reusable-dependabot"></span>
 
-<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+<h3>
     Dependabot (reusable-dependabot.yml)
 </h3>
 
@@ -477,7 +475,7 @@ update checks are applied consistently across all supported ecosystems.
 <br>
 </details>
 
-<h4 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1em; font-weight: 600;">
+<h4>
     Minimal Usage Example
 </h4>
 
@@ -498,7 +496,7 @@ jobs:
 
 <span id="reusable-docs-lint"></span>
 
-<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+<h3>
     Docs Bundle (reusable-docs-lint.yml)
 </h3>
 
@@ -522,7 +520,7 @@ single job for documentation hygiene.
 <br>
 </details>
 
-<h4 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1em; font-weight: 600;">
+<h4>
     Minimal Usage Example
 </h4>
 
@@ -550,7 +548,7 @@ jobs:
 
 <span id="reusable-ensure-sha-pinned-actions"></span>
 
-<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+<h3>
     Enforce SHA-Pinned Actions (reusable-ensure-sha-pinned-actions.yml)
 </h3>
 
@@ -569,7 +567,7 @@ Reusable wrapper for the `reusable-ensire-sha-pinned-action.yml` that inspects a
 <br>
 </details>
 
-<h4 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1em; font-weight: 600;">
+<h4>
     Minimal Usage Example
 </h4>
 
@@ -596,7 +594,7 @@ jobs:
 
 <span id="reusable-generate-release"></span>
 
-<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+<h3>
     Generate Release (reusable-generate-release.yml)
 </h3>
 
@@ -617,7 +615,7 @@ Release via softprops/action-gh-release, so any repo can get consistent, documen
 <br>
 </details>
 
-<h4 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1em; font-weight: 600;">
+<h4>
     Minimal Usage Example (production Release)
 </h4>
 
@@ -640,7 +638,7 @@ jobs:
       github-token: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-<h4 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1em; font-weight: 600;">
+<h4>
     Minimal Usage Example (Test Release)
 </h4>
 
@@ -664,7 +662,7 @@ jobs:
 
 <span id="reusable-greetings"></span>
 
-<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+<h3>
     First Interaction Greetings (reusable-greetings.yml)
 </h3>
 
@@ -682,7 +680,7 @@ Reusable wrapper around actions/first-interaction to post a friendly, standardis
 <br>
 </details>
 
-<h4 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1em; font-weight: 600;">
+<h4>
     Minimal Usage Example
 </h4>
 
@@ -711,7 +709,7 @@ jobs:
 
 <span id="reusable-hadolint"></span>
 
-<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+<h3>
     Dockerfile Linting (reusable-hadolint.yml)
 </h3>
 
@@ -733,7 +731,7 @@ Runs the CICDToolbox hadolint pipeline to lint Dockerfiles and Docker-related bu
 <br>
 </details>
 
-<h4 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1em; font-weight: 600;">
+<h4>
     Minimal Usage Example
 </h4>
 
@@ -766,7 +764,7 @@ jobs:
 
 <span id="reusable-json-lint"></span>
 
-<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+<h3>
     JSON Linting (reusable-json-lint.yml)
 </h3>
 
@@ -788,7 +786,7 @@ Invokes the CICDToolbox json-lint pipeline to validate JSON files, catching synt
 <br>
 </details>
 
-<h4 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1em; font-weight: 600;">
+<h4>
     Minimal Usage Example
 </h4>
 
@@ -819,7 +817,7 @@ jobs:
 
 <span id="reusable-markdown-lint"></span>
 
-<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+<h3>
     Markdown Linting (reusable-markdown-lint.yml)
 </h3>
 
@@ -841,7 +839,7 @@ Standard Markdown linting workflow using the CICDToolbox markdown-lint pipeline 
 <br>
 </details>
 
-<h4 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1em; font-weight: 600;">
+<h4>
     Minimal Usage Example
 </h4>
 
@@ -872,7 +870,7 @@ jobs:
 
 <span id="reusable-perl-lint"></span>
 
-<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+<h3>
     Perl Linting (reusable-perl-lint.yml)
 </h3>
 
@@ -894,7 +892,7 @@ Uses the CICDToolbox perl-lint pipeline to run linting checks over Perl scripts 
 <br>
 </details>
 
-<h4 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1em; font-weight: 600;">
+<h4>
     Minimal Usage Example
 </h4>
 
@@ -927,7 +925,7 @@ jobs:
 
 <span id="reusable-php-lint"></span>
 
-<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+<h3>
     PHP Linting (reusable-php-lint.yml)
 </h3>
 
@@ -949,7 +947,7 @@ Runs the CICDToolbox php-lint pipeline to syntax-check and lint PHP files, helpi
 <br>
 </details>
 
-<h4 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1em; font-weight: 600;">
+<h4>
     Minimal Usage Example
 </h4>
 
@@ -980,7 +978,7 @@ jobs:
 
 <span id="reusable-puppet-lint"></span>
 
-<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+<h3>
     Puppet Manifest Linting (reusable-puppet-lint.yaml)
 </h3>
 
@@ -1002,7 +1000,7 @@ Wraps the CICDToolbox puppet-lint pipeline to validate Puppet manifests, enforci
 <br>
 </details>
 
-<h4 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1em; font-weight: 600;">
+<h4>
     Minimal Usage Example
 </h4>
 
@@ -1033,7 +1031,7 @@ jobs:
 
 <span id="reusable-pur"></span>
 
-<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+<h3>
     Python Requirements Updates (reusable-pur.yml)
 </h3>
 
@@ -1055,7 +1053,7 @@ Uses the CICDToolbox pur pipeline to update Python requirements*.txt files, ensu
 <br>
 </details>
 
-<h4 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1em; font-weight: 600;">
+<h4>
     Minimal Usage Example
 </h4>
 
@@ -1088,7 +1086,7 @@ jobs:
 
 <span id="reusable-purge-deprecated-workflow-runs"></span>
 
-<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+<h3>
     Purge Old Workflow Runs (reusable-purge-deprecated-workflow-runs.yml)
 </h3>
 
@@ -1110,7 +1108,7 @@ Reusable wrapper around otto-de/purge-deprecated-workflow-runs to clean up old, 
 <br>
 </details>
 
-<h4 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1em; font-weight: 600;">
+<h4>
     Minimal Usage Example
 </h4>
 
@@ -1136,7 +1134,7 @@ jobs:
 
 <span id="reusable-pycodestyle"></span>
 
-<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+<h3>
     Python Style (reusable-pycodestyle.yml)
 </h3>
 
@@ -1158,7 +1156,7 @@ Runs the CICDToolbox pycodestyle pipeline to enforce PEP 8-style guidelines on P
 <br>
 </details>
 
-<h4 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1em; font-weight: 600;">
+<h4>
     Minimal Usage Example
 </h4>
 
@@ -1189,7 +1187,7 @@ jobs:
 
 <span id="reusable-pydocstyle"></span>
 
-<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+<h3>
     Python Docstrings (reusable-pydocstyle.yml)
 </h3>
 
@@ -1211,7 +1209,7 @@ Invokes the CICDToolbox pydocstyle pipeline to check Python docstrings against a
 <br>
 </details>
 
-<h4 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1em; font-weight: 600;">
+<h4>
     Minimal Usage Example
 </h4>
 
@@ -1242,7 +1240,7 @@ jobs:
 
 <span id="reusable-pylama"></span>
 
-<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+<h3>
     Python Meta-Linting (reusable-pylama.yml)
 </h3>
 
@@ -1264,7 +1262,7 @@ Uses the CICDToolbox pylama pipeline as a meta-linter that combines multiple Pyt
 <br>
 </details>
 
-<h4 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1em; font-weight: 600;">
+<h4>
     Minimal Usage Example
 </h4>
 
@@ -1295,7 +1293,7 @@ jobs:
 
 <span id="reusable-pylint"></span>
 
-<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+<h3>
     Python Linting (reusable-pylint.yml)
 </h3>
 
@@ -1317,7 +1315,7 @@ Runs the CICDToolbox pylint pipeline to perform deep static analysis on Python c
 <br>
 </details>
 
-<h4 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1em; font-weight: 600;">
+<h4>
     Minimal Usage Example
 </h4>
 
@@ -1348,7 +1346,7 @@ jobs:
 
 <span id="reusable-reek"></span>
 
-<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+<h3>
     Ruby Code Smells (reusable-reek.yml)
 </h3>
 
@@ -1370,7 +1368,7 @@ Wraps the CICDToolbox reek pipeline to detect "code smells" in Ruby code, helpin
 <br>
 </details>
 
-<h4 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1em; font-weight: 600;">
+<h4>
     Minimal Usage Example
 </h4>
 
@@ -1401,7 +1399,7 @@ jobs:
 
 <span id="reusable-rubocop"></span>
 
-<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+<h3>
     Ruby Linting (reusable-rubocop.yml)
 </h3>
 
@@ -1423,7 +1421,7 @@ Runs the CICDToolbox rubocop pipeline to provide Ruby linting and auto-formattin
 <br>
 </details>
 
-<h4 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1em; font-weight: 600;">
+<h4>
     Minimal Usage Example
 </h4>
 
@@ -1454,7 +1452,7 @@ jobs:
 
 <span id="reusable-shellcheck"></span>
 
-<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+<h3>
     Shell Script Linting (reusable-shellcheck.yml)
 </h3>
 
@@ -1476,7 +1474,7 @@ Invokes the CICDToolbox shellcheck pipeline to lint shell scripts (.sh, .bash, e
 <br>
 </details>
 
-<h4 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1em; font-weight: 600;">
+<h4>
     Minimal Usage Example
 </h4>
 
@@ -1513,7 +1511,7 @@ jobs:
 
 <span id="reusable-slack-workflow-status"></span>
 
-<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+<h3>
     Slack Workflow Status Notifications (reusable-slack-workflow-status.yml)
 </h3>
 
@@ -1537,7 +1535,7 @@ All logic and guardrails around if we should send the message to slack comes fro
 <br>
 </details>
 
-<h4 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1em; font-weight: 600;">
+<h4>
     Minimal Usage Example (Minimum Guardrails)
 </h4>
 
@@ -1599,7 +1597,7 @@ jobs:
       slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
 ```
 
-<h4 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1em; font-weight: 600;">
+<h4>
     Minimal Usage Example (Extended Guardrails)
 </h4>
 
@@ -1693,7 +1691,7 @@ jobs:
 
 <span id="reusable-stale"></span>
 
-<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+<h3>
     Stale Issues and PRs (reusable-stale.yml)
 </h3>
 
@@ -1723,7 +1721,7 @@ Reusable wrapper around actions/stale to automatically mark and optionally close
 <br>
 </details>
 
-<h4 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1em; font-weight: 600;">
+<h4>
     Minimal Usage Example
 </h4>
 
@@ -1751,7 +1749,7 @@ jobs:
 
 <span id="reusable-validate-citations-file"></span>
 
-<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+<h3>
     CITATION File Validation (reusable-validate-citations-file.yml)
 </h3>
 
@@ -1773,7 +1771,7 @@ Runs the CICDToolbox validate-citations-file pipeline to validate CITATION.cff f
 <br>
 </details>
 
-<h4 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1em; font-weight: 600;">
+<h4>
     Minimal Usage Example
 </h4>
 
@@ -1804,7 +1802,7 @@ jobs:
 
 <span id="reusable-yaml-lint"></span>
 
-<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+<h3>
     YAML Linting (reusable-yaml-lint.yml)
 </h3>
 
@@ -1826,7 +1824,7 @@ Standard YAML linting workflow using the CICDToolbox yaml-lint pipeline and the 
 <br>
 </details>
 
-<h4 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1em; font-weight: 600;">
+<h4>
     Minimal Usage Example
 </h4>
 
@@ -1857,7 +1855,7 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-yaml-lint.yml@master
 ```
 
-<div style="width: 75%; height: 2px; background: #203959; margin: 1.2em auto; border-radius: 4px;"></div>
+<hr>
 
 <p align="center">
     <em>

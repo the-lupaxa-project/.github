@@ -4,13 +4,11 @@
     </a>
 </p>
 
-<h1 align="center" style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 2em; font-weight: 600;">
+<h1 align="center">
     The Lupaxa Project: Making a Contribution
 </h1>
 
-<div style="width: 75%; height: 2px; background: #203959; margin: 1.2em auto; border-radius: 4px;"></div>
-
-<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+<h2>
     Overview
 </h2>
 
@@ -20,7 +18,7 @@ If you discover issues, have ideas for improvements, or would like to propose ne
 
 Please follow the guidelines below when doing so.
 
-<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+<h2>
     Issue Reporting
 </h2>
 
@@ -33,7 +31,7 @@ Before submitting an issue:
 - **Include details** — specify the version, environment, or configuration used.
 - **Provide examples** — minimal code samples or reproduction steps help us diagnose faster.
 
-<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+<h2>
     Feature Requests
 </h2>
 
@@ -41,7 +39,7 @@ If you have an idea for a new feature or improvement that you’d like to see bu
 
 Explain *why* the feature is valuable and include use cases or examples where possible.
 
-<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+<h2>
     Pull Requests
 </h2>
 
@@ -62,7 +60,7 @@ Explain *why* the feature is valuable and include use cases or examples where po
 > **Note:** We reserve the right to request changes or reject pull requests that don’t meet these standards.
 > We will always provide constructive feedback to help you align with our practices.
 
-<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+<h2>
     Signed Commits
 </h2>
 
@@ -76,14 +74,14 @@ git commit -S -m "Your descriptive commit message"
 
 For details, see [GitHub’s Guide to Signing Commits](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits).
 
-<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+<h2>
     Code of Conduct
 </h2>
 
 This organization follows a [Code of Conduct](CODE_OF_CONDUCT.md).
 By participating in any repository, discussion, or community under The Lupaxa Project, you agree to uphold these principles.
 
-<div style="width: 75%; height: 2px; background: #203959; margin: 1.2em auto; border-radius: 4px;"></div>
+<hr>
 
 <p align="center">
     <em>

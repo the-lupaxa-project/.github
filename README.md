@@ -4,13 +4,11 @@
     </a>
 </p>
 
-<h1 align="center" style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 2em; font-weight: 600;">
+<h1 align="center">
     The Lupaxa Project â€” .github Repository
 </h1>
 
-<div style="width: 75%; height: 2px; background: #203959; margin: 1.2em auto; border-radius: 4px;"></div>
-
-<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+<h2>
     Overview
 </h2>
 
@@ -21,7 +19,7 @@ This repository defines the **shared standards, documentation, and automation re
 It serves as the **central hub** for community policies, contribution guidelines, security practices, and optional CI/CD workflows that embody our
 *Security by Design* and *Open Source with Integrity* principles.
 
-<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+<h2>
     Purpose
 </h2>
 
@@ -39,7 +37,7 @@ This repository provides:
 - **Reusable automation**  
   Global GitHub Actions, workflow templates, and composite actions for consistent CI/CD pipelines.
 
-<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+<h2>
     How GitHub Uses This Repo
 </h2>
 
@@ -55,7 +53,7 @@ GitHub automatically recognises and applies certain files from the organisationâ
 | PULL_REQUEST_TEMPLATE/ | Shared PR templates for consistent submissions.  |
 | .github/workflows/     | Provides reusable workflows for CI/CD.           |
 
-<h3 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.25em; font-weight: 600;">
+<h3>
     Extending or Overriding Defaults
 </h3>
 
@@ -70,7 +68,7 @@ However, maintainers can override or extend them when necessary:
 
 Repositories overriding central files should retain references back to the organization-wide versions to preserve visibility and intent.
 
-<h4 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1em; font-weight: 600;">
+<h4>
     Example:
 </h4>
 
@@ -78,7 +76,7 @@ Repositories overriding central files should retain references back to the organ
 This repository extends the Lupaxa Project Contributing Guidelines.
 ```
 
-<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+<h2>
     Reusable CI/CD Workflows
 </h2>
 
@@ -97,7 +95,7 @@ There are three layers:
 3. **Combined "bundle" workflows**
    - For example, a "docs lint" bundle that runs Markdown, YAML, and shell checks together.
 
-<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+<h2>
     SHA Pinning Policy
 </h2>
 
@@ -118,13 +116,13 @@ This gives you:
 - Automatic updates to shared workflows via the .github repo, which is in turn updated automatically by dependabot.
 - Strong SHA pinning for all other third-party actions.
 
-<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+<h2>
     Workflow Catalog
 </h2>
 
 Please refer to [WORKFLOWS.md](WORKFLOWS.md) for details on all the available reusable workflows.
 
-<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+<h2>
     Community Standards
 </h2>
 
@@ -136,13 +134,13 @@ All repositories under The Lupaxa Project follow these shared principles:
 
 These documents define how we collaborate respectfully, build securely, and contribute effectively across every Lupaxa project.
 
-<h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
+<h2>
     License
 </h2>
 
 All files within The Lupaxa Project are provided under the [MIT License](LICENSE.md), unless otherwise noted in specific project repositories.
 
-<div style="width: 75%; height: 2px; background: #203959; margin: 1.2em auto; border-radius: 4px;"></div>
+<hr>
 
 <p align="center">
     <em>
