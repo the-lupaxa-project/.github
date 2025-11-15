@@ -5,7 +5,7 @@
 </p>
 
 <h1 align="center">
-    The Lupaxa Project — .github Repository
+    The Lupaxa Project: The <em>.github</em> Repository
 </h1>
 
 <h2>

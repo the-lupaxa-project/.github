@@ -1,11 +1,9 @@
-<p align="center">
-    <a href="https://github.com/the-lupaxa-project">
-        <img src="https://raw.githubusercontent.com/the-lupaxa-project/org-logos/master/orgs/the-lupaxa-project/readme-logo.png" alt="The Lupaxa Project Logo" width="256" />
-    </a>
-</p>
+<a href="https://github.com/the-lupaxa-project">
+    <img src="https://raw.githubusercontent.com/the-lupaxa-project/org-logos/master/orgs/the-lupaxa-project/readme-logo.png" alt="The Lupaxa Project Logo" width="256" />
+</a>
 
 <h1 align="center">
-    The Lupaxa Project — Workflow Catalog
+    The Lupaxa Project: Workflow Catalog
 </h1>
 
 <h2>
