@@ -69,10 +69,10 @@ We ask that you:
 
 Following these principles helps us maintain a secure environment for everyone who uses our projects.
 
-<div style="width: 75%; height: 2px; background: #203959; margin: 1.2em auto; border-radius: 4px;"></div>
+<hr>
 
 <p align="center">
     <em>
-        The Lupaxa Project — Open Source, Secure by Design, Guided by Integrity.
+        &copy; The Lupaxa Project: Where Wild Instinct Meets Structured Intelligence.
     </em>
 </p>

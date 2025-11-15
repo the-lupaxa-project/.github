@@ -86,6 +86,6 @@ with modifications for **The Lupaxa Project’s** open-source and security-first
 
 <p align="center">
     <em>
-        The Lupaxa Project — Open Source, Secure by Design, Guided by Integrity.
+        &copy; The Lupaxa Project: Where Wild Instinct Meets Structured Intelligence.
     </em>
 </p>

@@ -145,6 +145,6 @@ All files within The Lupaxa Project are provided under the [MIT License](LICENSE
 
 <p align="center">
     <em>
-        The Lupaxa Project — Open Source, Secure by Design, Guided by Integrity.
+        &copy; The Lupaxa Project: Where Wild Instinct Meets Structured Intelligence.
     </em>
 </p>
