@@ -4,11 +4,9 @@
     </a>
 </p>
 
-<h1 align="center" style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 2em; font-weight: 600;">
+<h1 align="center">
     Welcome to The Lupaxa Project
 </h1>
-
-<div style="width: 75%; height: 2px; background: #203959; margin: 1.2em auto; border-radius: 4px;"></div>
 
 <h2 style="border: none; padding-bottom: 0.3em; margin-bottom: 0; font-size: 1.5em; font-weight: 600;">
     The Spirit of Lupaxa 🐺
