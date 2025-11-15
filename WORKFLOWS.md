@@ -213,6 +213,7 @@ All examples assume you are calling from another (consuming) repo in the organis
 uses: the-lupaxa-project/.github/.github/workflows/<reusable-workflow>.yml@master
 ```
 
+> [!NOTE]
 > This is the standard way to consume these reuable workflows.
 
 You can adapt triggers (on:), paths, and inputs for your specific project.
@@ -338,7 +339,8 @@ The workflow:
 - Emit appropriate GitHub error/warning annotations
 - Exit non-zero if any upstream job did not succeed
 
-> IMPORTANT: this is a *job-level* uses, not under steps!
+> [!IMPORTANT]
+> This is a *job-level* uses, not under steps!
 
 <details>
 <summary><strong>Click to expand: Inputs Accepted by this workflow</strong></summary>
@@ -410,6 +412,7 @@ code scanning across one or more supported languages in a consistent way.
 | :--------- | :----- | :------- | :------ | :-------------------------------- |
 | languages  | string | Yes      |         | Comma-separated list of CodeQL languages e.g. "python", "python,javascript". |
 
+> [!NOTE]
 > We always append +security-and-quality to the queries passed to CodeQL.
 
 <br>

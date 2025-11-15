@@ -57,7 +57,8 @@ Explain *why* the feature is valuable and include use cases or examples where po
 [3]: http://gitready.com/advanced/2009/02/10/squashing-commits-with-rebase.html
 [4]: https://help.github.com/articles/about-pull-requests/
 
-> **Note:** We reserve the right to request changes or reject pull requests that don’t meet these standards.
+> [!IMPORTANT]
+> We reserve the right to request changes or reject pull requests that don’t meet these standards.
 > We will always provide constructive feedback to help you align with our practices.
 
 <h2>
