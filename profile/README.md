@@ -23,12 +23,10 @@ Lupaxa is where **exploration meets precision**, and where **the untamed meets t
     Who We Are (and Who We’re Not)
 </h2>
 
-We are **not a company**.
-There’s no office, no boardroom, and no business model.
-
 Lupaxa is an **informal collective** of independent developers and open-source contributors.
 Some of us are hobbyists, others professionals — but all collaborate voluntarily, outside the bounds of employment or commercial obligation.
 
+We are **not a company**. There’s no office, no boardroom, and no business model.
 There are no customers, no shareholders — only peers and creators.
 There are no product pitches, pipelines, or roadmaps here — just code, shared openly and responsibly.
 
