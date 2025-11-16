@@ -5,7 +5,7 @@
 </p>
 
 <h1 align="center">
-    The Lupaxa Project: The <em>.github</em> Repository
+    The Lupaxa Project 🐺: The <em>.github</em> Repository
 </h1>
 
 <h2>
@@ -145,6 +145,6 @@ All files within The Lupaxa Project are provided under the [MIT License](LICENSE
 
 <p align="center">
     <em>
-        &copy; The Lupaxa Project: Where Wild Instinct Meets Structured Intelligence.
+        &copy; The Lupaxa Project 🐺: Where Wild Instinct Meets Structured Intelligence.
     </em>
 </p>

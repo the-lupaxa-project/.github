@@ -5,7 +5,7 @@
 </p>
 
 <h1 align="center">
-    The Lupaxa Project: Code of Conduct
+    The Lupaxa Project 🐺: Code of Conduct
 </h1>
 
 <h2>
@@ -86,6 +86,6 @@ with modifications for **The Lupaxa Project’s** open-source and security-first
 
 <p align="center">
     <em>
-        &copy; The Lupaxa Project: Where Wild Instinct Meets Structured Intelligence.
+        &copy; The Lupaxa Project 🐺: Where Wild Instinct Meets Structured Intelligence.
     </em>
 </p>

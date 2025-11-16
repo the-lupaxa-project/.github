@@ -3,7 +3,7 @@
 </a>
 
 <h1 align="center">
-    The Lupaxa Project: Workflow Catalog
+    The Lupaxa Project 🐺: Workflow Catalog
 </h1>
 
 <h2>
@@ -1860,6 +1860,6 @@ jobs:
 
 <p align="center">
     <em>
-        &copy; The Lupaxa Project: Where Wild Instinct Meets Structured Intelligence.
+        &copy; The Lupaxa Project 🐺: Where Wild Instinct Meets Structured Intelligence.
     </em>
 </p>

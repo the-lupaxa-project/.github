@@ -5,7 +5,7 @@
 </p>
 
 <h1 align="center">
-    The Lupaxa Project: Making a Contribution
+    The Lupaxa Project 🐺: How to Contribute
 </h1>
 
 <h2>
@@ -86,6 +86,6 @@ By participating in any repository, discussion, or community under The Lupaxa Pr
 
 <p align="center">
     <em>
-        &copy; The Lupaxa Project: Where Wild Instinct Meets Structured Intelligence.
+        &copy; The Lupaxa Project 🐺: Where Wild Instinct Meets Structured Intelligence.
     </em>
 </p>

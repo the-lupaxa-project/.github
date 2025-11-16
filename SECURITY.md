@@ -5,7 +5,7 @@
 </p>
 
 <h1 align="center">
-    The Lupaxa Project: Security Policy
+    The Lupaxa Project 🐺: Security Policy
 </h1>
 
 <h2>
@@ -73,6 +73,6 @@ Following these principles helps us maintain a secure environment for everyone w
 
 <p align="center">
     <em>
-        &copy; The Lupaxa Project: Where Wild Instinct Meets Structured Intelligence.
+        &copy; The Lupaxa Project 🐺: Where Wild Instinct Meets Structured Intelligence.
     </em>
 </p>

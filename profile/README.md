@@ -5,7 +5,7 @@
 </p>
 
 <h1 align="center">
-    Welcome to The Lupaxa Project
+    Welcome to The Lupaxa Project 🐺
 </h1>
 
 <h2>
@@ -106,6 +106,6 @@ It reflects both the **primal and the systematic** — a name that captures our 
 
 <p align="center">
     <em>
-        &copy; The Lupaxa Project: Where Wild Instinct Meets Structured Intelligence.
+        &copy; The Lupaxa Project 🐺: Where Wild Instinct Meets Structured Intelligence.
     </em>
 </p>
