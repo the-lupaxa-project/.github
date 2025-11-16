@@ -139,10 +139,10 @@ fi
 
 if [[ "${failed_jobs}" = true ]]; then
     # This will show up as a red annotation in the workflow summary
-    echo "::error title=Lint job failures::${summary}"
+    echo "::error title=Job failures::${summary}"
     exit 1
 else
     # Notice still appears in the Annotations section but does not fail the job
-    echo "::notice title=Lint jobs summary::${summary}"
+    echo "::notice title=Jobs summary::${summary}"
     exit 0
 fi
