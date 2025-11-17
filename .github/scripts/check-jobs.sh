@@ -151,15 +151,20 @@ build_summary()
 }
 
 # --------------------------------------------------------------------------------
-# Emit GitHub Actions annotation
+# Emit GitHub Actions annotation (with proper newline escaping)
 # --------------------------------------------------------------------------------
 
 emit_annotation()
 {
-    local rendered=""
+    local rendered
 
-    # Interpret the \n sequences as real newlines
+    # Turn the \n sequences into real newlines
     printf -v rendered '%b' "${summary}"
+
+    # For GitHub workflow commands, newlines and % must be percent-encoded
+    rendered=${rendered//'%'/'%25'}
+    rendered=${rendered//$'\r'/'%0D'}
+    rendered=${rendered//$'\n'/'%0A'}
 
     if [[ "${failed_jobs}" == true ]]; then
         echo "::error title=Job failures::${rendered}"
