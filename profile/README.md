@@ -10,7 +10,7 @@
 
 At **The Lupaxa Project**, we’re guided by the belief that the best ideas are born at the intersection of **wild instinct** and **structured intelligence**.
 
-Inspired by the mythos of the wolf — independent yet collaborative, intuitive yet disciplined — Lupaxa is more than a name. It’s a philosophy.
+Inspired by the mythos of the Wolf — independent yet collaborative, intuitive yet disciplined — Lupaxa is more than a name. It’s a philosophy.
 
 We believe that great tools don’t emerge from bureaucracy or rigid frameworks, but from the freedom to create and the discipline to refine.
 Lupaxa is where **exploration meets precision**, and where **the untamed meets the engineered**.
