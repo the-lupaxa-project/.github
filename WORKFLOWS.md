@@ -346,6 +346,7 @@ jobs:
     needs:
       - markdown
       - yaml
+    if: always()
     uses: the-lupaxa-project/.github/.github/workflows/reusable-check-job-status.yml@master
     with:
       jobs_json: ${{ toJson(needs) }}

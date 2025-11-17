@@ -172,10 +172,24 @@ write_step_summary()
     total_other=${#other_list[@]}
     total_all=$(( total_success + total_failed + total_cancelled + total_skipped + total_timed_out + total_other ))
 
-    {
-        echo "## Job Status Summary"
-        echo
+    # GitHub metadata (may be empty if not running in Actions, but that's fine)
+    local wf_name run_number ref_short sha_short
+    wf_name="${GITHUB_WORKFLOW:-unknown}"
+    run_number="${GITHUB_RUN_NUMBER:-unknown}"
+    ref_short="${GITHUB_REF##*/}"
+    sha_short="${GITHUB_SHA:-unknown}"
+    sha_short="${sha_short::7}"
 
+    {
+        echo "## Job Status Overview"
+        echo
+        echo "### Workflow metadata"
+        echo "- **Workflow:** ${wf_name}"
+        echo "- **Run:** #${run_number}"
+        echo "- **Ref:** ${ref_short}"
+        echo "- **Commit:** ${sha_short}"
+        echo "- **Generated at (UTC):** $(date -u +"%Y-%m-%d %H:%M:%S")"
+        echo
         echo "### Totals"
         echo "- Total jobs: ${total_all}"
         echo "- Successful: ${total_success}"

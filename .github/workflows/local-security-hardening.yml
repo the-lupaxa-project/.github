@@ -30,7 +30,7 @@ jobs:
     name: Check Lint Job Statuses
     needs:
       - ensure-sha-pinned
-
+    if: always()
     # 🔴 IMPORTANT: this is a *job-level* uses, not under steps:
     uses: ./.github/workflows/reusable-check-jobs-status.yml
     with:
