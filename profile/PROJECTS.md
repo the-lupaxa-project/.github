@@ -38,10 +38,15 @@ together, simplify discovery, and maintain a clear separation of focus.
 | <img src="https://raw.githubusercontent.com/the-lupaxa-project/org-logos/master/orgs/sre-toolbox/readme-logo.png" width="48px" alt="logo">           | [SRE Toolbox](https://github.com/lupaxa-sre-toolbox)                     | A curated toolkit for Site Reliability Engineers, focused on availability, resilience and performance. |
 | <img src="https://raw.githubusercontent.com/the-lupaxa-project/org-logos/master/orgs/terraform-toolbox/readme-logo.png" width="48px" alt="logo">     | [Terraform Toolbox](https://github.com/lupaxa-terraform-toolbox)         | A curated library of Terraform modules and Infrastructure-as-Code resources.                           |
 
-<hr>
+<p align="center">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</p>
 
 <p align="center">
+    <strong>
+        &copy; The Lupaxa Project 🐺
+    </strong>
+    <br />
     <em>
-        &copy; The Lupaxa Project 🐺: Where Wild Instinct Meets Structured Intelligence.
+        Where exploration meets precision.<br />
+        Where the untamed meets engineering.
     </em>
 </p>

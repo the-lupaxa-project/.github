@@ -1856,10 +1856,15 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-yaml-lint.yml@master
 ```
 
-<hr>
+<p align="center">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</p>
 
 <p align="center">
+    <strong>
+        &copy; The Lupaxa Project 🐺
+    </strong>
+    <br />
     <em>
-        &copy; The Lupaxa Project 🐺: Where Wild Instinct Meets Structured Intelligence.
+        Where exploration meets precision.<br />
+        Where the untamed meets engineering.
     </em>
 </p>

@@ -141,10 +141,15 @@ These documents define how we collaborate respectfully, build securely, and cont
 
 All files within The Lupaxa Project are provided under the [MIT License](LICENSE.md), unless otherwise noted in specific project repositories.
 
-<hr>
+<p align="center">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</p>
 
 <p align="center">
+    <strong>
+        &copy; The Lupaxa Project 🐺
+    </strong>
+    <br />
     <em>
-        &copy; The Lupaxa Project 🐺: Where Wild Instinct Meets Structured Intelligence.
+        Where exploration meets precision.<br />
+        Where the untamed meets engineering.
     </em>
 </p>

@@ -82,10 +82,15 @@ For details, see [GitHub’s Guide to Signing Commits](https://docs.github.com/e
 This organization follows a [Code of Conduct](CODE_OF_CONDUCT.md).
 By participating in any repository, discussion, or community under The Lupaxa Project, you agree to uphold these principles.
 
-<hr>
+<p align="center">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</p>
 
 <p align="center">
+    <strong>
+        &copy; The Lupaxa Project 🐺
+    </strong>
+    <br />
     <em>
-        &copy; The Lupaxa Project 🐺: Where Wild Instinct Meets Structured Intelligence.
+        Where exploration meets precision.<br />
+        Where the untamed meets engineering.
     </em>
 </p>
