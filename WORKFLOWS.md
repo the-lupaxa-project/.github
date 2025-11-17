@@ -2,13 +2,9 @@
     <img src="https://raw.githubusercontent.com/the-lupaxa-project/org-logos/master/orgs/the-lupaxa-project/readme-logo.png" alt="The Lupaxa Project Logo" width="256" />
 </a>
 
-<h1 align="center">
-    The Lupaxa Project 🐺: Workflow Catalog
-</h1>
+<h1 align="center">The Lupaxa Project.: Workflow Catalog</h1>
 
-<h2>
-    Overview
-</h2>
+<h2>Overview</h2>
 
 This document describes the shared GitHub Actions reusable workflows provided by
 The Lupaxa Project via the .github repository.
@@ -26,13 +22,9 @@ All workflows are designed to be:
 - Secure by default, with strong controls around third-party actions.
 - Consistent with organisational linting, documentation, and security standards.
 
-<h2>
-    Branch / SHA Policy and Security Hardening
-</h2>
+<h2>Branch / SHA Policy and Security Hardening</h2>
 
-<h3>
-    General policy
-</h3>
+<h3>General policy</h3>
 
 Across **ALL** Lupaxa Project repositories, we require **ALL 3<sup>rd</sup> party actions** to be pinned to a specific commit SHA.
 
@@ -48,9 +40,10 @@ These security-hardening workflows:
   - Point to 3<sup>rd</sup> actions without @&lt;SHA&gt;, or
   - Use @main, @master, or version tags that are not allow-listed.
 
-**There is one deliberate exception:**
-
-Calls to the-lupaxa-project/.github/.github/workflows/*.yml are **explicitly** allow-listed in the security-hardening configuration.
+> [!NOTE]
+> **There is one deliberate exception:**
+>
+> Calls to the-lupaxa-project/.github/.github/workflows/*.yml are **explicitly** allow-listed in the security-hardening configuration.
 
 This allows all Lupaxa Project repos to reference organisation workflows using @master, for example:
 
@@ -63,29 +56,21 @@ This provides:
 - Automatic updates to shared workflows via the .github repo.
 - Strong SHA pinning for all other third-party actions.
 
-<h2>
-    Naming Conventions
-</h2>
+<h2>Naming Conventions</h2>
 
-<h3>
-    Reusable workflows
-</h3>
+<h3>Reusable workflows</h3>
 
 - Location: the-lupaxa-project/.github/.github/workflows/
 - Naming pattern: reusable-&lt;NAME&gt;.yml
 - Purpose: reusable primitives and bundles that other repos call.
 
-<h4>
-    Examples:
-</h4>
+<h4>Examples:</h4>
 
 - reusable-markdown-lint.yml
 - reusable-yaml-lint.yml
 - reusable-codeql.yml
 
-<h3>
-    Consuming workflows
-</h3>
+<h3>Consuming workflows</h3>
 
 - Location: .github/workflows/ in a consuming repository.
 - Naming pattern: &lt;NAME&gt;.yml
@@ -94,16 +79,12 @@ This provides:
 - Group jobs logically,
 - Call one or more reusable-*.yml workflows via uses:.
 
-<h4>
-    Consumption Example:
-</h4>
+<h4>Consumption Example:</h4>
 
 - docs-lint.yml
 - security-hardening.yml
 
-<h2>
-    CI/CD Toolbox based Reusable Workflows
-</h2>
+<h2>CI/CD Toolbox based Reusable Workflows</h2>
 
 These workflows wrap tools from the [Lupaxa CI/CD Toolbox](https://github.com/lapaxa-actions-toolbox)￼GitHub organisation and all follow the same pattern:
 
@@ -125,9 +106,7 @@ These map to environment variables used by CICDToolbox pipelines:
 - SHOW_SKIPPED
 - NO_COLOR
 
-<h3>
-    Catalog — CI/CD Toolbox based Workflows
-</h3>
+<h3>Catalog — CI/CD Toolbox based Workflows</h3>
 
 | Workflow file                              | Purpose                                | Example                                      |
 | :----------------------------------------- | :------------------------------------- | :------------------------------------------: |
@@ -169,15 +148,11 @@ These map to environment variables used by CICDToolbox pipelines:
 [17]: https://github.com/the-lupaxa-project/.github/tree/master/.github/workflows/reusable-validate-citations-file.yml
 [18]: https://github.com/the-lupaxa-project/.github/tree/master/.github/workflows/reusable-yaml-lint.yml
 
-<h2>
-    Core Governance & Maintenance Workflows
-</h2>
+<h2>Core Governance & Maintenance Workflows</h2>
 
 These workflows are not CI/CD Toolbox based, but provide core services like dependency updates, stale handling, CodeQL analysis, and security-hardening.
 
-<h3>
-    Catalog — Core Workflows
-</h3>
+<h3>Catalog — Core Workflows</h3>
 
 | Workflow file                                     | Purpose                                                                                             | Example                                             |
 | :------------------------------------------------ | :-------------------------------------------------------------------------------------------------- | :-------------------------------------------------: |
@@ -203,9 +178,7 @@ These workflows are not CI/CD Toolbox based, but provide core services like depe
 [28]: https://github.com/the-lupaxa-project/.github/tree/master/.github/workflows/reusable-slack-workflow-status.yml
 [29]: https://github.com/the-lupaxa-project/.github/tree/master/.github/workflows/reusable-stale.yml
 
-<h2>
-    Minimal Usage Examples (Alphabetical by Workflow File)
-</h2>
+<h2>Minimal Usage Examples (Alphabetical by Workflow File)</h2>
 
 All examples assume you are calling from another (consuming) repo in the organisation and using:
 
@@ -218,11 +191,7 @@ uses: the-lupaxa-project/.github/.github/workflows/<reusable-workflow>.yml@maste
 
 You can adapt triggers (on:), paths, and inputs for your specific project.
 
-<span id="reusable-awesomebot"></span>
-
-<h3>
-    Markdown Link Checking (reusable-awesomebot.yml)
-</h3>
+<h3 id="reusable-awesomebot">Markdown Link Checking (reusable-awesomebot.yml)</h3>
 
 <details>
 <summary><strong>Click to expand: Inputs Accepted by this workflow</strong></summary>
@@ -240,9 +209,7 @@ You can adapt triggers (on:), paths, and inputs for your specific project.
 <br>
 </details>
 
-<h4>
-    Minimal Usage Example
-</h4>
+<h4>Minimal Usage Example</h4>
 
 ```yaml
 name: Markdown Link Check
@@ -1860,7 +1827,7 @@ jobs:
 
 <p align="center">
     <strong>
-        &copy; The Lupaxa Project 🐺
+        &copy; The Lupaxa Project.
     </strong>
     <br />
     <em>

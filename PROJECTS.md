@@ -4,18 +4,15 @@
     </a>
 </p>
 
-<h1 align="center">
-    The Lupaxa Project 🐺: Public Projects
+<h1 align="center">The Lupaxa Project : Our Projects
 </h1>
 
-<h2>
-    Our Projects
-</h2>
+<h2>Our Projects</h2>
 
 We group our repositories into logical domains, each managed as a dedicated GitHub organisation. This structure helps us keep related tools
 together, simplify discovery, and maintain a clear separation of focus.
 
-| Logo | Project                                                                                                                                       | Description                                                                                            |
+| Logo                                                                                                                                                 | Project                                                                  | Description                                                                                            |
 | :--------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------- |
 | <img src="https://raw.githubusercontent.com/the-lupaxa-project/org-logos/master/orgs/actions-toolbox/readme-logo.png" width="48px" alt="logo">       | [Actions Toolbox](https://github.com/lapaxa-actions-toolbox)             | A curated collection of reusable GitHub Actions.                                                       |
 | <img src="https://raw.githubusercontent.com/the-lupaxa-project/org-logos/master/orgs/aws-toolbox/readme-logo.png" width="48px" alt="logo">           | [AWS Toolbox](https://github.com/lupaxa-api-extractor-toolbox)           | A curated suite of API extraction and transformation tools for structured data collection.             |
@@ -42,7 +39,7 @@ together, simplify discovery, and maintain a clear separation of focus.
 
 <p align="center">
     <strong>
-        &copy; The Lupaxa Project 🐺
+        &copy; The Lupaxa Project.
     </strong>
     <br />
     <em>

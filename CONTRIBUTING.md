@@ -4,13 +4,9 @@
     </a>
 </p>
 
-<h1 align="center">
-    The Lupaxa Project 🐺: How to Contribute
-</h1>
+<h1 align="center">The Lupaxa Project: How to Contribute</h1>
 
-<h2>
-    Overview
-</h2>
+<h2>Overview</h2>
 
 We welcome contributions of all kinds — whether it’s fixing a bug, improving documentation, or adding new functionality.
 
@@ -166,7 +162,7 @@ By participating in any repository, discussion, or community under The Lupaxa Pr
 
 <p align="center">
     <strong>
-        &copy; The Lupaxa Project 🐺
+        &copy; The Lupaxa Project.
     </strong>
     <br />
     <em>
