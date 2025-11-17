@@ -81,7 +81,7 @@ For a detailed list of available projects please refer to our [projects list](PR
 The name fuses ***lupus*** (Latin for *wolf*) with a modern, tech-flavoured suffix.
 It reflects both the **primal and the systematic** — a name that captures our balance between creative instinct and technical precision.
 
-<hr>
+<hr />
 
 <p align="center">
     <strong>
@@ -90,6 +90,6 @@ It reflects both the **primal and the systematic** — a name that captures our 
     <br />
     <em>
         Where exploration meets precision. <br />
-        Where the untamed meets engineering.
+        Where the untamed meets the engineered.
     </em>
 </p>

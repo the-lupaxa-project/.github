@@ -1856,7 +1856,7 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-yaml-lint.yml@master
 ```
 
-<hr>
+<hr />
 
 <p align="center">
     <strong>
@@ -1865,6 +1865,6 @@ jobs:
     <br />
     <em>
         Where exploration meets precision.<br />
-        Where the untamed meets engineering.
+        Where the untamed meets the engineered.
     </em>
 </p>

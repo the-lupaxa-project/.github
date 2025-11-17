@@ -69,7 +69,7 @@ We ask that you:
 
 Following these principles helps us maintain a secure environment for everyone who uses our projects.
 
-<hr>
+<hr />
 
 <p align="center">
     <strong>
@@ -78,6 +78,6 @@ Following these principles helps us maintain a secure environment for everyone w
     <br />
     <em>
         Where exploration meets precision.<br />
-        Where the untamed meets engineering.
+        Where the untamed meets the engineered.
     </em>
 </p>
