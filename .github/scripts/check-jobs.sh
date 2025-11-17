@@ -119,18 +119,26 @@ write_step_summary()
     {
         echo "## Job Status Overview"
         echo
+        print_sorted_section "Successful jobs" "${success_list[@]}"
+        print_sorted_section "Failed jobs" "${failed_list[@]}"
+        print_sorted_section "Timed out jobs" "${timed_out_list[@]}"
+        print_sorted_section "Cancelled jobs" "${cancelled_list[@]}"
+        print_sorted_section "Skipped jobs" "${skipped_list[@]}"
+        print_sorted_section "Other statuses" "${other_list[@]}"
+        echo
         echo "### Workflow metadata"
-        echo "### Workflow metadata"
-
         echo "- **Repository:** ${GITHUB_REPOSITORY}"
         echo "- **Workflow:** ${GITHUB_WORKFLOW}"
         echo "- **Run number:** #${GITHUB_RUN_NUMBER}"
         echo "- **Attempt:** ${GITHUB_RUN_ATTEMPT}"
         echo "- **Event:** ${GITHUB_EVENT_NAME}"
-        echo "- **Triggered by:** ${GITHUB_ACTOR}"
 
-        if [[ -n "${GITHUB_TRIGGERING_ACTOR:-}" ]]; then
-            echo "- **Original actor:** ${GITHUB_TRIGGERING_ACTOR}"
+        actor="${GITHUB_ACTOR:-unknown}"
+        trigger="${GITHUB_TRIGGERING_ACTOR:-}"
+
+        echo "- **Actor:** ${actor}"
+        if [[ -n "${trigger}" && "${trigger}" != "${actor}" ]]; then
+            echo "- **Triggering actor:** ${trigger}"
         fi
 
         echo "- **Ref:** ${GITHUB_REF_NAME}"
@@ -151,12 +159,6 @@ write_step_summary()
         echo "- **Generated at (UTC):** $(date -u +"%Y-%m-%d %H:%M:%S")"
         echo
 
-        print_sorted_section "Successful jobs" "${success_list[@]}"
-        print_sorted_section "Failed jobs" "${failed_list[@]}"
-        print_sorted_section "Timed out jobs" "${timed_out_list[@]}"
-        print_sorted_section "Cancelled jobs" "${cancelled_list[@]}"
-        print_sorted_section "Skipped jobs" "${skipped_list[@]}"
-        print_sorted_section "Other statuses" "${other_list[@]}"
 
     } >> "${file}"
 }
