@@ -1856,7 +1856,7 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-yaml-lint.yml@master
 ```
 
-<p align="center">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</p>
+<hr>
 
 <p align="center">
     <strong>

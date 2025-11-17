@@ -69,7 +69,7 @@ We ask that you:
 
 Following these principles helps us maintain a secure environment for everyone who uses our projects.
 
-<p align="center">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</p>
+<hr>
 
 <p align="center">
     <strong>

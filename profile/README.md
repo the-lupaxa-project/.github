@@ -81,7 +81,8 @@ For a detailed list of available projects please refer to our [projects list](PR
 The name fuses ***lupus*** (Latin for *wolf*) with a modern, tech-flavoured suffix.
 It reflects both the **primal and the systematic** — a name that captures our balance between creative instinct and technical precision.
 
-<p align="center">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</p>
+<hr>
+
 <p align="center">
     <strong>
         &copy; The Lupaxa Project 🐺

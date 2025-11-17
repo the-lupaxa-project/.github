@@ -82,7 +82,7 @@ For details, see [GitHub’s Guide to Signing Commits](https://docs.github.com/e
 This organization follows a [Code of Conduct](CODE_OF_CONDUCT.md).
 By participating in any repository, discussion, or community under The Lupaxa Project, you agree to uphold these principles.
 
-<p align="center">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</p>
+<hr>
 
 <p align="center">
     <strong>

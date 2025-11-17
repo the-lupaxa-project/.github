@@ -141,7 +141,7 @@ These documents define how we collaborate respectfully, build securely, and cont
 
 All files within The Lupaxa Project are provided under the [MIT License](LICENSE.md), unless otherwise noted in specific project repositories.
 
-<p align="center">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</p>
+<hr>
 
 <p align="center">
     <strong>
