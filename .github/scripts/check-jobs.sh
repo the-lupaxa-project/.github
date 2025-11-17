@@ -116,23 +116,38 @@ write_step_summary()
     # If not running in GitHub Actions, nothing to do
     [[ -z "${file}" ]] && return 0
 
-
-    # GitHub metadata (may be empty if not running in Actions, but that's fine)
-    local wf_name run_number ref_short sha_short
-    wf_name="${GITHUB_WORKFLOW:-unknown}"
-    run_number="${GITHUB_RUN_NUMBER:-unknown}"
-    ref_short="${GITHUB_REF##*/}"
-    sha_short="${GITHUB_SHA:-unknown}"
-    sha_short="${sha_short::7}"
-
     {
         echo "## Job Status Overview"
         echo
         echo "### Workflow metadata"
-        echo "- **Workflow:** ${wf_name}"
-        echo "- **Run:** #${run_number}"
-        echo "- **Ref:** ${ref_short}"
-        echo "- **Commit:** ${sha_short}"
+        echo "### Workflow metadata"
+
+        echo "- **Repository:** ${GITHUB_REPOSITORY}"
+        echo "- **Workflow:** ${GITHUB_WORKFLOW}"
+        echo "- **Run number:** #${GITHUB_RUN_NUMBER}"
+        echo "- **Attempt:** ${GITHUB_RUN_ATTEMPT}"
+        echo "- **Event:** ${GITHUB_EVENT_NAME}"
+        echo "- **Triggered by:** ${GITHUB_ACTOR}"
+
+        if [[ -n "${GITHUB_TRIGGERING_ACTOR:-}" ]]; then
+            echo "- **Original actor:** ${GITHUB_TRIGGERING_ACTOR}"
+        fi
+
+        echo "- **Ref:** ${GITHUB_REF_NAME}"
+        echo "- **Commit SHA:** ${GITHUB_SHA}"
+        echo "- **Run URL:** https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+
+        # Pull Request metadata (if applicable)
+        if [[ -f "${GITHUB_EVENT_PATH}" ]]; then
+            pr_number=$(jq -r '.pull_request.number // empty' "${GITHUB_EVENT_PATH}")
+            pr_title=$(jq -r '.pull_request.title // empty' "${GITHUB_EVENT_PATH}")
+
+            if [[ -n "$pr_number" ]]; then
+                echo "- **PR #${pr_number}:** ${pr_title}"
+                echo "- **PR URL:** https://github.com/${GITHUB_REPOSITORY}/pull/${pr_number}"
+            fi
+        fi
+
         echo "- **Generated at (UTC):** $(date -u +"%Y-%m-%d %H:%M:%S")"
         echo
 
