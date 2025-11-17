@@ -15,37 +15,6 @@ skipped_list=()
 timed_out_list=()
 other_list=()
 
-# Colours (initially empty; set in init_colors)
-BOLD=""
-RESET=""
-GREEN=""
-RED=""
-YELLOW=""
-CYAN=""
-
-# --------------------------------------------------------------------------------
-# init_colors: set up colour variables if supported
-# --------------------------------------------------------------------------------
-
-init_colors()
-{
-    if command -v tput >/dev/null 2>&1 && [[ -t 1 ]]; then
-        BOLD="$(tput bold || true)"
-        RESET="$(tput sgr0 || true)"
-        GREEN="$(tput setaf 2 || true)"
-        RED="$(tput setaf 1 || true)"
-        YELLOW="$(tput setaf 3 || true)"
-        CYAN="$(tput setaf 6 || true)"
-    else
-        BOLD=""
-        RESET=""
-        GREEN=""
-        RED=""
-        YELLOW=""
-        CYAN=""
-    fi
-}
-
 # --------------------------------------------------------------------------------
 # ensure_jq: make sure jq is available (attempt installation if missing)
 # --------------------------------------------------------------------------------
@@ -82,8 +51,16 @@ parse_jobs()
     local job_results_json="$1"
 
     echo
-    echo "${CYAN}Job results:${RESET}"
+    echo "Job results:"
     echo
+
+    # If in GitHub, also append this header to the summary
+    if [[ -n "${GITHUB_STEP_SUMMARY:-}" ]]; then
+        {
+            echo "## Per-job Results"
+            echo
+        } >> "${GITHUB_STEP_SUMMARY}"
+    fi
 
     local parsed
     parsed=$(echo "${job_results_json}" | jq -r 'to_entries[] | "\(.key) \(.value.result)"') || {
@@ -98,37 +75,50 @@ parse_jobs()
         job_name=$(echo "${line}" | awk '{print $1}')
         result=$(echo "${line}" | awk '{print $2}')
 
+        local msg=""
         case "${result}" in
             success)
-                echo "  ${GREEN}[OK]${RESET} ${job_name} succeeded."
+                msg="[OK] ${job_name} succeeded."
                 success_list+=("${job_name}")
                 ;;
             failure)
-                echo "  ${RED}[FAIL]${RESET} ${job_name} failed."
+                msg="[FAIL] ${job_name} failed."
                 failed_list+=("${job_name}")
                 failed_jobs=true
                 ;;
             cancelled)
-                echo "  ${YELLOW}[CANCELLED]${RESET} ${job_name} was cancelled."
+                msg="[CANCELLED] ${job_name} was cancelled."
                 cancelled_list+=("${job_name}")
                 ;;
             skipped)
-                echo "  ${YELLOW}[SKIPPED]${RESET} ${job_name} was skipped."
+                msg="[SKIPPED] ${job_name} was skipped."
                 skipped_list+=("${job_name}")
                 ;;
             timed_out)
-                echo "  ${RED}[TIMED OUT]${RESET} ${job_name} timed out."
+                msg="[TIMED OUT] ${job_name} timed out."
                 timed_out_list+=("${job_name}")
                 failed_jobs=true
                 ;;
             *)
-                echo "  [OTHER] ${job_name} has unknown result: ${result}"
+                msg="[OTHER] ${job_name} has unknown result: ${result}"
                 other_list+=("${job_name}:${result}")
                 ;;
         esac
+
+        # print to stdout
+        echo "  ${msg}"
+
+        # append to job summary
+        if [[ -n "${GITHUB_STEP_SUMMARY:-}" ]]; then
+            echo "- ${msg}" >> "${GITHUB_STEP_SUMMARY}"
+        fi
+
     done <<< "${parsed}"
 
     echo
+    if [[ -n "${GITHUB_STEP_SUMMARY:-}" ]]; then
+        echo >> "${GITHUB_STEP_SUMMARY}"
+    fi
 }
 
 # --------------------------------------------------------------------------------
@@ -190,14 +180,7 @@ write_step_summary()
         echo "- **Commit:** ${sha_short}"
         echo "- **Generated at (UTC):** $(date -u +"%Y-%m-%d %H:%M:%S")"
         echo
-        echo "### Totals"
-        echo "- Total jobs: ${total_all}"
-        echo "- Successful: ${total_success}"
-        echo "- Failed: ${total_failed}"
-        echo "- Timed out: ${total_timed_out}"
-        echo "- Cancelled: ${total_cancelled}"
-        echo "- Skipped: ${total_skipped}"
-        echo "- Other: ${total_other}"
+        echo "### Total jobs ${total_all}"
         echo
 
         print_sorted_section "Successful jobs" "${success_list[@]}"
@@ -238,11 +221,11 @@ main()
 
     if [[ "${failed_jobs}" = true ]]; then
         echo
-        echo "${RED}One or more jobs failed or timed out.${RESET}"
+        echo "One or more jobs failed or timed out."
         exit 1
     else
         echo
-        echo "${GREEN}All jobs completed successfully.${RESET}"
+        echo "All jobs completed successfully."
         exit 0
     fi
 }
