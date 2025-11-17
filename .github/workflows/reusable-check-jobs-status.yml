@@ -13,6 +13,7 @@ permissions:
 
 jobs:
   check-jobs-status:
+    name: Check Jobs Status
     runs-on: ubuntu-latest
 
     steps:
