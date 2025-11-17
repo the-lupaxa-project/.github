@@ -147,8 +147,8 @@ write_step_summary()
         echo
         echo "### Workflow metadata"
         echo
-        echo "| Field | Value |"
-        echo "|-------|--------|"
+        echo "| Field  | Value   |"
+        echo "| :----- | :------ |"
 
         echo "| Repository | ${GITHUB_REPOSITORY} |"
         echo "| Workflow | ${GITHUB_WORKFLOW} |"
