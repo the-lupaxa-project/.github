@@ -1,16 +1,5 @@
 #!/usr/bin/env bash
 
-# This script receives a JSON string containing job results (from `toJson(needs)`)
-# and:
-#   - prints per-job status (success, failure, cancelled, skipped, timed_out)
-#   - emits a GitHub Actions workflow summary (via $GITHUB_STEP_SUMMARY)
-#   - emits a single GitHub Actions annotation (error/notice)
-#   - exits 1 if any job failed/timed_out, otherwise 0
-#
-# Example usage in a GitHub Actions step:
-#   - name: Check Job Statuses
-#     run: .github/scripts/check-jobs.sh '${{ toJson(needs) }}'
-
 set -euo pipefail
 
 # --------------------------------------------------------------------------------
@@ -25,6 +14,37 @@ cancelled_list=()
 skipped_list=()
 timed_out_list=()
 other_list=()
+
+# Colours (initially empty; set in init_colors)
+BOLD=""
+RESET=""
+GREEN=""
+RED=""
+YELLOW=""
+CYAN=""
+
+# --------------------------------------------------------------------------------
+# init_colors: set up colour variables if supported
+# --------------------------------------------------------------------------------
+
+init_colors()
+{
+    if command -v tput >/dev/null 2>&1 && [[ -t 1 ]]; then
+        BOLD="$(tput bold || true)"
+        RESET="$(tput sgr0 || true)"
+        GREEN="$(tput setaf 2 || true)"
+        RED="$(tput setaf 1 || true)"
+        YELLOW="$(tput setaf 3 || true)"
+        CYAN="$(tput setaf 6 || true)"
+    else
+        BOLD=""
+        RESET=""
+        GREEN=""
+        RED=""
+        YELLOW=""
+        CYAN=""
+    fi
+}
 
 # --------------------------------------------------------------------------------
 # ensure_jq: make sure jq is available (attempt installation if missing)
@@ -48,7 +68,7 @@ ensure_jq()
     fi
 
     if ! command -v jq >/dev/null 2>&1; then
-        echo "::error title=check-jobs.sh::jq could not be installed or found on PATH."
+        echo "ERROR: jq could not be installed or found."
         exit 1
     fi
 }
@@ -61,7 +81,8 @@ parse_jobs()
 {
     local job_results_json="$1"
 
-    echo "Job results:"
+    echo
+    echo "${CYAN}Job results:${RESET}"
     echo
 
     local parsed
@@ -73,39 +94,60 @@ parse_jobs()
     while IFS= read -r line; do
         [[ -z "${line}" ]] && continue
 
+        local job_name result
         job_name=$(echo "${line}" | awk '{print $1}')
         result=$(echo "${line}" | awk '{print $2}')
 
         case "${result}" in
             success)
-                echo "  ✓ ${job_name} succeeded."
+                echo "  ${GREEN}[OK]${RESET} ${job_name} succeeded."
                 success_list+=("${job_name}")
                 ;;
             failure)
-                echo "  ✗ ${job_name} FAILED."
+                echo "  ${RED}[FAIL]${RESET} ${job_name} failed."
                 failed_list+=("${job_name}")
                 failed_jobs=true
                 ;;
             cancelled)
-                echo "  ! ${job_name} was cancelled."
+                echo "  ${YELLOW}[CANCELLED]${RESET} ${job_name} was cancelled."
                 cancelled_list+=("${job_name}")
                 ;;
             skipped)
-                echo "  - ${job_name} was skipped."
+                echo "  ${YELLOW}[SKIPPED]${RESET} ${job_name} was skipped."
                 skipped_list+=("${job_name}")
                 ;;
             timed_out)
-                echo "  ⏱ ${job_name} TIMED OUT."
+                echo "  ${RED}[TIMED OUT]${RESET} ${job_name} timed out."
                 timed_out_list+=("${job_name}")
                 failed_jobs=true
                 ;;
             *)
-                echo "  ? ${job_name} has unknown result: ${result}"
+                echo "  [OTHER] ${job_name} has unknown result: ${result}"
                 other_list+=("${job_name}:${result}")
                 ;;
         esac
     done <<< "${parsed}"
 
+    echo
+}
+
+# --------------------------------------------------------------------------------
+# print_sorted_section: helper for the summary
+# --------------------------------------------------------------------------------
+
+print_sorted_section()
+{
+    local title="$1"
+    shift
+    local arr=("$@")
+
+    (( ${#arr[@]} == 0 )) && return
+
+    echo "### ${title}"
+    printf '%s\n' "${arr[@]}" | sort | while IFS= read -r j; do
+        [[ -z "${j}" ]] && continue
+        echo "- ${j}"
+    done
     echo
 }
 
@@ -117,93 +159,48 @@ write_step_summary()
 {
     local file="${GITHUB_STEP_SUMMARY:-}"
 
+    # If not running in GitHub Actions, nothing to do
     [[ -z "${file}" ]] && return 0
+
+    local total_success total_failed total_cancelled total_skipped total_timed_out total_other total_all
+
+    total_success=${#success_list[@]}
+    total_failed=${#failed_list[@]}
+    total_cancelled=${#cancelled_list[@]}
+    total_skipped=${#skipped_list[@]}
+    total_timed_out=${#timed_out_list[@]}
+    total_other=${#other_list[@]}
+    total_all=$(( total_success + total_failed + total_cancelled + total_skipped + total_timed_out + total_other ))
 
     {
         echo "## Job Status Summary"
+        echo
 
-        if ((${#success_list[@]} > 0)); then
-            echo "### Successful jobs"
-            for j in "${success_list[@]}"; do
-                echo "- ${j}"
-            done
-            echo
+        echo "### Totals"
+        echo "- Total jobs: ${total_all}"
+        echo "- Successful: ${total_success}"
+        echo "- Failed: ${total_failed}"
+        echo "- Timed out: ${total_timed_out}"
+        echo "- Cancelled: ${total_cancelled}"
+        echo "- Skipped: ${total_skipped}"
+        echo "- Other: ${total_other}"
+        echo
+
+        print_sorted_section "Successful jobs" "${success_list[@]}"
+        print_sorted_section "Failed jobs" "${failed_list[@]}"
+        print_sorted_section "Timed out jobs" "${timed_out_list[@]}"
+        print_sorted_section "Cancelled jobs" "${cancelled_list[@]}"
+        print_sorted_section "Skipped jobs" "${skipped_list[@]}"
+        print_sorted_section "Other statuses" "${other_list[@]}"
+
+        echo "---"
+        if [[ "${failed_jobs}" = true ]]; then
+            echo "**One or more jobs failed or timed out.**"
+        else
+            echo "**All jobs completed successfully.**"
         fi
 
-        if ((${#failed_list[@]} > 0)); then
-            echo "### Failed jobs"
-            for j in "${failed_list[@]}"; do
-                echo "- ${j}"
-            done
-            echo
-        fi
-
-        if ((${#timed_out_list[@]} > 0)); then
-            echo "### Timed out jobs"
-            for j in "${timed_out_list[@]}"; do
-                echo "- ${j}"
-            done
-            echo
-        fi
-
-        if ((${#cancelled_list[@]} > 0)); then
-            echo "### Cancelled jobs"
-            for j in "${cancelled_list[@]}"; do
-                echo "- ${j}"
-            done
-            echo
-        fi
-
-        if ((${#skipped_list[@]} > 0)); then
-            echo "### Skipped jobs"
-            for j in "${skipped_list[@]}"; do
-                echo "- ${j}"
-            done
-            echo
-        fi
-
-        if ((${#other_list[@]} > 0)); then
-            echo "### Other results"
-            for j in "${other_list[@]}"; do
-                echo "- ${j}"
-            done
-            echo
-        fi
     } >> "${file}"
-}
-
-# --------------------------------------------------------------------------------
-# emit_annotation: emit a single error/notice annotation summarising everything
-# --------------------------------------------------------------------------------
-
-emit_annotation()
-{
-    local message=""
-
-    if ((${#success_list[@]} > 0)); then
-        message+="Success: ${success_list[*]}%0A"
-    fi
-    if ((${#failed_list[@]} > 0)); then
-        message+="Failed: ${failed_list[*]}%0A"
-    fi
-    if ((${#timed_out_list[@]} > 0)); then
-        message+="Timed out: ${timed_out_list[*]}%0A"
-    fi
-    if ((${#cancelled_list[@]} > 0)); then
-        message+="Cancelled: ${cancelled_list[*]}%0A"
-    fi
-    if ((${#skipped_list[@]} > 0)); then
-        message+="Skipped: ${skipped_list[*]}%0A"
-    fi
-    if ((${#other_list[@]} > 0)); then
-        message+="Other: ${other_list[*]}%0A"
-    fi
-
-    if [[ "${failed_jobs}" = true ]]; then
-        echo "::error title=Job failures::${message}"
-    else
-        echo "::notice title=Jobs summary::${message}"
-    fi
 }
 
 # --------------------------------------------------------------------------------
@@ -212,21 +209,27 @@ emit_annotation()
 
 main()
 {
+    init_colors
     ensure_jq
 
     local job_results_json="${1:-}"
 
     if [[ -z "${job_results_json}" ]]; then
-        echo "::error title=check-jobs.sh::No job results JSON provided."
+        echo "ERROR: No job results JSON provided."
         exit 1
     fi
 
     parse_jobs "${job_results_json}"
     write_step_summary
-    emit_annotation
 
     if [[ "${failed_jobs}" = true ]]; then
+        echo
+        echo "${RED}One or more jobs failed or timed out.${RESET}"
         exit 1
+    else
+        echo
+        echo "${GREEN}All jobs completed successfully.${RESET}"
+        exit 0
     fi
 }
 
