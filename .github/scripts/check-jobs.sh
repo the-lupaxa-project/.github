@@ -154,21 +154,17 @@ build_summary()
 # Emit GitHub Actions annotation (with proper newline escaping)
 # --------------------------------------------------------------------------------
 
-emit_annotation()
-{
+emit_annotation() {
     local rendered="${summary}"
 
-    # Convert literal "\n" sequences into GitHub-safe newline escapes
     rendered=${rendered//'%'/'%25'}
-    rendered=${rendered//$'\r'/'%0D'}
-    rendered=${rendered//\\n/'%0A'}     # <-- KEY FIX
+    rendered=${rendered//$'\r'/''}
+    rendered=${rendered//$'\n'/'%0A'}   # --- REPLACE REAL NEWLINE WITH %0A ---
 
     if [[ "${failed_jobs}" == true ]]; then
         echo "::error title=Job failures::${rendered}"
-        return 1
     else
         echo "::notice title=Jobs summary::${rendered}"
-        return 0
     fi
 }
 
