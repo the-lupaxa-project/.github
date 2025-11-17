@@ -64,7 +64,7 @@ This Code of Conduct is adapted from the
 [Contributor Covenant v2.1](https://www.contributor-covenant.org/version/2/1/code_of_conduct.html),
 with modifications for **The Lupaxa Project’s** open-source and security-first philosophy.
 
-<hr />
+<h1></h1>
 
 <p align="center">
     <strong>

@@ -156,7 +156,7 @@ Example
 This organization follows a [Code of Conduct](CODE_OF_CONDUCT.md).
 By participating in any repository, discussion, or community under The Lupaxa Project, you agree to uphold these principles.
 
-<hr />
+<h1></h1>
 
 <p align="center">
     <strong>

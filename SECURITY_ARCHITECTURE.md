@@ -76,12 +76,12 @@ We believe security improves through:
 
 This architecture ensures the safety, trustworthiness, and longevity of Lupaxa’s open-source ecosystem.
 
-<hr />
+<h1></h1>
 
 <p align="center">
-    **
+    <strong>
         &copy; The Lupaxa Project.
-    **
+    </strong>
     <br />
     <em>
         Where exploration meets precision.<br />

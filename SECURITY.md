@@ -57,7 +57,7 @@ We ask that you:
 
 Following these principles helps us maintain a secure environment for everyone who uses our projects.
 
-<hr />
+<h1></h1>
 
 <p align="center">
     <strong>

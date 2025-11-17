@@ -1620,7 +1620,7 @@ jobs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-yaml-lint.yml@master
 ```
 
-<hr />
+<h1></h1>
 
 <p align="center">
     <strong>

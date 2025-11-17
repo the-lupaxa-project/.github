@@ -86,7 +86,7 @@ Contributors must ensure:
 
 Where uncertain, maintainers should request a security review from the organisation owners.
 
-<hr />
+<h1></h1>
 
 <p align="center">
     <strong>

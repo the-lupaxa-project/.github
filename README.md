@@ -167,7 +167,7 @@ for the correct reporting channel.
 
 Unless explicitly stated otherwise, repositories under The Lupaxa Project follow the [MIT License](LICENSE.md).
 
-<hr />
+<h1></h1>
 
 <p align="center">
     <strong>
