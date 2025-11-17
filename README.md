@@ -59,7 +59,7 @@ However, maintainers can override or extend them when necessary:
 
 Repositories overriding central files should retain references back to the organization-wide versions to preserve visibility and intent.
 
-<h4>Example:</h4>
+<h4>Example</h4>
 
 ```text
 This repository extends the Lupaxa Project Contributing Guidelines.
@@ -69,7 +69,7 @@ This repository extends the Lupaxa Project Contributing Guidelines.
 
 This repository also acts as a **central catalog of reusable workflows** for linting, security scanning, and general CI hygiene.
 
-There are three layers:
+There are two layers:
 
 1. **Reusable workflows**
    - Live in this repo: `.github/workflows/reusable-*.yml`  
@@ -78,9 +78,6 @@ There are three layers:
 2. **Local workflows**
    - Live in this repo: `.github/workflows/local-*.yml`  
    - Use `uses: ./.github/workflows/reusable-*.yml` to call the shared logic.
-
-3. **Combined "bundle" workflows**
-   - For example, a "docs lint" bundle that runs Markdown, YAML, and shell checks together.
 
 <h2>SHA Pinning Policy</h2>
 

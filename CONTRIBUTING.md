@@ -142,7 +142,7 @@ A well-labelled issue or PR typically has:
 - 1× state
 - 1× resolution (added when closing)
 
-Example:
+Example
 
 | Category   | Label                |
 | :--------- | :------------------- |
@@ -151,9 +151,7 @@ Example:
 | State      | state: confirmed     |
 | Resolution | resolution: released |
 
-<h2>
-    Code of Conduct
-</h2>
+<h2>Code of Conduct</h2>
 
 This organization follows a [Code of Conduct](CODE_OF_CONDUCT.md).
 By participating in any repository, discussion, or community under The Lupaxa Project, you agree to uphold these principles.
