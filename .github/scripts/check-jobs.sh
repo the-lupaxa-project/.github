@@ -50,18 +50,6 @@ parse_jobs()
 {
     local job_results_json="$1"
 
-    echo
-    echo "Job results:"
-    echo
-
-    # If in GitHub, also append this header to the summary
-    if [[ -n "${GITHUB_STEP_SUMMARY:-}" ]]; then
-        {
-            echo "## Per-job Results"
-            echo
-        } >> "${GITHUB_STEP_SUMMARY}"
-    fi
-
     local parsed
     parsed=$(echo "${job_results_json}" | jq -r 'to_entries[] | "\(.key) \(.value.result)"') || {
         echo "Failed to parse job results JSON via jq."
@@ -75,50 +63,30 @@ parse_jobs()
         job_name=$(echo "${line}" | awk '{print $1}')
         result=$(echo "${line}" | awk '{print $2}')
 
-        local msg=""
         case "${result}" in
             success)
-                msg="[OK] ${job_name} succeeded."
                 success_list+=("${job_name}")
                 ;;
             failure)
-                msg="[FAIL] ${job_name} failed."
                 failed_list+=("${job_name}")
                 failed_jobs=true
                 ;;
             cancelled)
-                msg="[CANCELLED] ${job_name} was cancelled."
                 cancelled_list+=("${job_name}")
                 ;;
             skipped)
-                msg="[SKIPPED] ${job_name} was skipped."
                 skipped_list+=("${job_name}")
                 ;;
             timed_out)
-                msg="[TIMED OUT] ${job_name} timed out."
                 timed_out_list+=("${job_name}")
                 failed_jobs=true
                 ;;
             *)
-                msg="[OTHER] ${job_name} has unknown result: ${result}"
                 other_list+=("${job_name}:${result}")
                 ;;
         esac
 
-        # print to stdout
-        echo "  ${msg}"
-
-        # append to job summary
-        if [[ -n "${GITHUB_STEP_SUMMARY:-}" ]]; then
-            echo "- ${msg}" >> "${GITHUB_STEP_SUMMARY}"
-        fi
-
     done <<< "${parsed}"
-
-    echo
-    if [[ -n "${GITHUB_STEP_SUMMARY:-}" ]]; then
-        echo >> "${GITHUB_STEP_SUMMARY}"
-    fi
 }
 
 # --------------------------------------------------------------------------------
