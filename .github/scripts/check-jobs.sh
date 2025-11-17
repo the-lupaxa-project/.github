@@ -122,6 +122,37 @@ print_sorted_section()
     echo
 }
 
+# Returns the ordinal suffix for a given day number ("st", "nd", "rd", "th")
+ordinal_suffix() {
+    local day="$1"
+    local suf
+
+    if (( day == 1 || day == 21 || day == 31 )); then
+        suf="st"
+    elif (( day == 2 || day == 22 )); then
+        suf="nd"
+    elif (( day == 3 || day == 23 )); then
+        suf="rd"
+    else
+        suf="th"
+    fi
+
+    echo "<sup>${suf}</sup>"
+}
+
+# Build a human-readable timestamp
+build_human_timestamp() {
+    local day month_name year time dow suffix
+    day="$(date -u +'%d' | sed 's/^0//')"          # 1–31
+    dow="$(date -u +'%A')"                         # Monday
+    month_name="$(date -u +'%B')"                  # November
+    year="$(date -u +'%Y')"                        # 2025
+    time="$(date -u +'%H:%M:%S')"                  # 18:03:45
+    suffix="$(ordinal_suffix "${day}")"            
+
+    echo "${dow} ${day}${suffix} ${month_name} ${year} ${time}"
+}
+
 # --------------------------------------------------------------------------------
 # write_step_summary: use GitHub's official job summary API
 # --------------------------------------------------------------------------------
@@ -179,7 +210,7 @@ write_step_summary()
             fi
         fi
 
-        generated_at="$(date -u +"%Y-%m-%d %H:%M:%S")"
+        generated_at="$(build_human_timestamp)"
         echo "| Generated at (UTC) | ${generated_at} |"
         echo
 
