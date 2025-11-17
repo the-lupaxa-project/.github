@@ -342,7 +342,7 @@ jobs:
 
   # 🔴 IMPORTANT: this is a *job-level* uses, not under steps:
   check-status:
-    name: Pipeline Job Summary
+    name: Check Jobs Status
     needs:
       - markdown
       - yaml

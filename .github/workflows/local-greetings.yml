@@ -22,7 +22,7 @@ jobs:
       repo-token: ${{ secrets.GITHUB_TOKEN }}
 
   status-check:
-    name: Pipeline Job Summary
+    name: Check Jobs Status
     needs:
       - greetings
     if: always()

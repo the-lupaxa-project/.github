@@ -20,7 +20,7 @@ jobs:
     uses: ./.github/workflows/reusable-purge-deprecated-workflow-runs.yml
 
   status-check:
-    name: Pipeline Job Summary
+    name: Check Jobs Status
     needs:
       - purge-deprecated-workflows
     if: always()
