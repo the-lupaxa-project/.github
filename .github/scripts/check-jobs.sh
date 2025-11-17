@@ -206,7 +206,6 @@ write_step_summary()
 
 main()
 {
-    init_colors
     ensure_jq
 
     local job_results_json="${1:-}"
