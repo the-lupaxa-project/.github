@@ -20,7 +20,7 @@ jobs:
     uses: ./.github/workflows/reusable-stale.yml
 
   status-check:
-    name: Check Lint Job Statuses
+    name: Pipeline Job Summary
     needs:
       - stale
     if: always()

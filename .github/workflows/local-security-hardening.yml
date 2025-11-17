@@ -27,7 +27,7 @@ jobs:
     uses: ./.github/workflows/reusable-ensure-sha-pinned-actions.yml
 
   status-check:
-    name: Check Lint Job Statuses
+    name: Pipeline Job Summary
     needs:
       - ensure-sha-pinned
     if: always()
