@@ -21,7 +21,7 @@ jobs:
     secrets: inherit
 
   status-check:
-    name: Check Lint Job Statuses
+    name: Check Jobs Status
     needs:
       - shellcheck
     if: always()

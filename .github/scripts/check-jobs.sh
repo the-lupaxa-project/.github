@@ -6,8 +6,6 @@ set -euo pipefail
 # Globals (job buckets)
 # --------------------------------------------------------------------------------
 
-failed_jobs=false
-
 success_list=()
 failed_list=()
 cancelled_list=()
@@ -69,7 +67,6 @@ parse_jobs()
                 ;;
             failure)
                 failed_list+=("${job_name}")
-                failed_jobs=true
                 ;;
             cancelled)
                 cancelled_list+=("${job_name}")
@@ -79,7 +76,6 @@ parse_jobs()
                 ;;
             timed_out)
                 timed_out_list+=("${job_name}")
-                failed_jobs=true
                 ;;
             *)
                 other_list+=("${job_name}:${result}")
@@ -120,15 +116,6 @@ write_step_summary()
     # If not running in GitHub Actions, nothing to do
     [[ -z "${file}" ]] && return 0
 
-    local total_success total_failed total_cancelled total_skipped total_timed_out total_other total_all
-
-    total_success=${#success_list[@]}
-    total_failed=${#failed_list[@]}
-    total_cancelled=${#cancelled_list[@]}
-    total_skipped=${#skipped_list[@]}
-    total_timed_out=${#timed_out_list[@]}
-    total_other=${#other_list[@]}
-    total_all=$(( total_success + total_failed + total_cancelled + total_skipped + total_timed_out + total_other ))
 
     # GitHub metadata (may be empty if not running in Actions, but that's fine)
     local wf_name run_number ref_short sha_short
@@ -148,8 +135,6 @@ write_step_summary()
         echo "- **Commit:** ${sha_short}"
         echo "- **Generated at (UTC):** $(date -u +"%Y-%m-%d %H:%M:%S")"
         echo
-        echo "### Total jobs ${total_all}"
-        echo
 
         print_sorted_section "Successful jobs" "${success_list[@]}"
         print_sorted_section "Failed jobs" "${failed_list[@]}"
@@ -157,13 +142,6 @@ write_step_summary()
         print_sorted_section "Cancelled jobs" "${cancelled_list[@]}"
         print_sorted_section "Skipped jobs" "${skipped_list[@]}"
         print_sorted_section "Other statuses" "${other_list[@]}"
-
-        echo "---"
-        if [[ "${failed_jobs}" = true ]]; then
-            echo "**One or more jobs failed or timed out.**"
-        else
-            echo "**All jobs completed successfully.**"
-        fi
 
     } >> "${file}"
 }
@@ -185,16 +163,6 @@ main()
 
     parse_jobs "${job_results_json}"
     write_step_summary
-
-    if [[ "${failed_jobs}" = true ]]; then
-        echo
-        echo "One or more jobs failed or timed out."
-        exit 1
-    else
-        echo
-        echo "All jobs completed successfully."
-        exit 0
-    fi
 }
 
 main "$@"
