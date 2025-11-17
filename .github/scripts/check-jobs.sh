@@ -130,11 +130,11 @@ format_list_multiline()
         return 0
     fi
 
-    summary+="${title}:\n"
+    summary+="${title}:\\n"
     for item in "${items[@]}"; do
-        summary+="  - ${item}\n"
+        summary+="  - ${item}\\n"
     done
-    summary+="\n"
+    summary+="\\n"
 }
 
 build_summary()
@@ -156,15 +156,12 @@ build_summary()
 
 emit_annotation()
 {
-    local rendered
+    local rendered="${summary}"
 
-    # Turn the \n sequences into real newlines
-    printf -v rendered '%b' "${summary}"
-
-    # For GitHub workflow commands, newlines and % must be percent-encoded
+    # Convert literal "\n" sequences into GitHub-safe newline escapes
     rendered=${rendered//'%'/'%25'}
     rendered=${rendered//$'\r'/'%0D'}
-    rendered=${rendered//$'\n'/'%0A'}
+    rendered=${rendered//\\n/'%0A'}     # <-- KEY FIX
 
     if [[ "${failed_jobs}" == true ]]; then
         echo "::error title=Job failures::${rendered}"
