@@ -34,7 +34,7 @@ jobs:
     secrets: inherit
 
   status-check:
-    name: Check Lint Job Statuses
+    name: Pipeline Job Summary
     needs:
       - markdown-lint
       - yaml-lint

@@ -21,7 +21,7 @@ jobs:
     secrets: inherit
 
   status-check:
-    name: Check Jobs Status
+    name: Pipeline Job Summary
     needs:
       - shellcheck
     if: always()

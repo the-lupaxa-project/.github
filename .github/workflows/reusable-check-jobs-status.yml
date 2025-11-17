@@ -1,4 +1,4 @@
-name: Reusable Check Jobs Status
+name: Check Jobs Status summary
 
 on:
   workflow_call:
@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   check-jobs-status:
-    name: Check Jobs Status
+    name: Jobs Summary
     runs-on: ubuntu-latest
 
     steps:
