@@ -15,15 +15,21 @@ permissions:
   contents: read
 
 jobs:
-  docs-lint:
-    name: Run Documentation Lint
-    uses: ./.github/workflows/reusable-docs-lint.yml
+  markdown-lint:
+    name: Markdown Lint
+    uses: ./.github/workflows/reusable-markdown-lint.yml
+    secrets: inherit
+
+  yaml-lint:
+    name: YAML Lint
+    uses: ./.github/workflows/reusable-yaml-lint.yml
     secrets: inherit
 
   status-check:
     name: Check Lint Job Statuses
     needs:
-      - docs-lint
+      - markdown-lint
+      - yaml-lint
 
     # 🔴 IMPORTANT: this is a *job-level* uses, not under steps:
     uses: ./.github/workflows/reusable-check-jobs-status.yml
