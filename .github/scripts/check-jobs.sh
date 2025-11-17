@@ -13,6 +13,23 @@ skipped_list=()
 timed_out_list=()
 other_list=()
 
+# ------------------------------------------------------------------------
+# GitHub Actions environment variables (defined at runtime)
+# Declared here only to silence ShellCheck warnings (SC2154 etc.)
+# ------------------------------------------------------------------------
+: "${GITHUB_REPOSITORY:=}"
+: "${GITHUB_WORKFLOW:=}"
+: "${GITHUB_RUN_NUMBER:=}"
+: "${GITHUB_RUN_ATTEMPT:=}"
+: "${GITHUB_EVENT_NAME:=}"
+: "${GITHUB_ACTOR:=}"
+: "${GITHUB_TRIGGERING_ACTOR:=}"
+: "${GITHUB_REF_NAME:=}"
+: "${GITHUB_SHA:=}"
+: "${GITHUB_RUN_ID:=}"
+: "${GITHUB_STEP_SUMMARY:=}"
+: "${GITHUB_EVENT_PATH:=}"
+
 # --------------------------------------------------------------------------------
 # ensure_jq: make sure jq is available (attempt installation if missing)
 # --------------------------------------------------------------------------------
@@ -119,46 +136,52 @@ write_step_summary()
     {
         echo "## Job Status Overview"
         echo
+
         print_sorted_section "Successful jobs" "${success_list[@]}"
         print_sorted_section "Failed jobs" "${failed_list[@]}"
         print_sorted_section "Timed out jobs" "${timed_out_list[@]}"
         print_sorted_section "Cancelled jobs" "${cancelled_list[@]}"
         print_sorted_section "Skipped jobs" "${skipped_list[@]}"
         print_sorted_section "Other statuses" "${other_list[@]}"
+
         echo
         echo "### Workflow metadata"
-        echo "- **Repository:** ${GITHUB_REPOSITORY}"
-        echo "- **Workflow:** ${GITHUB_WORKFLOW}"
-        echo "- **Run number:** #${GITHUB_RUN_NUMBER}"
-        echo "- **Attempt:** ${GITHUB_RUN_ATTEMPT}"
-        echo "- **Event:** ${GITHUB_EVENT_NAME}"
+        echo
+        echo "| Field | Value |"
+        echo "|-------|--------|"
+
+        echo "| Repository | ${GITHUB_REPOSITORY} |"
+        echo "| Workflow | ${GITHUB_WORKFLOW} |"
+        echo "| Run number | #${GITHUB_RUN_NUMBER} |"
+        echo "| Attempt | ${GITHUB_RUN_ATTEMPT} |"
+        echo "| Event | ${GITHUB_EVENT_NAME} |"
 
         actor="${GITHUB_ACTOR:-unknown}"
         trigger="${GITHUB_TRIGGERING_ACTOR:-}"
 
-        echo "- **Actor:** ${actor}"
+        echo "| Actor | ${actor} |"
         if [[ -n "${trigger}" && "${trigger}" != "${actor}" ]]; then
-            echo "- **Triggering actor:** ${trigger}"
+            echo "| Triggering actor | ${trigger} |"
         fi
 
-        echo "- **Ref:** ${GITHUB_REF_NAME}"
-        echo "- **Commit SHA:** ${GITHUB_SHA}"
-        echo "- **Run URL:** https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+        echo "| Ref | ${GITHUB_REF_NAME} |"
+        echo "| Commit SHA | ${GITHUB_SHA} |"
+        echo "| Run URL | https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID} |"
 
         # Pull Request metadata (if applicable)
         if [[ -f "${GITHUB_EVENT_PATH}" ]]; then
             pr_number=$(jq -r '.pull_request.number // empty' "${GITHUB_EVENT_PATH}")
             pr_title=$(jq -r '.pull_request.title // empty' "${GITHUB_EVENT_PATH}")
 
-            if [[ -n "$pr_number" ]]; then
-                echo "- **PR #${pr_number}:** ${pr_title}"
-                echo "- **PR URL:** https://github.com/${GITHUB_REPOSITORY}/pull/${pr_number}"
+            if [[ -n "${pr_number}" ]]; then
+                echo "| PR | #${pr_number}: ${pr_title} |"
+                echo "| PR URL | https://github.com/${GITHUB_REPOSITORY}/pull/${pr_number} |"
             fi
         fi
 
-        echo "- **Generated at (UTC):** $(date -u +"%Y-%m-%d %H:%M:%S")"
+        generated_at="$(date -u +"%Y-%m-%d %H:%M:%S")"
+        echo "| Generated at (UTC) | ${generated_at} |"
         echo
-
 
     } >> "${file}"
 }

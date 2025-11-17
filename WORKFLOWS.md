@@ -352,6 +352,9 @@ jobs:
       jobs_json: ${{ toJson(needs) }}
 ```
 
+> [!NOTE]
+> This workflow automatically writes a GitHub Job Summary to the run’s main page, reporting the outcome of each job and providing useful GitHub metadata for context.
+
 <h3 id="reusable-codeql">CodeQL Security and Quality (reusable-codeql.yml)</h3>
 
 Reusable wrapper for the `reusable-codeql.yml` to standardise CodeQL security analysis workflow with a language matrix, suitable for running GitHub’s
