@@ -11,10 +11,27 @@
 #     run: .github/scripts/check-jobs.sh '${{ toJson(needs) }}'
 
 # --------------------------------------------------------------------------------
+# Globals
+# --------------------------------------------------------------------------------
+
+failed_jobs=false
+
+# Buckets
+success_list=()
+failed_list=()
+cancelled_list=()
+skipped_list=()
+timed_out_list=()
+other_list=()
+
+summary=""
+
+# --------------------------------------------------------------------------------
 # Ensure jq is available (attempt installation if missing)
 # --------------------------------------------------------------------------------
 
-ensure_jq() {
+ensure_jq()
+{
     if command -v jq >/dev/null 2>&1; then
         return 0
     fi
@@ -38,111 +55,133 @@ ensure_jq() {
     fi
 }
 
-ensure_jq
-
 # --------------------------------------------------------------------------------
-# Input handling
+# Parse job results JSON into buckets
 # --------------------------------------------------------------------------------
 
-job_results_json=$1
+parse_job_results()
+{
+    local job_results_json=$1
+    local parsed_jobs
 
-if [[ -z "${job_results_json}" ]]; then
-    echo "::error title=check-jobs.sh::No job results JSON provided."
-    exit 1
-fi
+    if [[ -z "${job_results_json}" ]]; then
+        echo "::error title=check-jobs.sh::No job results JSON provided."
+        exit 1
+    fi
 
-failed_jobs=false
+    echo "Job results:"
+    echo
 
-# Buckets
-success_list=()
-failed_list=()
-cancelled_list=()
-skipped_list=()
-timed_out_list=()
-other_list=()
+    parsed_jobs=$(echo "${job_results_json}" | jq -r 'to_entries[] | "\(.key) \(.value.result)"') || {
+        echo "Failed to parse job results JSON via jq."
+        exit 1
+    }
 
-echo "Job results:"
-echo
+    # Format from jq: "<job_name> <result>"
+    # where result ∈ { success, failure, cancelled, skipped, timed_out, ... }
+    while IFS= read -r line; do
+        job_name=$(echo "${line}" | awk '{print $1}')
+        result=$(echo "${line}" | awk '{print $2}')
 
-parsed_jobs=$(echo "${job_results_json}" | jq -r 'to_entries[] | "\(.key) \(.value.result)"') || {
-    echo "Failed to parse job results JSON via jq."
-    exit 1
+        case "${result}" in
+            success)
+                echo "  ✓ ${job_name} succeeded."
+                success_list+=("${job_name}")
+                ;;
+            failure)
+                echo "  ✗ ${job_name} FAILED."
+                failed_list+=("${job_name}")
+                failed_jobs=true
+                ;;
+            cancelled)
+                echo "  ! ${job_name} was cancelled."
+                cancelled_list+=("${job_name}")
+                ;;
+            skipped)
+                echo "  - ${job_name} was skipped."
+                skipped_list+=("${job_name}")
+                ;;
+            timed_out)
+                echo "  ⏱ ${job_name} TIMED OUT."
+                timed_out_list+=("${job_name}")
+                failed_jobs=true
+                ;;
+            *)
+                echo "  ? ${job_name} has unknown result: ${result}"
+                other_list+=("${job_name}:${result}")
+                ;;
+        esac
+    done <<< "${parsed_jobs}"
+
+    echo
 }
 
-# Format from jq: "<job_name> <result>"
-# where result ∈ { success, failure, cancelled, skipped, timed_out, ... }
-while IFS= read -r line; do
-    job_name=$(echo "${line}" | awk '{print $1}')
-    result=$(echo "${line}" | awk '{print $2}')
-
-    case "${result}" in
-        success)
-            echo "  ✓ ${job_name} succeeded."
-            success_list+=("${job_name}")
-            ;;
-        failure)
-            echo "  ✗ ${job_name} FAILED."
-            failed_list+=("${job_name}")
-            failed_jobs=true
-            ;;
-        cancelled)
-            echo "  ! ${job_name} was cancelled."
-            cancelled_list+=("${job_name}")
-            ;;
-        skipped)
-            echo "  - ${job_name} was skipped."
-            skipped_list+=("${job_name}")
-            ;;
-        timed_out)
-            echo "  ⏱ ${job_name} TIMED OUT."
-            timed_out_list+=("${job_name}")
-            failed_jobs=true
-            ;;
-        *)
-            echo "  ? ${job_name} has unknown result: ${result}"
-            other_list+=("${job_name}:${result}")
-            ;;
-    esac
-done <<< "${parsed_jobs}"
-
-echo
-
 # --------------------------------------------------------------------------------
-# Build and emit summary annotation
+# Build multi-line summary text
 # --------------------------------------------------------------------------------
 
-join_by_comma() {
-    local IFS=', '
-    echo "$*"
+format_list_multiline()
+{
+    local title=$1
+    shift
+    local items=("$@")
+
+    if ((${#items[@]} == 0)); then
+        return 0
+    fi
+
+    summary+="${title}:\n"
+    for item in "${items[@]}"; do
+        summary+="  - ${item}\n"
+    done
+    summary+="\n"
 }
 
-summary=""
+build_summary()
+{
+    # Reset summary in case this function is called more than once
+    summary=""
 
-if ((${#success_list[@]} > 0)); then
-    summary+="Success: $(join_by_comma "${success_list[@]}"). "
-fi
-if ((${#failed_list[@]} > 0)); then
-    summary+="Failed: $(join_by_comma "${failed_list[@]}"). "
-fi
-if ((${#timed_out_list[@]} > 0)); then
-    summary+="Timed out: $(join_by_comma "${timed_out_list[@]}"). "
-fi
-if ((${#cancelled_list[@]} > 0)); then
-    summary+="Cancelled: $(join_by_comma "${cancelled_list[@]}"). "
-fi
-if ((${#skipped_list[@]} > 0)); then
-    summary+="Skipped: $(join_by_comma "${skipped_list[@]}"). "
-fi
-if ((${#other_list[@]} > 0)); then
-    summary+="Other: $(join_by_comma "${other_list[@]}"). "
-fi
+    format_list_multiline "Successful jobs"   "${success_list[@]}"
+    format_list_multiline "Failed jobs"       "${failed_list[@]}"
+    format_list_multiline "Timed-out jobs"    "${timed_out_list[@]}"
+    format_list_multiline "Cancelled jobs"    "${cancelled_list[@]}"
+    format_list_multiline "Skipped jobs"      "${skipped_list[@]}"
+    format_list_multiline "Other job results" "${other_list[@]}"
+}
 
-if [[ "${failed_jobs}" = true ]]; then
-    # This will show up as a red annotation in the workflow summary
-    echo "::error title=Job failures::${summary}"
-    exit 1
-else
-    # Notice still appears in the Annotations section but does not fail the job
-    echo "::notice title=Jobs summary::${summary}"
-    exit 0
-fi
+# --------------------------------------------------------------------------------
+# Emit GitHub Actions annotation
+# --------------------------------------------------------------------------------
+
+emit_annotation()
+{
+    local rendered=""
+
+    # Interpret the \n sequences as real newlines
+    printf -v rendered '%b' "${summary}"
+
+    if [[ "${failed_jobs}" == true ]]; then
+        echo "::error title=Job failures::${rendered}"
+        return 1
+    else
+        echo "::notice title=Jobs summary::${rendered}"
+        return 0
+    fi
+}
+
+# --------------------------------------------------------------------------------
+# Main
+# --------------------------------------------------------------------------------
+
+main()
+{
+    local job_results_json=${1:-}
+
+    ensure_jq
+    parse_job_results "${job_results_json}"
+    build_summary
+    emit_annotation
+}
+
+main "$@"

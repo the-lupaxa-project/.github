@@ -8,29 +8,18 @@
 
 <h2>Overview</h2>
 
-This repository defines the **shared standards, documentation, and automation resources** used across all repositories in **The Lupaxa Project** organisation.
+This repository (the-lupaxa-project/.github) defines the organisation-wide defaults for:
 
-> [!NOTE]
-> Automation resources (reusable workflows) are also used by all repositories in associated organisations.
+- Issue templates
+- Pull request templates
+- Organisation-level GitHub Actions workflows
+- Shared documentation (security, contribution guidelines, etc.)
+- Label conventions
+- Central governance and project structure
 
-It serves as the **central hub** for community policies, contribution guidelines, security practices, and optional CI/CD workflows that embody our
-*Security by Design* and *Open Source with Integrity* principles.
+These files apply automatically to all repositories under The Lupaxa Project unless explicitly overridden.
 
-<h2>Purpose</h2>
-
-This repository provides:
-
-- **Organisation-wide defaults**  
-  Issue templates, Pull Request (PR) templates, and global documentation automatically inherited by all Lupaxa Project repositories.
-
-- **Centralized policies**  
-  The official [Code of Conduct](CODE_OF_CONDUCT.md), [Contributing Guide](CONTRIBUTING.md), and [Security Policy](SECURITY.md) for The Lupaxa Project.
-
-- **Organisation profile**  
-  The public [organisation profile README](https://github.com/the-lupaxa-project) displayed on GitHub.
-
-- **Reusable automation**  
-  Global GitHub Actions, workflow templates, and composite actions for consistent CI/CD pipelines.
+This repo acts as the central source of truth for project standards, security practices, automation, and contributor experience.
 
 <h2>How GitHub Uses This Repo</h2>
 
@@ -65,9 +54,43 @@ Repositories overriding central files should retain references back to the organ
 This repository extends the Lupaxa Project Contributing Guidelines.
 ```
 
-<h2>Reusable CI/CD Workflows</h2>
+<h2>Documentation Index</h2>
 
-This repository also acts as a **central catalog of reusable workflows** for linting, security scanning, and general CI hygiene.
+The Lupaxa Project follows a structured, cross-referenced documentation model.
+Each file plays a specific role and links into the overall governance structure.
+
+<h3>Contributor & Community Documentation</h3>
+
+| Document                                 | Purpose                                                  |
+| :--------------------------------------- | :------------------------------------------------------- |
+| [CONTRIBUTING.md](CONTRIBUTING.md)￼      | How to report issues, request features, and submit PRs.  |
+| [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)￼| Expected behaviour and community standards.              |
+| [PROJECTS.md](PROJECTS.md)￼              | Overview of key projects in the organisation.            |
+| [WORKFLOWS.md](WORKFLOWS.md)￼            | Documentation for all reusable GitHub Actions workflows. |
+
+<h3>Security Documentation</h3>
+
+| Document                                             | Purpose                                                       |
+| :--------------------------------------------------- | :------------------------------------------------------------ |
+| [SECURITY.md](SECURITY.md)￼                          | Public vulnerability disclosure policy.                       |
+| [SECURITY_PROCESSS.md](SECURITY_PROCESS.md)          | Internal lifecycle for security reports, fixes, & disclosure. |
+| [SECURITY_ARCHITECTURE.md](SECURITY_ARCHITECTURE.md) | High-level security principles and organisational guarantees. |
+
+> [!NOTE]
+> Private versions of security documents are maintained in our private .github-private repository.
+
+<h2>Reusable GitHub Workflows</h2>
+
+This repository also acts as a **central catalog of reusable workflows** for:
+
+- Standardised linting
+- Security scanning
+- Workflow hardening
+- Release preparation & tagging
+- Dependency automation
+- Slack notifications
+- Check-jobs validation
+- Code quality enforcement
 
 There are two layers:
 
@@ -79,43 +102,70 @@ There are two layers:
    - Live in this repo: `.github/workflows/local-*.yml`  
    - Use `uses: ./.github/workflows/reusable-*.yml` to call the shared logic.
 
-<h2>SHA Pinning Policy</h2>
+A complete description of each reusable workflow is available in [WORKFLOWS.md](WORKFLOWS.md) which also includes input tables, behaviour notes, and consumer examples.
 
-All Lupaxa Project organisations enforce a rule that **3<sup>rd</sup> party workflows must be referenced using a full commit SHA**, never a branch or tag.
+<h2>Organisation-Wide Labels</h2>
 
-> [!NOTE]
-> ***There is one deliberate exception:***
->
-> Calls to the-lupaxa-project/.github/.github/workflows/*.yml are explicitly allow-listed in the security-hardening configuration.
+We maintain a consistent, structured label taxonomy across all repositories:
 
-This allows all Lupaxa repos to reference organisation workflows using @master, for example:
+- Impact levels (impact: critical, impact: low, etc.)
+- State labels (state: triage, state: confirmed, etc.)
+- Resolution labels
+- Dependabot ecosystem labels
+- Type labels (type: feature, type: bug, …)
 
-```yml
-  uses: the-lupaxa-project/.github/.github/workflows/reusable-markdown-lint.yml@master
-```
+More details can be found in [WORKFLOWS.md](WORKFLOWS.md) and the labels section of [CONTRIBUTING.md](CONTRIBUTING.md).
 
-This gives you:
+<h2>Security by Design</h2>
 
-- Automatic updates to shared workflows via the .github repo, which is in turn updated automatically by dependabot.
-- Strong SHA pinning for all other third-party actions.
+Security is a core organisational principle.
 
-<h2>Workflow Catalog</h2>
+- All commits must be signed
+- All workflows follow principle of least privilege
+- Default permissions are read-only unless escalated by consumer workflows
+- All reusable workflows include explicit input validation and guardrails
+- Public vulnerability handling is documented in [SECURITY.md](SECURITY.md)
 
-Please refer to [WORKFLOWS.md](WORKFLOWS.md) for details on all the available reusable workflows.
+A deeper architectural overview is provided in the [SECURITY_ARCHITECTURE.md](SECURITY_ARCHITECTURE.md).
 
-<h2>Community Standards</h2>
+<h2>High-Level Governance</h2>
 
-All repositories under The Lupaxa Project follow these shared principles:
+The Lupaxa Project enforces:
 
-- [Code of Conduct](CODE_OF_CONDUCT.md)
-- [Contributing Guidelines](CONTRIBUTING.md)
-- [Security Policy](SECURITY.md)
+- Consistent coding standards across languages
+- Reproducible builds
+- Mandatory testing in all relevant versions
+- Open governance for feature proposals
+- Clearly defined lifecycle for issues and PRs
+- Automated stale/triage workflows
+- Secure, minimal permissions for all automation
 
-These documents define how we collaborate respectfully, build securely, and contribute effectively across every Lupaxa project.
+This repository captures these principles so all downstream repositories inherit the same quality and safety requirements.
+
+<h2>Contributing</h2>
+
+We welcome all contributions — code, documentation, testing, or design.
+
+Review:
+
+- [CONTRIBUTING.md](CONTRIBUTING.md)
+- [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
+
+Before sending a pull request.
+
+<h2>Security Reporting</h2>
+
+Never open a public issue for a vulnerability.
+
+See:
+
+[SECURITY.md](SECURITY.md)
+
+for the correct reporting channel.
 
 <h2>License</h2>
 
-All files within The Lupaxa Project are provided under the [MIT License](LICENSE.md), unless otherwise noted in specific project repositories.
+Unless explicitly stated otherwise, repositories under The Lupaxa Project follow the [MIT License](LICENSE.md).
 
 <hr />
 

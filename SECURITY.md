@@ -35,8 +35,8 @@ We aim to acknowledge receipt within **48 hours** and provide regular updates un
 This policy covers:
 
 - All public repositories under **The Lupaxa Project** organization
-- Related Docker images, GitHub Actions, and published packages
-  (PyPI, RubyGems, Crates.io, npm, and others)
+- Related Docker images, GitHub Actions, and published packages (PyPI, RubyGems, Crates.io, npm, and others)
+- Internal and private infrastructure is covered by separate internal security policies.
 
 If you are unsure whether a project is in scope, please ask — we will confirm.
 
