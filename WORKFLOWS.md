@@ -167,7 +167,7 @@ These workflows are not CI/CD Toolbox based, but provide core services like depe
 | [reusable-greetings.yml][106]                      | Greet first-time issue and PR authors.                                                              | [Example](#reusable-greetings)                      |
 | [reusable-publish-mkdocs.yml][107]                 | Generate and publish mkdocs to GitHug Pages.                                                        | [Example](#reusable-publish-mkdocs)                 |
 | [reusable-purge-deprecated-workflow-runs.yml][108] | Purge obsolete / cancelled / failed / skipped workflow runs.                                        | [Example](#reusable-purge-deprecated-workflow-runs) |
-| [reusable-python-make-ci.yml][109]                 | Test and Lint Python code (using Makefile).                                                         | [Example](#reusable-python-make-ci) |
+| [reusable-python-make-ci.yml][109]                 | Test and Lint Python code (using Makefile).                                                         | [Example](#reusable-python-make-ci)                 |
 | [reusable-slack-workflow-status.yml][110]          | Posts final workflow status to Slack via webhook.                                                   | [Example](#reusable-slack-workflow-status)          |
 | [reusable-stale.yml][111]                          | Mark and close stale issues/PRs.                                                                    | [Example](#reusable-stale)                          |
 
