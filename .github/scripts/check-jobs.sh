@@ -101,7 +101,6 @@ parse_jobs()
 
     # Detect if this looks like the /jobs API shape (has "jobs" top-level key)
     if echo "${job_results_json}" | jq -e 'type == "object" and has("jobs")' >/dev/null 2>&1; then
-        # GitHub Jobs API
         parsed=$(echo "${job_results_json}" | jq -r '
             .jobs[]
             | "\(.name) \(.conclusion // "unknown")"
@@ -110,7 +109,7 @@ parse_jobs()
             exit 1
         }
     else
-        # Fallback: assume toJson(needs) style
+        # Probably toJson(needs)
         parsed=$(echo "${job_results_json}" | jq -r '
             to_entries[]
             | "\(.key) \(.value.result)"
@@ -123,39 +122,44 @@ parse_jobs()
     while IFS= read -r line; do
         [[ -z "${line}" ]] && continue
 
-        # Everything before the last space is the job name
-        # Everything after the last space is the result
-        local job_name result
-        job_name=${line% *}
+        # Extract result = last word
+        local job_name_raw result
+        job_name_raw=${line% *}
         result=${line##* }
 
-        # Skip the job that generates the summary itself
-        if [[ "${job_name}" == "Check Jobs Status" ]]; then
+        # If job name has a slash, keep ONLY the right side ("real" job name)
+        local job_name="${job_name_raw##*/ }"
+
+        # Trim leading/trailing whitespace
+        job_name="$(echo "$job_name" | sed 's/^ *//;s/ *$//')"
+
+        # Ignore our own summariser job entirely
+        if [[ "$job_name" == "Check Jobs Status" ]]; then
             continue
         fi
 
-        case "${result}" in
+        case "$result" in
             success)
-                success_list+=("${job_name}")
+                success_list+=("$job_name")
                 ;;
             failure)
-                failed_list+=("${job_name}")
+                failed_list+=("$job_name")
                 ;;
             cancelled)
-                cancelled_list+=("${job_name}")
+                cancelled_list+=("$job_name")
                 ;;
             skipped)
-                skipped_list+=("${job_name}")
+                skipped_list+=("$job_name")
                 ;;
             timed_out)
-                timed_out_list+=("${job_name}")
+                timed_out_list+=("$job_name")
                 ;;
             *)
                 other_list+=("${job_name}:${result}")
                 ;;
         esac
 
-    done <<< "${parsed}"
+    done <<< "$parsed"
 }
 
 # --------------------------------------------------------------------------------
