@@ -1,0 +1,94 @@
+name: Reusable - Python CI
+
+on:
+  workflow_call:
+    inputs:
+      python-versions:
+        description: 'JSON array of Python versions'
+        required: false
+        type: string
+        default: '["3.9","3.10","3.11","3.12","3.13"]'
+      extras:
+        description: 'Extras to install, e.g. "dev,test" (used in -e ".[...]" )'
+        required: false
+        type: string
+        default: 'dev,test'
+      src-path:
+        description: 'Path to source package'
+        required: false
+        type: string
+        default: 'src'
+      tests-path:
+        description: 'Path to tests'
+        required: false
+        type: string
+        default: 'tests'
+      run-ruff:
+        description: 'Run Ruff linting'
+        required: false
+        type: boolean
+        default: true
+      run-mypy:
+        description: 'Run mypy type checking'
+        required: false
+        type: boolean
+        default: true
+      ruff-targets:
+        description: 'Targets for Ruff (space separated)'
+        required: false
+        type: string
+        default: 'src tests'
+      mypy-targets:
+        description: 'Targets for mypy (space separated)'
+        required: false
+        type: string
+        default: 'src'
+      test-command:
+        description: 'Test command to run'
+        required: false
+        type: string
+        default: 'pytest'
+
+permissions:
+  contents: read
+
+jobs:
+  lint-and-test:
+    name: Lint & Test
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: ${{ fromJson(inputs.python-versions) }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3  # v6.0.0
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@e797f83bcb11b83ae66e0230d6156d7c80228e7c  # v6.0.0
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install build system
+        run: |
+          python -m pip install --upgrade pip
+          pip install hatch
+
+      - name: Install project (editable) with dev extras
+        run: |
+          pip install -e ".[${{ inputs.extras }}]"
+
+      - name: Run Ruff (lint only)
+        if: ${{ inputs.run-ruff == true }}
+        run: |
+          ruff check ${{ inputs.ruff-targets }}
+
+      - name: Run mypy (type checking)
+        if: ${{ inputs.run-mypy == true }}
+        run: |
+          mypy ${{ inputs.mypy-targets }}
+
+      - name: Run tests with coverage
+        run: |
+          ${{ inputs.test-command }}

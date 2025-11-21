@@ -175,10 +175,12 @@ print_sorted_section()
     (( ${#arr[@]} == 0 )) && return
 
     echo "### ${title}"
-    printf '%s\n' "${arr[@]}" | sort | while IFS= read -r j; do
-        [[ -z "${j}" ]] && continue
-        echo "- ${j}"
-    done
+    printf '%s\n' "${arr[@]}" \
+        | sort -fV \
+        | while IFS= read -r j; do
+            [[ -z "${j}" ]] && continue
+            echo "- ${j}"
+        done
     echo
 }
 
