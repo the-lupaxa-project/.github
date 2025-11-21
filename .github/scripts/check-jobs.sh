@@ -58,7 +58,39 @@ ensure_jq()
 }
 
 # --------------------------------------------------------------------------------
+# fetch_jobs_json: call GitHub API for the current run's jobs (matrix-aware)
+# --------------------------------------------------------------------------------
+
+fetch_jobs_json()
+{
+    if [[ -z "${GITHUB_REPOSITORY:-}" || -z "${GITHUB_RUN_ID:-}" ]]; then
+        echo "ERROR: GITHUB_REPOSITORY or GITHUB_RUN_ID not set; cannot call GitHub API." >&2
+        return 1
+    fi
+
+    # Prefer GITHUB_TOKEN, fall back to ACTIONS_RUNTIME_TOKEN if needed
+    local token="${GITHUB_TOKEN:-${ACTIONS_RUNTIME_TOKEN:-}}"
+    if [[ -z "${token}" ]]; then
+        echo "ERROR: GITHUB_TOKEN (or ACTIONS_RUNTIME_TOKEN) is not set; cannot call GitHub API." >&2
+        return 1
+    fi
+
+    local api_url="https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/jobs?per_page=100"
+
+    curl -fsSL \
+        -H "Authorization: Bearer ${token}" \
+        -H "Accept: application/vnd.github+json" \
+        "${api_url}"
+}
+
+# --------------------------------------------------------------------------------
 # parse_jobs: parse JSON input into buckets and print per-job text output
+# --------------------------------------------------------------------------------
+# Supports two shapes:
+# 1) GitHub Actions API /jobs response:
+#      { "jobs": [ { "name": "...", "conclusion": "success" }, ... ] }
+# 2) toJson(needs) mapping:
+#      { "job_id": { "result": "success", ... }, ... }
 # --------------------------------------------------------------------------------
 
 parse_jobs()
@@ -66,10 +98,27 @@ parse_jobs()
     local job_results_json="$1"
 
     local parsed
-    parsed=$(echo "${job_results_json}" | jq -r 'to_entries[] | "\(.key) \(.value.result)"') || {
-        echo "Failed to parse job results JSON via jq."
-        exit 1
-    }
+
+    # Detect if this looks like the /jobs API shape (has "jobs" top-level key)
+    if echo "${job_results_json}" | jq -e 'type == "object" and has("jobs")' >/dev/null 2>&1; then
+        # GitHub Jobs API
+        parsed=$(echo "${job_results_json}" | jq -r '
+            .jobs[]
+            | "\(.name) \(.conclusion // "unknown")"
+        ') || {
+            echo "Failed to parse GitHub jobs API JSON via jq."
+            exit 1
+        }
+    else
+        # Fallback: assume toJson(needs) style
+        parsed=$(echo "${job_results_json}" | jq -r '
+            to_entries[]
+            | "\(.key) \(.value.result)"
+        ') || {
+            echo "Failed to parse job results JSON via jq."
+            exit 1
+        }
+    fi
 
     while IFS= read -r line; do
         [[ -z "${line}" ]] && continue
@@ -123,7 +172,8 @@ print_sorted_section()
 }
 
 # Returns the ordinal suffix for a given day number ("st", "nd", "rd", "th")
-ordinal_suffix() {
+ordinal_suffix()
+{
     local day="$1"
     local suf
 
@@ -141,14 +191,15 @@ ordinal_suffix() {
 }
 
 # Build a human-readable timestamp
-build_human_timestamp() {
+build_human_timestamp()
+{
     local day month_name year time dow suffix
     day="$(date -u +'%d' | sed 's/^0//')"          # 1–31
     dow="$(date -u +'%A')"                         # Monday
     month_name="$(date -u +'%B')"                  # November
     year="$(date -u +'%Y')"                        # 2025
     time="$(date -u +'%H:%M:%S')"                  # 18:03:45
-    suffix="$(ordinal_suffix "${day}")"            
+    suffix="$(ordinal_suffix "${day}")"
 
     echo "${dow} ${day}${suffix} ${month_name} ${year} ${time}"
 }
@@ -227,9 +278,12 @@ main()
 
     local job_results_json="${1:-}"
 
+    # If no JSON was passed in, fetch from GitHub API (matrix-aware)
     if [[ -z "${job_results_json}" ]]; then
-        echo "ERROR: No job results JSON provided."
-        exit 1
+        job_results_json="$(fetch_jobs_json)" || {
+            echo "ERROR: No job results JSON provided and failed to fetch from GitHub API."
+            exit 1
+        }
     fi
 
     parse_jobs "${job_results_json}"
