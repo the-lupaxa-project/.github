@@ -133,9 +133,14 @@ parse_jobs()
         # Trim leading/trailing whitespace
         job_name="$(echo "$job_name" | sed 's/^ *//;s/ *$//')"
 
-        # Ignore our own summariser job entirely
-        if [[ "$job_name" == "Check Jobs Status" ]]; then
-            continue
+        # Ignore umbrella "Status" jobs by default (CI Status, Lint Status, etc.)
+        # Set CHECK_JOBS_INCLUDE_STATUS=1 to include them if ever needed.
+        if [[ "${CHECK_JOBS_INCLUDE_STATUS:-0}" != "1" ]]; then
+            case "${job_name}" in
+                *" Status" | "Status" | *"Status")
+                    continue
+                    ;;
+            esac
         fi
 
         case "$result" in
