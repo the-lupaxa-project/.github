@@ -2,9 +2,6 @@ name: Check Jobs Status Summary
 
 on:
   workflow_call:
-    secrets:
-      GITHUB_TOKEN:
-        required: false
 
 permissions:
   contents: read
@@ -18,5 +15,5 @@ jobs:
       - name: Run central check-jobs.sh
         env:
           # Prefer explicit secret if the caller provides one, otherwise fall back to the built-in token
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN || github.token }}
+          GITHUB_TOKEN: ${{ github.token }}
         run: bash <(curl -fsSL "https://raw.githubusercontent.com/the-lupaxa-project/.github/master/.github/scripts/check-jobs.sh")
