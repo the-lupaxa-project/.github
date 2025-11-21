@@ -365,9 +365,9 @@ code scanning across one or more supported languages in a consistent way.
 <summary><strong>Click to expand: Inputs Accepted by this workflow</strong></summary>
 <br>
 
-| Input      | Type   | Required | Default | Description                       |
-| :--------- | :----- | :------- | :------ | :-------------------------------- |
-| languages  | string | Yes      |         | Comma-separated list of CodeQL languages e.g. "python", "python,javascript". |
+| Input      | Type   | Required | Default | Description                                                                   |
+| :--------- | :----- | :------- | :------ | :---------------------------------------------------------------------------- |
+| languages  | string | Yes      |         | Comma-separated list of CodeQL languages e.g. "python", "python, javascript". |
 
 > [!NOTE]
 > We always append +security-and-quality to the queries passed to CodeQL.
@@ -1410,14 +1410,14 @@ jobs:
     always() &&                          # Always evaluate this block, even if earlier jobs fail.
     env.SLACK_ENABLED == true &&         # Global toggle set by the repo author.
     secrets.SLACK_WEBHOOK_URL != '' &&   # Skip if webhook isn't configured at repo/org level.
-    
+
     # --- Prevent Slack for pull requests coming from forks ---
     # Forks should NEVER have access to internal Slack systems.
     (
       github.event_name != 'pull_request' ||
       github.event.pull_request.head.repo.full_name == github.repository
     ) &&
-  
+
     uses: the-lupaxa-project/.github/.github/workflows/reusable-slack-workflow-status.yml@master
     secrets:
       slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -1474,7 +1474,7 @@ jobs:
     always() &&                          # Always evaluate this block, even if earlier jobs fail.
     env.SLACK_ENABLED == true &&         # Global toggle set by the repo author.
     secrets.SLACK_WEBHOOK_URL != '' &&   # Skip if webhook isn't configured at repo/org level.
-    
+
     # --- Prevent Slack for pull requests coming from forks ---
     # Forks should NEVER have access to internal Slack systems.
     (
@@ -1507,7 +1507,7 @@ jobs:
       github.ref == '' ||
       !startsWith(github.ref, 'refs/tags/')
     )
-  
+
     uses: the-lupaxa-project/.github/.github/workflows/reusable-slack-workflow-status.yml@master
     secrets:
       slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
