@@ -123,9 +123,16 @@ parse_jobs()
     while IFS= read -r line; do
         [[ -z "${line}" ]] && continue
 
+        # Everything before the last space is the job name
+        # Everything after the last space is the result
         local job_name result
-        job_name=$(echo "${line}" | awk '{print $1}')
-        result=$(echo "${line}" | awk '{print $2}')
+        job_name=${line% *}
+        result=${line##* }
+
+        # Skip the job that generates the summary itself
+        if [[ "${job_name}" == "Check Jobs Status" ]]; then
+            continue
+        fi
 
         case "${result}" in
             success)
