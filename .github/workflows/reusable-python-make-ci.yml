@@ -1,4 +1,4 @@
-name: Reusable - Python CI via Make
+name: Reusable Python CI via Make
 
 on:
   workflow_call:
