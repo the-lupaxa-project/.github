@@ -13,17 +13,11 @@ on:
         required: false
         default: true
         type: boolean
-    # If you ever need secrets (e.g. PAT), declare them here:
-    # secrets: {}
 
 permissions:
   contents: read
   pages: write
   id-token: write
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
 
 jobs:
   build:

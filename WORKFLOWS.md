@@ -956,6 +956,15 @@ on:
       - ".github/workflows/docs.yml"
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   docs:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-publish-mkdocs.yml@master
