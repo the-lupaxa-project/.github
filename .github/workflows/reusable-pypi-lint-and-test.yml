@@ -1,4 +1,4 @@
-name: Reusable - Python CI
+name: Reusable - Python CI via Make
 
 on:
   workflow_call:
@@ -8,46 +8,16 @@ on:
         required: false
         type: string
         default: '["3.9","3.10","3.11","3.12","3.13"]'
-      extras:
-        description: 'Extras to install, e.g. "dev,test" (used in -e ".[...]" )'
+      install-target:
+        description: 'Make target for installing dev deps'
         required: false
         type: string
-        default: 'dev,test'
-      src-path:
-        description: 'Path to source package'
+        default: 'install-dev'
+      ci-target:
+        description: 'Make target that runs lint/type/tests'
         required: false
         type: string
-        default: 'src'
-      tests-path:
-        description: 'Path to tests'
-        required: false
-        type: string
-        default: 'tests'
-      run-ruff:
-        description: 'Run Ruff linting'
-        required: false
-        type: boolean
-        default: true
-      run-mypy:
-        description: 'Run mypy type checking'
-        required: false
-        type: boolean
-        default: true
-      ruff-targets:
-        description: 'Targets for Ruff (space separated)'
-        required: false
-        type: string
-        default: 'src tests'
-      mypy-targets:
-        description: 'Targets for mypy (space separated)'
-        required: false
-        type: string
-        default: 'src'
-      test-command:
-        description: 'Test command to run'
-        required: false
-        type: string
-        default: 'pytest'
+        default: 'check'
 
 permissions:
   contents: read
@@ -70,25 +40,15 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install build system
+      - name: Show Python version
         run: |
-          python -m pip install --upgrade pip
-          pip install hatch
+          python --version
+          which python
 
-      - name: Install project (editable) with dev extras
+      - name: Install dev dependencies via Make
         run: |
-          pip install -e ".[${{ inputs.extras }}]"
+          make PYTHON=python ${{ inputs.install-target }}
 
-      - name: Run Ruff (lint only)
-        if: ${{ inputs.run-ruff == true }}
+      - name: Run CI checks via Make
         run: |
-          ruff check ${{ inputs.ruff-targets }}
-
-      - name: Run mypy (type checking)
-        if: ${{ inputs.run-mypy == true }}
-        run: |
-          mypy ${{ inputs.mypy-targets }}
-
-      - name: Run tests with coverage
-        run: |
-          ${{ inputs.test-command }}
+          make PYTHON=python ${{ inputs.ci-target }}
