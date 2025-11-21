@@ -76,5 +76,3 @@ jobs:
       - deploy
     if: always()
     uses: the-lupaxa-project/.github/.github/workflows/reusable-check-jobs-status.yml@master
-    with:
-      jobs_json: ${{ toJson(needs) }}
