@@ -2,11 +2,9 @@ name: Check Jobs Status Summary
 
 on:
   workflow_call:
-    inputs:
-      jobs_json:
-        description: "JSON representation of the 'needs' context from the caller workflow."
-        required: true
-        type: string
+    secrets:
+      GITHUB_TOKEN:
+        required: false
 
 permissions:
   contents: read
@@ -18,7 +16,7 @@ jobs:
 
     steps:
       - name: Run central check-jobs.sh
-        run: |
-          bash <(curl -fsSL \
-            "https://raw.githubusercontent.com/the-lupaxa-project/.github/master/.github/scripts/check-jobs.sh") \
-            '${{ inputs.jobs_json }}'
+        env:
+          # Prefer explicit secret if the caller provides one, otherwise fall back to the built-in token
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN || github.token }}
+        run: bash <(curl -fsSL "https://raw.githubusercontent.com/the-lupaxa-project/.github/master/.github/scripts/check-jobs.sh")
