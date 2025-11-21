@@ -1,0 +1,86 @@
+name: Reusable MkDocs Publish
+
+on:
+  workflow_call:
+    inputs:
+      python-version:
+        description: "Python version to use"
+        required: false
+        default: "3.13"
+        type: string
+      use-dev-extras:
+        description: 'Try to install ".[dev]" from pyproject.toml'
+        required: false
+        default: true
+        type: boolean
+    # If you ever need secrets (e.g. PAT), declare them here:
+    # secrets: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ inputs.python-version }}
+
+      - name: Install docs dependencies
+        run: |
+          python -m pip install --upgrade pip
+
+          if [ "${{ inputs.use-dev-extras }}" = "true" ]; then
+            echo "Attempting to install dev extras from pyproject.toml..."
+            if python -m pip install ".[dev]" 2>/dev/null; then
+              echo "Installed dev extras from pyproject.toml"
+            else
+              echo "Dev extras failed; falling back to mkdocs + theme only."
+              python -m pip install mkdocs mkdocs-material
+            fi
+          else
+            echo "Using bare mkdocs + theme (no dev extras)."
+            python -m pip install mkdocs mkdocs-material
+          fi
+
+      - name: Build MkDocs site
+        run: mkdocs build --strict
+
+      - name: Upload artifact for GitHub Pages
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  status-check:
+    name: Check Jobs Status
+    needs:
+      - build
+      - deploy
+    if: always()
+    uses: the-lupaxa-project/.github/.github/workflows/reusable-check-jobs-status.yml@master
+    with:
+      jobs_json: ${{ toJson(needs) }}

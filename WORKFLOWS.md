@@ -163,6 +163,7 @@ These workflows are not CI/CD Toolbox based, but provide core services like depe
 | [reusable-codeql.yml][21]                         | CodeQL security and quality scanning.                                                               | [Example](#reusable-codeql)                         |
 | [reusable-dependabot.yml][22]                     | Wrapper to standardise Dependabot config across repos.                                              | [Example](#reusable-dependabot)                     |
 | [reusable-ensure-sha-pinned-actions.yml][23]      | Enforce SHA-pinned actions, with an allow-list for the-lupaxa-project/.github workflows on @master. | [Example](#reusable-ensure-sha-pinned-actions)      |
+| [reusable-generate-mkdocs.yml][24]                | Generate and publish mkdocs to GitHug Pages.                                                        | [Example](#reusable-generate-mkdocs)                |
 | [reusable-generate-release.yml][24]               | Create GitHub Releases with changelog.                                                              | [Example](#reusable-generate-release)               |
 | [reusable-greetings.yml][25]                      | Greet first-time issue and PR authors.                                                              | [Example](#reusable-greetings)                      |
 | [reusable-purge-deprecated-workflow-runs.yml][26] | Purge obsolete / cancelled / failed / skipped workflow runs.                                        | [Example](#reusable-purge-deprecated-workflow-runs) |
@@ -518,9 +519,69 @@ permissions:
 
 jobs:
   create-release:
+    uses: the-lupaxa-project/.github/.github/workflows/reusable-generate-release.yml@master
+    secrets:
+      github-token: ${{ secrets.GITHUB_TOKEN }}
+```
+
+<h4>Minimal Usage Example (Test Release)</h4>
+
+```yaml
+name: Generate Test Release
+
+on:
+  push:
+    tags:
+      - 'v[0-9].[0-9]+.[0-9]+rc[0-9]+'
+
+permissions:
+  contents: write
+
+jobs:
+  create-release:
     uses: the-lupaxa-project/.github/.github/workflows/reusable-github-release.yml@master
     secrets:
       github-token: ${{ secrets.GITHUB_TOKEN }}
+```
+
+<h3 id="reusable-generate-mkdocs">Generate Mkdocs (reusable-generate-mkdocs.yml)</h3>
+
+Reusable wrapper for the `reusable-generate-mkdocs.yml` to publish Mkdocs to GitHub Pages.
+
+<details>
+<summary><strong>Click to expand: Inputs Accepted by this workflow</strong></summary>
+<br>
+
+| Input          | Type    | Required | Default | Description                                  |
+| :------------- | :------ | :------: | :------ | :------------------------------------------- |
+| python-version | string  | No       | 3.13    | Any supported version of Python.             |
+| use-dev-extras | string  | No       | true    | Try to install ".[dev]" from pyproject.toml. |
+
+<br>
+</details>
+
+<h4>Minimal Usage Example (production Release)</h4>
+
+```yaml
+name: Docs
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - "docs/**"
+      - "mkdocs.yml"
+      - "pyproject.toml"
+      - ".github/workflows/docs.yml"
+  workflow_dispatch:
+
+jobs:
+  docs:
+    uses: the-lupaxa-project/.github/.github/workflows/reusable-mkdocs-publish.yml@master
+    secrets: inherit
+    with:
+      python-version: "3.13"
 ```
 
 <h4>Minimal Usage Example (Test Release)</h4>
