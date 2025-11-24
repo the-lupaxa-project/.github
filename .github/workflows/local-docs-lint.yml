@@ -26,12 +26,12 @@ permissions:
 jobs:
   markdown-lint:
     name: Markdown Lint
-    uses: ./.github/workflows/reusable-markdown-lint.yml
+    uses: the-lupaxa-project/workflows/.github/workflows/reusable-markdown-lint.yml@master
     secrets: inherit
 
   yaml-lint:
     name: YAML Lint
-    uses: ./.github/workflows/reusable-yaml-lint.yml
+    uses: the-lupaxa-project/workflows/.github/workflows/reusable-yaml-lint.yml@master
     secrets: inherit
 
   status-check:
@@ -41,4 +41,4 @@ jobs:
       - yaml-lint
     if: always()
     # 🔴 IMPORTANT: this is a *job-level* uses, not under steps:
-    uses: ./.github/workflows/reusable-check-jobs-status.yml
+    uses: the-lupaxa-project/workflows/.github/workflows/reusable-check-jobs-status.yml@master
