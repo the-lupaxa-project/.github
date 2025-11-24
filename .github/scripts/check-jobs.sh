@@ -59,13 +59,11 @@ ensure_jq()
 
 # --------------------------------------------------------------------------------
 # fetch_jobs_json: call GitHub API for the current run's jobs (matrix-aware)
+# Now with proper HTTP status handling + clearer errors.
 # --------------------------------------------------------------------------------
 
 fetch_jobs_json()
 {
-    echo "Has GITHUB_TOKEN? ${GITHUB_TOKEN:+yes}"
-    echo "Has ACTIONS_RUNTIME_TOKEN? ${ACTIONS_RUNTIME_TOKEN:+yes}"
-
     if [[ -z "${GITHUB_REPOSITORY:-}" || -z "${GITHUB_RUN_ID:-}" ]]; then
         echo "ERROR: GITHUB_REPOSITORY or GITHUB_RUN_ID not set; cannot call GitHub API." >&2
         return 1
@@ -80,15 +78,33 @@ fetch_jobs_json()
 
     local api_url="https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/jobs?per_page=100"
 
-    curl -fsSL \
+    # Capture body + status in one go
+    local response http_status body
+    response="$(curl -sS -w $'\nHTTP_STATUS=%{http_code}\n' \
         -H "Authorization: Bearer ${token}" \
         -H "Accept: application/vnd.github+json" \
-        "${api_url}"
+        "${api_url}")" || {
+        echo "ERROR: curl failed when calling GitHub API." >&2
+        echo "Raw curl output:" >&2
+        echo "${response}" >&2
+        return 1
+    }
+
+    http_status="$(printf '%s\n' "${response}" | awk -F= '/^HTTP_STATUS=/{print $2}')"
+    body="$(printf '%s\n' "${response}" | sed '/^HTTP_STATUS=/d')"
+
+    if [[ "${http_status}" != "200" ]]; then
+        echo "ERROR: GitHub API returned HTTP ${http_status}." >&2
+        echo "Response body was:" >&2
+        echo "${body}" >&2
+        return 1
+    fi
+
+    printf '%s\n' "${body}"
 }
 
 # --------------------------------------------------------------------------------
 # parse_jobs: parse JSON input into buckets and print per-job text output
-# --------------------------------------------------------------------------------
 # Supports two shapes:
 # 1) GitHub Actions API /jobs response:
 #      { "jobs": [ { "name": "...", "conclusion": "success" }, ... ] }
@@ -99,6 +115,15 @@ fetch_jobs_json()
 parse_jobs()
 {
     local job_results_json="$1"
+
+    # Quick validation: is this even JSON?
+    if ! echo "${job_results_json}" | jq -e . >/dev/null 2>&1; then
+        echo "ERROR: job_results_json is not valid JSON. Raw value was:" >&2
+        echo "----- BEGIN job_results_json -----" >&2
+        echo "${job_results_json}" >&2
+        echo "----- END job_results_json -----" >&2
+        exit 1
+    fi
 
     local parsed
 
@@ -136,8 +161,7 @@ parse_jobs()
         # Trim leading/trailing whitespace
         job_name="$(echo "$job_name" | sed 's/^ *//;s/ *$//')"
 
-        # Ignore umbrella "Status" jobs by default (CI Status, Lint Status, etc.)
-        # Set CHECK_JOBS_INCLUDE_STATUS=1 to include them if ever needed.
+        # Ignore umbrella "Status" jobs by default
         if [[ "${CHECK_JOBS_INCLUDE_STATUS:-0}" != "1" ]]; then
             case "${job_name}" in
                 *" Status" | "Status" | *"Status")
