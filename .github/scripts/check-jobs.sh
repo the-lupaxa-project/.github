@@ -63,6 +63,9 @@ ensure_jq()
 
 fetch_jobs_json()
 {
+    echo "Has GITHUB_TOKEN? ${GITHUB_TOKEN:+yes}"
+    echo "Has ACTIONS_RUNTIME_TOKEN? ${ACTIONS_RUNTIME_TOKEN:+yes}"
+
     if [[ -z "${GITHUB_REPOSITORY:-}" || -z "${GITHUB_RUN_ID:-}" ]]; then
         echo "ERROR: GITHUB_REPOSITORY or GITHUB_RUN_ID not set; cannot call GitHub API." >&2
         return 1
