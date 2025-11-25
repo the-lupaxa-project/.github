@@ -4,9 +4,12 @@
     </a>
 </p>
 
-<h1 align="center">The Lupaxa Project: The <em>.github</em> Repository</h1>
+<h1 align="center">The Lupaxa Project: The<em>.github</em> Repository</h1>
 
-<h2>Overview</h2>
+This repository contains organisation‑wide documentation, standards, and governance for all projects within **The Lupaxa Project** GitHub organisation.
+These documents define how our tools are developed, maintained, secured, documented, and governed.
+
+## Organisation Overview
 
 This repository defines the organisation-wide defaults for:
 
@@ -18,20 +21,23 @@ This repository defines the organisation-wide defaults for:
 
 These files apply automatically to all repositories under The Lupaxa Project unless explicitly overridden.
 
-This repository acts as the central source of truth for project standards, security practices, automation, and contributor experience.
-
 <h2>How GitHub Uses This Repo</h2>
 
-GitHub automatically recognises and applies certain files from the organisation’s `.github` repository across all its **public repositories**:
+GitHub automatically recognises and applies certain files from this repository across all the organisations **public repositories**:
 
-| File / Folder          | Purpose                                          |
-| :--------------------- | :----------------------------------------------- |
-| profile/README.md      | Appears on the organisation’s public profile.    |
-| CODE_OF_CONDUCT.md     | Linked automatically in all repositories.        |
-| CONTRIBUTING.md        | Used as the default contribution guide.          |
-| SECURITY.md            | Linked under "Report a vulnerability".           |
-| ISSUE_TEMPLATE/        | Shared issue templates.                          |
-| PULL_REQUEST_TEMPLATE/ | Shared PR templates for consistent submissions.  |
+Supported Files:
+
+- CODE_OF_CONDUCT.md
+- CONTRIBUTING.md
+- FUNDING.md
+- SECURITY.md
+- SUPPORT.md
+- FUNDING.md
+
+Supported Directories:
+
+- ISSUE_TEMPLATE
+- PULL_REQUEST_TEMPLATE
 
 <h3>Extending or Overriding Defaults</h3>
 
@@ -52,29 +58,23 @@ Repositories overriding central files should retain references back to the organ
 This repository extends the Lupaxa Project Contributing Guidelines.
 ```
 
-<h2>Documentation Index</h2>
+<h2>Key Documents</h2>
 
-The Lupaxa Project follows a structured, cross-referenced documentation model.
-Each file plays a specific role and links into the overall governance structure.
+- [Governance][1]
+- [Maintainers][2]
+- [Contributing][3]
+- [Security Policy][4]
+- [Support Guide][5]
+- [Code of Conduct][6]
+- [Projects Overview][7]
 
-<h3>Contributor & Community Documentation</h3>
-
-| Document                                 | Purpose                                                  |
-| :--------------------------------------- | :------------------------------------------------------- |
-| [CONTRIBUTING.md](CONTRIBUTING.md)￼      | How to report issues, request features, and submit PRs.  |
-| [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)￼| Expected behaviour and community standards.              |
-| [PROJECTS.md](PROJECTS.md)￼              | Overview of key projects in the organisation.            |
-
-<h3>Security Documentation</h3>
-
-| Document                                             | Purpose                                                       |
-| :--------------------------------------------------- | :------------------------------------------------------------ |
-| [SECURITY.md](SECURITY.md)￼                          | Public vulnerability disclosure policy.                       |
-| [SECURITY_PROCESSS.md](SECURITY_PROCESS.md)          | Internal lifecycle for security reports, fixes, & disclosure. |
-| [SECURITY_ARCHITECTURE.md](SECURITY_ARCHITECTURE.md) | High-level security principles and organisational guarantees. |
-
-> [!NOTE]
-> Private versions of security documents are maintained in our private .github-private repository.
+[1]: https://github.com/TheLupaxaProject/.github/blob/master/GOVERNANCE.md
+[2]: https://github.com/TheLupaxaProject/.github/blob/master/MAINTAINERS.md
+[3]: https://github.com/TheLupaxaProject/.github/blob/master/CONTRIBUTING.md
+[4]: https://github.com/TheLupaxaProject/.github/blob/master/SECURITY.md
+[5]: https://github.com/TheLupaxaProject/.github/blob/master/SUPPORT.md
+[6]: https://github.com/TheLupaxaProject/.github/blob/master/CODE_OF_CONDUCT.md
+[7]: https://github.com/TheLupaxaProject/.github/blob/master/PROJECTS.md
 
 <h2>Organisation-Wide Labels</h2>
 
@@ -97,8 +97,6 @@ Security is a core organisational principle.
 - Default permissions are read-only unless escalated by consumer workflows
 - All reusable workflows include explicit input validation and guardrails
 - Public vulnerability handling is documented in [SECURITY.md](SECURITY.md)
-
-A deeper architectural overview is provided in the [SECURITY_ARCHITECTURE.md](SECURITY_ARCHITECTURE.md).
 
 <h2>High-Level Governance</h2>
 

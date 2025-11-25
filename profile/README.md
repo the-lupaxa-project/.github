@@ -7,9 +7,6 @@
 <h1 align="center">Welcome to The Lupaxa Project</h1>
 
 At **The Lupaxa Project**, we’re guided by the belief that the best ideas are born at the intersection of **wild instinct** and **structured intelligence**.
-
-Inspired by the mythos of the Wolf — independent yet collaborative, intuitive yet disciplined — Lupaxa is more than a name. It’s a philosophy.
-
 We believe that great tools don’t emerge from bureaucracy or rigid frameworks, but from the freedom to create and the discipline to refine.
 Lupaxa is where **exploration meets precision**, and where **the untamed meets the engineered**.
 
@@ -56,12 +53,12 @@ We care about craftsmanship, clarity, and composability — not complexity for i
 We group our repositories into logical domains, each managed as a dedicated GitHub organisation. This structure helps us keep related tools
 together, simplify discovery, and maintain a clear separation of focus.
 
-For a detailed list of available projects please refer to our [projects list](PROJECTS.md).
+For a detailed list of available projects please refer to our [projects list](https://github.com/the-lupaxa-project/.github/blob/master/PROJECTS.md).
 
-<h2>Why “Lupaxa”?</h2>
+<h2>Why "Lupaxa"?</h2>
 
-The name fuses ***lupus*** (Latin for *wolf*) with a modern, tech-flavoured suffix.
-It reflects both the **primal and the systematic** — a name that captures our balance between creative instinct and technical precision.
+The name fuses lupus (Latin for wolf) with a modern, tech-flavoured suffix. It reflects both the primal and the systematic — a name that captures our balance
+between creative instinct and technical precision.
 
 <h1></h1>
 
