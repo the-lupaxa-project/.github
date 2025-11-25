@@ -4,9 +4,7 @@
     </a>
 </p>
 
-<h1 align="center">The Lupaxa Project: How to Contribute</h1>
-
-<h2>Overview</h2>
+<h1 align="center">How to Contribute</h1>
 
 We welcome contributions of all kinds — whether it’s fixing a bug, improving documentation, or adding new functionality.
 
@@ -14,9 +12,7 @@ If you discover issues, have ideas for improvements, or would like to propose ne
 
 Please follow the guidelines below when doing so.
 
-<h2>
-    Issue Reporting
-</h2>
+<h2>Issue Reporting</h2>
 
 Before submitting an issue:
 
@@ -27,20 +23,16 @@ Before submitting an issue:
 - **Include details** — specify the version, environment, or configuration used.
 - **Provide examples** — minimal code samples or reproduction steps help us diagnose faster.
 
-<h2>
-    Feature Requests
-</h2>
+<h2>Feature Requests</h2>
 
 If you have an idea for a new feature or improvement that you’d like to see but don’t plan to implement yourself, please open an issue using the **Feature Request** template.
 
 Explain *why* the feature is valuable and include use cases or examples where possible.
 
-<h2>
-    Pull Requests
-</h2>
+<h2>Pull Requests</h2>
 
 - Read [How to Properly Contribute to Open Source Projects on GitHub][1].
-- Fork the project and create a **feature branch** (not `main` or `master`).
+- Fork the project and create a **feature branch** (not `master`).
 - Write [Good Commit Messages][2].
 - Follow existing **code style, documentation, and testing conventions**.
 - Include or update tests for any new code.
@@ -57,9 +49,7 @@ Explain *why* the feature is valuable and include use cases or examples where po
 > We reserve the right to request changes or reject pull requests that don’t meet these standards.
 > We will always provide constructive feedback to help you align with our practices.
 
-<h2>
-    Signed Commits
-</h2>
+<h2>Signed Commits</h2>
 
 All commits **must be GPG- or SSH-signed** to verify the developer’s identity. Unsigned commits will be rejected automatically.
 
@@ -71,15 +61,11 @@ git commit -S -m "Your descriptive commit message"
 
 For details, see [GitHub’s Guide to Signing Commits](https://docs.github.com/en/authentication/managing-commit-signature-verification/signing-commits).
 
-<h2>
-    Labeling Guidelines
-</h2>
+<h2>Labeling Guidelines</h2>
 
 To maintain consistency across all repositories in The Lupaxa Project, we use a structured label system based on four categories:
 
-<h3>
-    1. Type — What is this?
-</h3>
+<h3>1. Type — What is this?</h3>
 
 Choose one label to describe the nature of the issue or PR:
 

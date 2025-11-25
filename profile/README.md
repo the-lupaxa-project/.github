@@ -6,8 +6,6 @@
 
 <h1 align="center">Welcome to The Lupaxa Project</h1>
 
-<h2>The Spirit of Lupaxa</h2>
-
 At **The Lupaxa Project**, we’re guided by the belief that the best ideas are born at the intersection of **wild instinct** and **structured intelligence**.
 
 Inspired by the mythos of the Wolf — independent yet collaborative, intuitive yet disciplined — Lupaxa is more than a name. It’s a philosophy.
@@ -17,12 +15,12 @@ Lupaxa is where **exploration meets precision**, and where **the untamed meets t
 
 <h2>Who We Are (and Who We’re Not)</h2>
 
-Lupaxa is an **informal collective** of independent developers and open-source contributors.
+The Lupaxa Project is an **informal collective** of independent developers and open-source contributors.
 Some of us are hobbyists, others professionals — but all collaborate voluntarily, outside the bounds of employment or commercial obligation.
 
-We are **not a company**. There’s no office, no boardroom, and no business model.
-There are no customers, no shareholders — only peers and creators.
-There are no product pitches, pipelines, or roadmaps here — just code, shared openly and responsibly.
+- We are **not a company**. There’s no office, no boardroom, and no business model.
+- There are no customers, no shareholders — only peers and creators.
+- There are no product pitches, pipelines, or roadmaps here — just code, shared openly and responsibly.
 
 <h2>What We Do</h2>
 
@@ -45,7 +43,7 @@ shared utility and community value.
 - **Security by Design** means we build defensively from the start — prioritizing privacy, minimal attack surfaces, secure defaults, and hardened code, even in the smallest tools.
 
 We believe that **freedom and structure are not opposites** — they’re partners.
-Lupaxa exists to honour that balance.
+The Lupaxa Project exists to honour that balance.
 
 <h2>Built by Developers, for Developers</h2>
 

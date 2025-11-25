@@ -4,7 +4,7 @@
     </a>
 </p>
 
-<h1 align="center">The Lupaxa Project: Code of Conduct</h1>
+<h1 align="center">Code of Conduct</h1>
 
 <h2>Our Pledge</h2>
 

@@ -4,22 +4,21 @@
     </a>
 </p>
 
-<h1 align="center">The Lupaxa Project: The <em>.github</em> Repository</h1>
+<h1 align="center">The <em>.github</em> Repository</h1>
 
 <h2>Overview</h2>
 
-This repository (the-lupaxa-project/.github) defines the organisation-wide defaults for:
+This repository defines the organisation-wide defaults for:
 
 - Issue templates
 - Pull request templates
-- Organisation-level GitHub Actions workflows
 - Shared documentation (security, contribution guidelines, etc.)
 - Label conventions
 - Central governance and project structure
 
 These files apply automatically to all repositories under The Lupaxa Project unless explicitly overridden.
 
-This repo acts as the central source of truth for project standards, security practices, automation, and contributor experience.
+This repository acts as the central source of truth for project standards, security practices, automation, and contributor experience.
 
 <h2>How GitHub Uses This Repo</h2>
 
@@ -33,7 +32,6 @@ GitHub automatically recognises and applies certain files from the organisation�
 | SECURITY.md            | Linked under "Report a vulnerability".           |
 | ISSUE_TEMPLATE/        | Shared issue templates.                          |
 | PULL_REQUEST_TEMPLATE/ | Shared PR templates for consistent submissions.  |
-| .github/workflows/     | Provides reusable workflows for CI/CD.           |
 
 <h3>Extending or Overriding Defaults</h3>
 
@@ -66,7 +64,6 @@ Each file plays a specific role and links into the overall governance structure.
 | [CONTRIBUTING.md](CONTRIBUTING.md)￼      | How to report issues, request features, and submit PRs.  |
 | [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)￼| Expected behaviour and community standards.              |
 | [PROJECTS.md](PROJECTS.md)￼              | Overview of key projects in the organisation.            |
-| [WORKFLOWS.md](WORKFLOWS.md)￼            | Documentation for all reusable GitHub Actions workflows. |
 
 <h3>Security Documentation</h3>
 
@@ -79,31 +76,6 @@ Each file plays a specific role and links into the overall governance structure.
 > [!NOTE]
 > Private versions of security documents are maintained in our private .github-private repository.
 
-<h2>Reusable GitHub Workflows</h2>
-
-This repository also acts as a **central catalog of reusable workflows** for:
-
-- Standardised linting
-- Security scanning
-- Workflow hardening
-- Release preparation & tagging
-- Dependency automation
-- Slack notifications
-- Check-jobs validation
-- Code quality enforcement
-
-There are two layers:
-
-1. **Reusable workflows**
-   - Live in this repo: `.github/workflows/reusable-*.yml`  
-   - Called by other repos via `uses: the-lupaxa-project/.github/...@master`
-
-2. **Local workflows**
-   - Live in this repo: `.github/workflows/local-*.yml`  
-   - Use `uses: ./.github/workflows/reusable-*.yml` to call the shared logic.
-
-A complete description of each reusable workflow is available in [WORKFLOWS.md](WORKFLOWS.md) which also includes input tables, behaviour notes, and consumer examples.
-
 <h2>Organisation-Wide Labels</h2>
 
 We maintain a consistent, structured label taxonomy across all repositories:
@@ -114,7 +86,7 @@ We maintain a consistent, structured label taxonomy across all repositories:
 - Dependabot ecosystem labels
 - Type labels (type: feature, type: bug, …)
 
-More details can be found in [WORKFLOWS.md](WORKFLOWS.md) and the labels section of [CONTRIBUTING.md](CONTRIBUTING.md).
+More details can be found in the labels section of [CONTRIBUTING.md](CONTRIBUTING.md).
 
 <h2>Security by Design</h2>
 

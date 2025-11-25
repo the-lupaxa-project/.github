@@ -4,9 +4,7 @@
     </a>
 </p>
 
-<h1 align="center">The Lupaxa Project: Security Process</h1>
-
-<h2>Overview</h2>
+<h1 align="center">Security Process</h1>
 
 This document describes how The Lupaxa Project internally handles security-related work, including:
 
