@@ -6,54 +6,209 @@
 
 <h1 align="center">The Lupaxa Project: Security Policy</h1>
 
-The Lupaxa Project follows a **Security by Design** philosophy across all open-source and internal projects.
-We take vulnerabilities seriously and deeply value responsible disclosure from the community.
+The Lupaxa Project is committed to building secure, reliable, and trustworthy open-source software.
+This document outlines our **security principles, architecture, processes**, and the **responsible disclosure policy** for reporting vulnerabilities.
 
-We believe that transparency, collaboration, and defensive design are essential for maintaining trust in open source.
+## 1. Security Philosophy
 
-<h2>Reporting a Vulnerability</h2>
+Security is a fundamental part of all Lupaxa tooling and services.
 
-If you discover a potential security issue:
+We follow a Security by Design approach based on:
 
-1. **Do not** open a public GitHub issue or pull request.
-2. **Email us directly:** [security@thelupaxaproject.org](mailto:security@thelupaxaproject.org)
-   - This address is hosted on **Proton Mail**, providing end-to-end encryption by default.
-   - You do **not** need to use GPG or provide a public key.
-   - If you also use Proton Mail, messages are encrypted automatically.
-3. In your report, please include:
-   - A clear description of the vulnerability
-   - Steps to reproduce
-   - Potential impact
-   - Any suggested mitigations
+- Least privilege
+- Minimal trust boundaries
+- Secure defaults
+- Separation of duties
+- Auditable automation
+- Secure development lifecycle (SDL) practices
 
-We aim to acknowledge receipt within **48 hours** and provide regular updates until the issue is resolved.
+Our goal: a secure ecosystem where contributors, users, and automated systems interact safely.
 
-<h2>Scope</h2>
+## 2. Security Architecture Overview
 
-This policy covers:
+The Lupaxa Project employs a layered security architecture across infrastructure, automation, and development workflows.
 
-- All public repositories under **The Lupaxa Project** organization
-- Related Docker images, GitHub Actions, and published packages (PyPI, RubyGems, Crates.io, npm, and others)
-- Internal and private infrastructure is covered by separate internal security policies.
+### 2.1 Organisational Structure & Isolation
 
-If you are unsure whether a project is in scope, please ask — we will confirm.
+To limit blast radius and maintain strong separation, we use:
 
-<h2>Our Commitments</h2>
+- Multiple GitHub organisations (tooling, libraries, infrastructure, private repos)
+- Strictly partitioned privileges across organisations
+- No shared secrets or cross-organisation trust relationships
+- Scoped permissions on all automation and API tokens
 
-- We aim to triage and verify all valid reports within **five business days**.
-- A fix or mitigation plan will be communicated before public disclosure.
-- Credit will be given to reporters who follow responsible disclosure practices.
-- We will work collaboratively to ensure any identified risks are resolved quickly and transparently.
+### 2.2 Protected Branches & Workflow Security
 
-<h2>Responsible Disclosure Guidelines</h2>
+All repositories enforce:
 
-We ask that you:
+- Protected master branches
+- Verified status checks
+- Require-review policies
+- Mandatory code review for dependency updates
+- Reusable hardened workflows across organisations
+- No secrets available to forked PRs
 
-- Avoid exploiting or publicly sharing vulnerabilities before a fix is available.
-- Do not access or modify data that is not your own.
-- Provide enough technical detail to help us reproduce the issue safely.
+### 2.3 GitHub Actions Hardening
 
-Following these principles helps us maintain a secure environment for everyone who uses our projects.
+Our workflows implement defence-in-depth:
+
+- SHA-pinned third-party actions
+- Permission minimisation (token and job-level)
+- Restricted trigger conditions
+- Guardrails for forked PRs
+- Slug/ref validation to protect from spoofing
+- Secure notifications that avoid leaking metadata
+- Reusable workflows for consistent security enforcement
+
+### 2.4 Dependency & Supply-Chain Controls
+
+We maintain strict control of our supply chain:
+
+- Mandatory review of all dependency updates
+- Dependabot monitoring across all repos
+- No introduction of dynamic code execution dependencies without approval
+- Licence scanning for new dependencies
+- Integrity checks and reproducible builds where possible
+
+### 2.5 Infrastructure & Secrets
+
+- No secrets are stored in source control
+- Secrets are scoped per repo and minimal privilege
+- Automated rotation for short-lived tokens
+- No plaintext secrets in automation logs
+- Secrets never exposed to untrusted workflows
+- Strong separation between public and private repositories
+
+## 3. Secure Development Practices
+
+All contributors are expected to follow:
+
+### 3.1 Coding Standards
+
+- Prefer safe, explicit patterns
+- Validate all input and external data
+- Avoid unnecessary complexity, implicit behaviour, or side effects
+- Use modern secure language features (e.g., Python 3.13, strict typing, safe defaults)
+
+### 3.2 Peer Review Requirements
+
+Every change must undergo review, including:
+
+- Dependency updates
+- Security-relevant code paths
+- Configuration changes
+- GitHub Actions or workflow updates
+- Documentation that affects operational behaviour
+
+### 3.3 Static Analysis & Testing
+
+We employ:
+
+- Ruff for linting
+- Mypy for type-checking
+- Pytest for tests
+- Security-focused CI gating
+- Automated test coverage for core logic
+
+## 4. Incident Response & Security Process
+
+If a security issue is suspected, observed, or confirmed, we follow the structured incident response workflow below.
+
+### 4.1 Initial Classification
+
+All incidents are classified into severity levels:
+
+- Critical: Active exploitation or remote unauthenticated impact
+- High: Privilege escalation or major information exposure
+- Medium: Limited-scope exposure or misuse potential
+- Low: Hardening gaps, misconfigurations, or informational issues
+
+### 4.2 Containment
+
+Depending on severity:
+
+- Disable affected workflows
+- Revoke exposed tokens
+- Quarantine affected infrastructure
+- Freeze releases or merges
+- Patch vulnerable components
+
+### 4.3 Eradication & Recovery
+
+- Apply fixes or remove compromised components
+- Rebuild from trusted sources
+- Rotate keys/tokens
+- Validate via testing and review
+- Resume normal operations
+
+### 4.4 Post-Incident Review
+
+We conduct a blameless review covering:
+
+- What happened
+- How it happened
+- How it was detected
+- Why controls permitted it
+- Improvements for prevention
+
+A summary may be published for transparency if appropriate.
+
+## 5. Reporting a Vulnerability (Responsible Disclosure)
+
+We greatly appreciate responsible disclosures from the security community.
+
+If you discover a vulnerability:
+
+**Please email us directly:** [security@thelupaxaproject.org](mailto:security@thelupaxaproject.org)
+
+Include:
+
+- A clear description of the vulnerability
+- Steps to reproduce
+- Potential impact
+- Any proof-of-concept or logs
+- Whether the issue is public or privately disclosed
+
+Do not create a public GitHub issue.
+
+This protects users from premature exposure.
+
+### 5.1 Response Timeline
+
+We aim to:
+
+- Acknowledge within 48 hours
+- Provide an initial assessment within 5 working days
+- Deliver a remediation plan shortly after triage
+- Coordinate public disclosure (if applicable) once a fix is available
+
+### 6. Security Expectations for Contributors
+
+All contributors should:
+
+- Use 2FA on GitHub
+- Avoid committing secrets
+- Use signed commits when possible
+- Keep dependencies updated locally
+- Run tests before pushing
+- Follow coding standards and review expectations
+
+## 7. Limitations & Use at Your Own Risk
+
+While we take security extremely seriously, The Lupaxa Project provides software "as-is" with no warranties.
+
+Users deploying our tools in production are responsible for:
+
+- Hardening their environment
+- Managing secrets
+- Performing their own security assessments
+- Ensuring compliance with organisational or regulatory requirements
+
+### 8. Contact
+
+For all security enquiries, disclosures, or concerns:
+
+Email: [security@thelupaxaproject.org](mailto:security@thelupaxaproject.org)
 
 <h1></h1>
 
