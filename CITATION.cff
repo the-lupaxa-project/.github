@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+
+title: "The Lupaxa Project: The .github Repository"
+version: "0.0.0"
+
+authors:
+  - family-names: "The Lupaxa Project"
+
+abstract: >
+  This repository contains organisation-wide documentation, standards, and governance for all projects within The Lupaxa Project GitHub organisation.
+  These documents define how our tools are developed, maintained, secured, documented, and governed.
+
+keywords:
+  - lupaxa
+  - the-lupaxa-project
+
+license: "MIT"
+
+repository-code: "https://github.com/the-lupaxa-project/.github"
+url: "https://github.com/the-lupaxa-project/.github"
+
+preferred-citation:
+  type: software
+  title: "The Lupaxa Project"
+  authors:
+    - family-names: "The Lupaxa Project"
+  year: 2025
+  url: "https://github.com/the-lupaxa-project/.github"

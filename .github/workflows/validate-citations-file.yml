@@ -1,9 +1,16 @@
-name: Greetings
+name: Citation Validation
 
 on:
+  push:
+    branches-ignore:
+      - 'dependabot/**'
+    paths:
+      - 'CITATION.cff'
   pull_request:
-  issues:
-  workflow_dispatch:
+    branches:
+      - '**'
+    paths:
+      - 'CITATION.cff'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -12,28 +19,25 @@ concurrency:
 permissions:
   actions: read
   contents: read
-  issues: write
-  pull-requests: write
 
 jobs:
-  greetings:
-    name: Run Greetings
-    uses: the-lupaxa-project/workflows/.github/workflows/reusable-greetings.yml@master
-    secrets:
-      repo-token: ${{ secrets.GITHUB_TOKEN }}
+  validate:
+    name: Citation Validation
+    uses: the-lupaxa-project/workflows/.github/workflows/reusable-validate-citations-file.yml@master
+    secrets: inherit
 
   status-check:
     name: Check Jobs Status
     needs:
-      - greetings
+      - validate
     if: always()
     # 🔴 IMPORTANT: this is a *job-level* uses, not under steps:
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-check-jobs-status.yml@master
 
   slack-workflow-status:
-    name: Slack Post Workflow Notification
+    name: Slack Workflow Status
     needs:
-      - status-check
+      - validate
     if: always()
 
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-slack-workflow-status.yml@master
