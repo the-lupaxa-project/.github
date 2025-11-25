@@ -4,9 +4,7 @@
     </a>
 </p>
 
-<h1 align="center">Code of Conduct</h1>
-
-<h2>Our Pledge</h2>
+<h1 align="center">The Lupaxa Project: Code of Conduct</h1>
 
 We pledge to make participation in **The Lupaxa Project** a welcoming, harassment-free, and respectful experience for everyone —
 regardless of age, body size, disability, ethnicity, gender identity or expression, level of experience, nationality, personal appearance, race,

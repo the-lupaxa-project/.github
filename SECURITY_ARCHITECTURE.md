@@ -4,7 +4,7 @@
     </a>
 </p>
 
-<h1 align="center">Security Architecture</h1>
+<h1 align="center">The Lupaxa Project: Security Architecture</h1>
 
 The Lupaxa Project applies a Security by Design architecture across all projects — prioritising defensive defaults, minimal trust boundaries, and secure development practices.
 

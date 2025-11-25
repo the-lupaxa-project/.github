@@ -4,7 +4,7 @@
     </a>
 </p>
 
-<h1 align="center">Our Projects</h1>
+<h1 align="center">The Lupaxa Project: Our Projects</h1>
 
 We group our repositories into logical domains, each managed as a dedicated GitHub organisation. This structure helps us keep related tools
 together, simplify discovery, and maintain a clear separation of focus.

@@ -4,7 +4,7 @@
     </a>
 </p>
 
-<h1 align="center">How to Contribute</h1>
+<h1 align="center">The Lupaxa Project: How to Contribute</h1>
 
 We welcome contributions of all kinds — whether it’s fixing a bug, improving documentation, or adding new functionality.
 

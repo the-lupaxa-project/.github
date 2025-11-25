@@ -4,7 +4,7 @@
     </a>
 </p>
 
-<h1 align="center">The <em>.github</em> Repository</h1>
+<h1 align="center">The Lupaxa Project: The <em>.github</em> Repository</h1>
 
 <h2>Overview</h2>
 

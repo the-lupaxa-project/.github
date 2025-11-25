@@ -4,7 +4,7 @@
     </a>
 </p>
 
-<h1 align="center">Security Policy</h1>
+<h1 align="center">The Lupaxa Project: Security Policy</h1>
 
 The Lupaxa Project follows a **Security by Design** philosophy across all open-source and internal projects.
 We take vulnerabilities seriously and deeply value responsible disclosure from the community.
