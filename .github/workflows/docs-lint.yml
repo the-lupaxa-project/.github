@@ -50,7 +50,5 @@ jobs:
     if: always()
 
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-slack-workflow-status.yml@master
-    with:
-      notify_on_results: "success,failed,timed_out"
     secrets:
       slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
