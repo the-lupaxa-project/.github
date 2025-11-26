@@ -29,12 +29,12 @@ jobs:
   slack-workflow-status:
     name: Slack Post Workflow Notification
     needs:
-      - dependabot
+      - status-check
     if: always()
 
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-slack-workflow-status.yml@master
     with:
       notify_on_results: "failed,timed_out"
-      ignore_jobs: "Check Job Status"
+      ignore_jobs: "Check Jobs Status"
     secrets:
       slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
