@@ -1,4 +1,4 @@
-name: Citation Validation
+name: Validate Citations File
 
 on:
   push:
@@ -22,7 +22,7 @@ permissions:
 
 jobs:
   validate:
-    name: Citation Validation
+    name: Validate Citation File
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-validate-citations-file.yml@master
     secrets: inherit
 
