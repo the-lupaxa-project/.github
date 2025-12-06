@@ -9,11 +9,11 @@
 This document describes how **The Lupaxa Project** is organised, maintained, and developed.
 It outlines the decision-making model, roles, responsibilities, and expectations across the ecosystem.
 
-The intent is to ensure consistent stewardship, transparency, and long-term sustainability across all Lupaxa repositories.
+The intent is to ensure consistent stewardship, transparency, and long-term sustainability across all of **The Lupaxa Project** repositories.
 
 ## 1. Project Scope
 
-The Lupaxa Project maintains a wide range of tools across multiple organisations, please refer to [PROJECTS.md](PROJECTS.md) for a complete list.
+**The Lupaxa Project** maintains a wide range of tools across multiple organisations, please refer to the [Projects Overview](PROJECTS.md) for a complete list.
 
 Governance processes and expectations are consistent across all of them.
 
@@ -45,7 +45,7 @@ All contributions are welcomed and reviewed on their merit.
 
 ### 2.3 Project Steward
 
-The Lupaxa Project is overseen by a project steward responsible for:
+**The Lupaxa Project** is overseen by a project steward responsible for:
 
 - Setting direction and strategic priorities
 - Maintaining consistency across all organisations
@@ -78,13 +78,13 @@ If consensus cannot be reached, the steward provides the final direction.
 
 ### 3.3 Security or critical issues
 
-Security-related decisions follow the separate process defined in [SECURITY.md](SECURITY.md).
+Security-related decisions follow the separate process defined in our [Security Policy](SECURITY.md).
 
 ## 4. Repository Standards
 
 All repositories within the ecosystem are expected to:
 
-- Follow the shared [CONTRIBUTING.md](CONTRIBUTING.md)
+- Follow the shared [How to Contrivute](CONTRIBUTING.md) guidelines.
 - Use the standard `.github` templates and guidelines
 - Follow consistent release and versioning practices
 - Maintain documentation that matches the project’s structure
@@ -139,9 +139,9 @@ Changes may be proposed via pull request, and require:
 
 ## 9. Contact
 
-For general questions, see [SUPPORT.md](SUPPORT.md)
-For security concerns, follow the instructions in [SECURITY.md](SECURITY.md).
-For governance or structural questions, open a discussion in [The Lupaxa Project](https://github.com/orgs/the-lupaxa-project/discussions) organisation.
+For general questions, see [Getting Support](SUPPORT.md)
+For security concerns, follow the instructions in the [Security Policy](SECURITY.md).
+For governance or structural questions, open a discussion in [**The Lupaxa Project**](https://github.com/orgs/the-lupaxa-project/discussions) organisation.
 
 <h1>&nbsp;</h1>
 <p align="center">

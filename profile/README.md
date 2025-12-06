@@ -12,12 +12,12 @@ Lupaxa is where **exploration meets precision**, and where **the untamed meets t
 
 <h2>Who We Are (and Who We’re Not)</h2>
 
-The Lupaxa Project is an **informal collective** of independent developers and open-source contributors.
-Some of us are hobbyists, others professionals — but all collaborate voluntarily, outside the bounds of employment or commercial obligation.
+**The Lupaxa Project** is an **informal collective** of independent developers and open-source contributors.
+Some of us are hobbyists, others professionals, but all collaborate voluntarily, outside the bounds of employment or commercial obligation.
 
 - We are **not a company**. There’s no office, no boardroom, and no business model.
-- There are no customers, no shareholders — only peers and creators.
-- There are no product pitches, pipelines, or roadmaps here — just code, shared openly and responsibly.
+- There are no customers, no shareholders, only peers and creators.
+- There are no product pitches, pipelines, or roadmaps here, just code, shared openly and responsibly.
 
 <h2>What We Do</h2>
 
@@ -28,7 +28,7 @@ Some of us are hobbyists, others professionals — but all collaborate voluntari
 - Security tools to help examine and improve your security posture.
 - Clean, purposeful solutions designed for clarity and reusability.
 
-Everything we release is built and maintained by people who **code for the joy of building** — not for clients, not for profit, but for
+Everything we release is built and maintained by people who **code for the joy of building**, not for clients, not for profit, but for
 shared utility and community value.
 
 <h2>Our Philosophy</h2>
@@ -36,28 +36,28 @@ shared utility and community value.
 - **Instinct** means trusting curiosity, embracing experimentation, and following creative impulses.
 - **Intelligence** ensures thoughtful design, clean code, and meaningful architecture.
 - **Autonomy** drives us to build tools that are elegant, dependable, and self-contained.
-- **Transparency** means every script, fix, or feature is open — for use, reuse, or reinvention.
-- **Security by Design** means we build defensively from the start — prioritizing privacy, minimal attack surfaces, secure defaults, and hardened code, even in the smallest tools.
+- **Transparency** means every script, fix, or feature is open, for use, reuse, or reinvention.
+- **Security by Design** means we build defensively from the start, prioritizing privacy, minimal attack surfaces, secure defaults, and hardened code, even in the smallest tools.
 
-We believe that **freedom and structure are not opposites** — they’re partners.
-The Lupaxa Project exists to honour that balance.
+We believe that **freedom and structure are not opposites**, they’re partners.
+**The Lupaxa Project** exists to honour that balance.
 
 <h2>Built by Developers, for Developers</h2>
 
 Whether you fork a repo, report an issue, or use one of our tools, you’re part of what we’re building.
 
-We care about craftsmanship, clarity, and composability — not complexity for its own sake.
+We care about craftsmanship, clarity, and composability, not complexity for its own sake.
 
 <h2>Our Projects</h2>
 
 We group our repositories into logical domains, each managed as a dedicated GitHub organisation. This structure helps us keep related tools
 together, simplify discovery, and maintain a clear separation of focus.
 
-For a detailed list of available projects please refer to our [projects list](https://github.com/the-lupaxa-project/.github/blob/master/PROJECTS.md).
+For a detailed list of available projects please refer to our [Projects Overview](https://github.com/the-lupaxa-project/.github/blob/master/PROJECTS.md).
 
 <h2>Why "Lupaxa"?</h2>
 
-The name fuses lupus (Latin for wolf) with a modern, tech-flavoured suffix. It reflects both the primal and the systematic — a name that captures our balance
+The name fuses lupus (Latin for wolf) with a modern, tech-flavoured suffix. It reflects both the primal and the systematic, a name that captures our balance
 between creative instinct and technical precision.
 
 <h1></h1>

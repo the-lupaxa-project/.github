@@ -4,7 +4,7 @@
     </a>
 </p>
 
-<h1 align="center">The Lupaxa Project: Our Projects</h1>
+<h1 align="center">The Lupaxa Project: Projects Overview</h1>
 
 We group our repositories into logical domains, each managed as a dedicated GitHub organisation. This structure helps us keep related tools
 together, simplify discovery, and maintain a clear separation of focus.
@@ -31,6 +31,14 @@ together, simplify discovery, and maintain a clear separation of focus.
 | <img src="https://raw.githubusercontent.com/the-lupaxa-project/org-logos/master/orgs/spider-toolbox/readme-logo.png" width="48px" alt="logo">        | [Spider Toolbox](https://github.com/lupaxa-spider-toolbox)               | Web spiders and crawlers for data collection and analysis.                               |
 | <img src="https://raw.githubusercontent.com/the-lupaxa-project/org-logos/master/orgs/sre-toolbox/readme-logo.png" width="48px" alt="logo">           | [SRE Toolbox](https://github.com/lupaxa-sre-toolbox)                     | Site Reliability Engineering tools focused on availability, resilience, and performance. |
 | <img src="https://raw.githubusercontent.com/the-lupaxa-project/org-logos/master/orgs/terraform-toolbox/readme-logo.png" width="48px" alt="logo">     | [Terraform Toolbox](https://github.com/lupaxa-terraform-toolbox)         | Terraform modules and Infrastructure-as-Code resources.                                  |
+
+For details on governance and maintainer responsibilities across these projects, see:
+
+- [Governance][1]
+- [Maintainers][2]
+
+[1]: https://github.com/the-lupaxa-project/.github/blob/main/GOVERNANCE.md
+[2]: https://github.com/the-lupaxa-project/.github/blob/main/MAINTAINERS.md
 
 <h1></h1>
 

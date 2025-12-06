@@ -6,7 +6,7 @@
 
 <h1 align="center">The Lupaxa Project: Getting Support</h1>
 
-The Lupaxa Project provides open-source tools across multiple repositories and organisations.
+**The Lupaxa Project** provides open-source tools across multiple repositories and organisations.
 This document describes how to seek help, report issues, and request improvements.
 
 ## Before Opening an Issue
@@ -22,7 +22,7 @@ Many common questions are already addressed there.
 
 ## Getting Help
 
-For general questions about using a tool, configuration, behaviour, or expected output, you may open an issue using the **“Question”** template (if available).
+For general questions about using a tool, configuration, behaviour, or expected output, you may open an issue using the **"Question"** template (if available).
 Keep questions concise and focused.
 
 ## Reporting Bugs
@@ -56,13 +56,26 @@ Not all requests will be implemented, but all will be considered.
 ## Security Issues
 
 Do not report security issues publicly.
-Instead, follow the guidance in the organisation-wide [SECURITY.md.](SECURITY.md)
+Instead, follow the guidance in the organisation-wide [Security Policy](SECURITY.md).
 
 We take security seriously and will respond promptly and privately.
 
 ## Contributing
 
-If you wish to contribute code or documentation, please first read the organisation-wide [CONTRIBUTING.md](CONTRIBUTING.md) for expectations, workflow, and standards.
+If you wish to contribute code or documentation, please first read the organisation-wide [How to Contribute](CONTRIBUTING.md) for expectations, workflow, and standards.
+
+## Organisation-Wide Context
+
+For information about how **The Lupaxa Project** is structured and governed, see:
+
+- [Governance][1]
+- [Maintainers][2]
+
+[1]: https://github.com/the-lupaxa-project/.github/blob/main/GOVERNANCE.md
+[2]: https://github.com/the-lupaxa-project/.github/blob/main/MAINTAINERS.md
+
+These documents explain how repositories are grouped, who is responsible for
+them, and how decisions are made across the ecosystem.
 
 ## General Questions
 
@@ -75,14 +88,14 @@ General questions about how to use the tools or how they work internally are alw
 
 ## Project Scope
 
-The Lupaxa Project maintains a wide range of tools across multiple organisations, please refer to [PROJECTS.md](PROJECTS.md) for a complete list.
+**The Lupaxa Project** maintains a wide range of tools across multiple organisations, please refer to the [Projects Overview](PROJECTS.md) for a complete list.
 
 Support processes and expectations are consistent across all of them.
 
 ## Community
 
 We appreciate all contributions—code, documentation, testing, feedback, or simply using the tools.
-Your involvement helps shape the future of The Lupaxa Project.
+Your involvement helps shape the future of **The Lupaxa Project**.
 
 <h1></h1>
 

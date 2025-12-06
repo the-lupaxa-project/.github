@@ -30,9 +30,9 @@ Supported Files:
 - CODE_OF_CONDUCT.md
 - CONTRIBUTING.md
 - FUNDING.md
+- GOVERNANCE.md
 - SECURITY.md
 - SUPPORT.md
-- FUNDING.md
 
 Supported Directories:
 
@@ -42,15 +42,9 @@ Supported Directories:
 <h3>Extending or Overriding Defaults</h3>
 
 Projects within The Lupaxa Project inherit these organizational files automatically.
-However, maintainers can override or extend them when necessary:
+However, maintainers can override or extend them when necessary.
 
-- Custom CONTRIBUTING.md — additional testing or workflow steps.
-- Custom SECURITY.md — defining project-specific scope or contact options.
-- Extra issue templates — for highly specialized tools.
-- Repo-specific workflows — custom build/test pipelines layered on top of reusable ones.
-- Per-repo lint configs (for example .markdownlint.yaml, .yamllint.yaml) — to fine-tune local rules.
-
-Repositories overriding central files should retain references back to the organization-wide versions to preserve visibility and intent.
+Repositories overriding central files should retain references back to the organisation-wide versions to preserve visibility and intent.
 
 <h4>Example</h4>
 
@@ -60,21 +54,21 @@ This repository extends the Lupaxa Project Contributing Guidelines.
 
 <h2>Key Documents</h2>
 
-- [Governance][1]
-- [Maintainers][2]
-- [Contributing][3]
-- [Security Policy][4]
-- [Support Guide][5]
-- [Code of Conduct][6]
-- [Projects Overview][7]
+- [Code of Conduct][1]
+- [Contributing][2]
+- [Governance][3]
+- [Maintainers][4]
+- [Projects Overview][5]
+- [Security Policy][6]
+- [Support Guide][7]
 
-[1]: https://github.com/TheLupaxaProject/.github/blob/master/GOVERNANCE.md
-[2]: https://github.com/TheLupaxaProject/.github/blob/master/MAINTAINERS.md
-[3]: https://github.com/TheLupaxaProject/.github/blob/master/CONTRIBUTING.md
-[4]: https://github.com/TheLupaxaProject/.github/blob/master/SECURITY.md
-[5]: https://github.com/TheLupaxaProject/.github/blob/master/SUPPORT.md
-[6]: https://github.com/TheLupaxaProject/.github/blob/master/CODE_OF_CONDUCT.md
-[7]: https://github.com/TheLupaxaProject/.github/blob/master/PROJECTS.md
+[1]: https://github.com/TheLupaxaProject/.github/blob/master/CODE_OF_CONDUCT.md
+[2]: https://github.com/TheLupaxaProject/.github/blob/master/CONTRIBUTING.md
+[3]: https://github.com/TheLupaxaProject/.github/blob/master/GOVERNANCE.md
+[4]: https://github.com/TheLupaxaProject/.github/blob/master/MAINTAINERS.md
+[5]: https://github.com/TheLupaxaProject/.github/blob/master/PROJECTS.md
+[6]: https://github.com/TheLupaxaProject/.github/blob/master/SECURITY.md
+[7]: https://github.com/TheLupaxaProject/.github/blob/master/SUPPORT.md
 
 <h2>Organisation-Wide Labels</h2>
 
@@ -86,7 +80,7 @@ We maintain a consistent, structured label taxonomy across all repositories:
 - Dependabot ecosystem labels
 - Type labels (type: feature, type: bug, …)
 
-More details can be found in the labels section of [CONTRIBUTING.md](CONTRIBUTING.md).
+More details can be found in the labels section of [How to Contribute](CONTRIBUTING.md).
 
 <h2>Security by Design</h2>
 
@@ -96,7 +90,7 @@ Security is a core organisational principle.
 - All workflows follow principle of least privilege
 - Default permissions are read-only unless escalated by consumer workflows
 - All reusable workflows include explicit input validation and guardrails
-- Public vulnerability handling is documented in [SECURITY.md](SECURITY.md)
+- Public vulnerability handling is documented in [Security Policy](SECURITY.md)
 
 <h2>High-Level Governance</h2>
 
@@ -114,12 +108,12 @@ This repository captures these principles so all downstream repositories inherit
 
 <h2>Contributing</h2>
 
-We welcome all contributions — code, documentation, testing, or design.
+We welcome all contributions, code, documentation, testing, or design.
 
 Review:
 
-- [CONTRIBUTING.md](CONTRIBUTING.md)
-- [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)
+- [How to Contribute](CONTRIBUTING.md)
+- [Code of Conduct](CODE_OF_CONDUCT.md)
 
 Before sending a pull request.
 
@@ -127,11 +121,7 @@ Before sending a pull request.
 
 Never open a public issue for a vulnerability.
 
-See:
-
-[SECURITY.md](SECURITY.md)
-
-for the correct reporting channel.
+Please refer to the [Security Policy](SECURITY.md) for the correct reporting channel.
 
 <h2>License</h2>
 

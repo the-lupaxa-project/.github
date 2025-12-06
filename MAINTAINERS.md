@@ -10,6 +10,10 @@ This document lists the maintainers of **The Lupaxa Project** and outlines the e
 
 The intent is to provide clarity, transparency, and consistency across all Lupaxa organisations and tools.
 
+For the full governance model and decision-making process, see [Governance][1]
+
+[1]: https://github.com/the-lupaxa-project/.github/blob/main/GOVERNANCE.md.
+
 ## 1. Current Maintainers
 
 ### Project Steward
@@ -53,7 +57,7 @@ Communication is primarily through GitHub Issues, Discussions, and Pull Requests
 ## 4. Decision Making
 
 Maintainers should aim for lightweight consensus.
-For major changes or disagreements, see [GOVERNANCE.md](GOVERNANCE.md), which describes the decision-making model and escalation path.
+For major changes or disagreements, see [Governance](GOVERNANCE.md), which describes the decision-making model and escalation path.
 
 The Project Steward has final decision authority when consensus cannot be reached.
 
@@ -85,9 +89,9 @@ Any changes will be communicated clearly.
 
 ## 7. Contact
 
-For general questions, see [SUPPORT.md](SUPPORT.md)
-For security concerns, follow the instructions in [SECURITY.md](SECURITY.md).
-For governance or maintainership questions, open a discussion in [The Lupaxa Project](https://github.com/orgs/the-lupaxa-project/discussions) organisation.
+For general questions, see [Getting Support](SUPPORT.md)
+For security concerns, follow the instructions in the [Security Policy](SECURITY.md).
+For governance or maintainership questions, open a discussion in [**The Lupaxa Project**](https://github.com/orgs/the-lupaxa-project/discussions) organisation.
 
 <h1>&nbsp;</h1>
 <p align="center">

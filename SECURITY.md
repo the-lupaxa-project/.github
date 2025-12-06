@@ -6,7 +6,7 @@
 
 <h1 align="center">The Lupaxa Project: Security Policy</h1>
 
-The Lupaxa Project is committed to building secure, reliable, and trustworthy open-source software.
+**The Lupaxa Project** is committed to building secure, reliable, and trustworthy open-source software.
 This document outlines our **security principles, architecture, processes**, and the **responsible disclosure policy** for reporting vulnerabilities.
 
 ## 1. Security Philosophy
@@ -26,7 +26,7 @@ Our goal: a secure ecosystem where contributors, users, and automated systems in
 
 ## 2. Security Architecture Overview
 
-The Lupaxa Project employs a layered security architecture across infrastructure, automation, and development workflows.
+**The Lupaxa Project** employs a layered security architecture across infrastructure, automation, and development workflows.
 
 ### 2.1 Organisational Structure & Isolation
 
@@ -37,7 +37,21 @@ To limit blast radius and maintain strong separation, we use:
 - No shared secrets or cross-organisation trust relationships
 - Scoped permissions on all automation and API tokens
 
-### 2.2 Protected Branches & Workflow Security
+### 2.2 Governance and Stewardship
+
+Security responsibilities and decision-making are aligned with the organisation-wide
+governance model:
+
+- [Governance][1]
+- [Maintainers][2]
+
+[1]: https://github.com/the-lupaxa-project/.github/blob/main/GOVERNANCE.md
+[2]: https://github.com/the-lupaxa-project/.github/blob/main/MAINTAINERS.md
+
+These documents describe who is responsible for security-related decisions and
+how changes to security posture are approved across Lupaxa repositories.
+
+### 2.3 Protected Branches & Workflow Security
 
 All repositories enforce:
 
@@ -48,7 +62,7 @@ All repositories enforce:
 - Reusable hardened workflows across organisations
 - No secrets available to forked PRs
 
-### 2.3 GitHub Actions Hardening
+### 2.4 GitHub Actions Hardening
 
 Our workflows implement defence-in-depth:
 
@@ -60,7 +74,7 @@ Our workflows implement defence-in-depth:
 - Secure notifications that avoid leaking metadata
 - Reusable workflows for consistent security enforcement
 
-### 2.4 Dependency & Supply-Chain Controls
+### 2.5 Dependency & Supply-Chain Controls
 
 We maintain strict control of our supply chain:
 
@@ -70,7 +84,7 @@ We maintain strict control of our supply chain:
 - Licence scanning for new dependencies
 - Integrity checks and reproducible builds where possible
 
-### 2.5 Infrastructure & Secrets
+### 2.6 Infrastructure & Secrets
 
 - No secrets are stored in source control
 - Secrets are scoped per repo and minimal privilege
@@ -195,7 +209,7 @@ All contributors should:
 
 ## 7. Limitations & Use at Your Own Risk
 
-While we take security extremely seriously, The Lupaxa Project provides software "as-is" with no warranties.
+While we take security extremely seriously, **The Lupaxa Project** provides software "as-is" with no warranties.
 
 Users deploying our tools in production are responsible for:
 
