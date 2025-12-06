@@ -1,0 +1,44 @@
+name: Publish to TestPyPI
+
+on:
+  push:
+    tags:
+      - 'v[0-9]+\.[0-9]+\.[0-9]+-rc[0-9]+'  # exclude RC prereleases
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  actions: read
+  contents: write
+  id-token: write
+
+jobs:
+  generate-release-notes:
+    name: Generate Release Notes
+    uses: the-lupaxa-project/workflows/.github/workflows/reusable-generate-release.yml@master
+    secrets:
+      github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  status-check:
+    name: Generate Test Release Status
+    needs:
+      - generate-release-notes
+    if: always()
+    # 🔴 IMPORTANT: this is a *job-level* uses, not under steps:
+    uses: the-lupaxa-project/workflows/.github/workflows/reusable-check-jobs-status.yml@master
+
+  slack-workflow-status:
+    name: Slack Workflow Status
+    needs:
+      - status-check
+    if: always()
+
+    uses: the-lupaxa-project/workflows/.github/workflows/reusable-slack-workflow-status.yml@master
+    with:
+      notify_on_results: "failure,timed_out"
+      ignore_jobs: "Check Jobs Status"
+    secrets:
+      slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
