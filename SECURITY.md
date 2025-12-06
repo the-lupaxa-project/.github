@@ -224,7 +224,7 @@ For all security enquiries, disclosures, or concerns:
 
 Email: [security@thelupaxaproject.org](mailto:security@thelupaxaproject.org)
 
-<h1>&nbsp;</h1>
+<h1></h1>
 
 <p align="center">
     <strong>

@@ -171,7 +171,7 @@ Example
 This organisation follows a [Code of Conduct](https://github.com/the-lupaxa-project/.github/blob/master/CODE_OF_CONDUCT.md).
 By participating in any repository, discussion, or community under **The Lupaxa Project**, you agree to uphold these principles.
 
-<h1>&nbsp;</h1>
+<h1></h1>
 
 <p align="center">
     <strong>

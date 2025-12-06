@@ -65,7 +65,7 @@ To maintain fairness and transparency, violations will generally result in one o
 
 Severity, frequency, and intent will be considered when determining the appropriate response.
 
-<h1>&nbsp;</h1>
+<h1></h1>
 
 <p align="center">
     <strong>

@@ -99,7 +99,7 @@ Support processes and expectations are consistent across all of them.
 We appreciate all contributions—code, documentation, testing, feedback, or simply using the tools.
 Your involvement helps shape the future of **The Lupaxa Project**.
 
-<h1>&nbsp;</h1>
+<h1></h1>
 
 <p align="center">
     <strong>

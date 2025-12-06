@@ -40,7 +40,7 @@ For details on governance and maintainer responsibilities across these projects,
 [1]: https://github.com/the-lupaxa-project/.github/blob/master/GOVERNANCE.md
 [2]: https://github.com/the-lupaxa-project/.github/blob/master/MAINTAINERS.md
 
-<h1>&nbsp;</h1>
+<h1></h1>
 
 <p align="center">
     <strong>

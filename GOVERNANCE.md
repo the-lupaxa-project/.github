@@ -144,7 +144,7 @@ For general questions, see [Getting Support](https://github.com/the-lupaxa-proje
 For security concerns, follow the instructions in the [Security Policy](https://github.com/the-lupaxa-project/.github/blob/master/SECURITY.md).
 For governance or structural questions, open a discussion in [**The Lupaxa Project**](https://github.com/orgs/the-lupaxa-project/discussions) organisation.
 
-<h1>&nbsp;</h1>
+<h1></h1>
 
 <p align="center">
     <strong>

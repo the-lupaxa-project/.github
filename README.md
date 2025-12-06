@@ -101,7 +101,7 @@ Refer to the [Security Policy][3] for responsible disclosure instructions.
 
 Unless a repository states otherwise, code under **The Lupaxa Project** follows the **MIT License**.
 
-<h1>&nbsp;</h1>
+<h1></h1>
 
 <p align="center">
     <strong>
