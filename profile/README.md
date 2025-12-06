@@ -60,7 +60,7 @@ For a detailed list of available projects please refer to our [Projects Overview
 The name fuses lupus (Latin for wolf) with a modern, tech-flavoured suffix. It reflects both the primal and the systematic, a name that captures our balance
 between creative instinct and technical precision.
 
-<h1></h1>
+<h1>&nbsp;</h1>
 
 <p align="center">
     <strong>

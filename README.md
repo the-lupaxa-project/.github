@@ -6,128 +6,102 @@
 
 <h1 align="center">The Lupaxa Project: The<em>.github</em> Repository</h1>
 
-This repository contains organisation‑wide documentation, standards, and governance for all projects within **The Lupaxa Project** GitHub organisation.
-These documents define how our tools are developed, maintained, secured, documented, and governed.
+This repository provides a central entry point into **The Lupaxa Project**. It introduces the ecosystem, links to our organisation-wide
+documentation, and defines the shared expectations that apply throughout all Lupaxa organisations and repositories.
 
-## Organisation Overview
+These resources ensure consistent, secure, and maintainable standards across the entire project portfolio.
 
-This repository defines the organisation-wide defaults for:
+<h2>Organisation-Wide Documentation</h2>
 
-- Issue templates
-- Pull request templates
-- Shared documentation (security, contribution guidelines, etc.)
-- Label conventions
-- Central governance and project structure
+These core policies and standards are maintained in dedicated repositories:
 
-These files apply automatically to all repositories under The Lupaxa Project unless explicitly overridden.
+| Document                                                                 | Purpose                                                      |
+| :----------------------------------------------------------------------- | :----------------------------------------------------------- |
+| [Code of Conduct](https://github.com/the-lupaxa-project/code-of-conduct) | Expected behaviour and reporting processes.                  |
+| [How to Contribute](https://github.com/the-lupaxa-project/contributing)  | Development workflow, review standards, coding practices.    |
+| [Governance](https://github.com/the-lupaxa-project/governance)           | How decisions are made and roles are defined.                |
+| [Maintainers](https://github.com/the-lupaxa-project/maintainer)          | Responsibilities, accountability, project ownership.         |
+| [Projects Overview](https://github.com/the-lupaxa-project/projects)      | Structure of the ecosystem and how repositories are grouped. |
+| [Security Policy](https://github.com/the-lupaxa-project/security)        | Vulnerability disclosure, secure development practices.      |
+| [Support Guide](https://github.com/the-lupaxa-project/support)           | Where to get help and what maintainers can provide.          |
 
-<h2>How GitHub Uses This Repo</h2>
+These documents apply to **all parts** of **The Lupaxa Project** ecosystem.
 
-GitHub automatically recognises and applies certain files from this repository across all the organisations **public repositories**:
+<h2>Role of This Repository</h2>
 
-Supported Files:
+This repository:
 
-- CODE_OF_CONDUCT.md
-- CONTRIBUTING.md
-- FUNDING.md
-- GOVERNANCE.md
-- SECURITY.md
-- SUPPORT.md
+- Presents the organisation to contributors and users
+- Acts as the root directory for global information
+- Ensures that all Lupaxa organisations link to the same standards
+- Supports editors, maintainers, and automation workflows
 
-Supported Directories:
+Individual repositories may include local overrides or additions — but should always reference these global standards where appropriate.
 
-- ISSUE_TEMPLATE
-- PULL_REQUEST_TEMPLATE
+<h2>Labels and Issue Management</h2>
 
-<h3>Extending or Overriding Defaults</h3>
+We maintain a consistent label taxonomy across the ecosystem for:
 
-Projects within The Lupaxa Project inherit these organizational files automatically.
-However, maintainers can override or extend them when necessary.
+- Impact classification
+- Resolution state
+- Issue lifecycle
+- Feature and bug types
+- Dependency management and automation
 
-Repositories overriding central files should retain references back to the organisation-wide versions to preserve visibility and intent.
+These conventions improve triage, reporting clarity, and long-term maintainability.
 
-<h4>Example</h4>
-
-```text
-This repository extends the Lupaxa Project Contributing Guidelines.
-```
-
-<h2>Key Documents</h2>
-
-- [Code of Conduct][1]
-- [Contributing][2]
-- [Governance][3]
-- [Maintainers][4]
-- [Projects Overview][5]
-- [Security Policy][6]
-- [Support Guide][7]
-
-[1]: https://github.com/TheLupaxaProject/.github/blob/master/CODE_OF_CONDUCT.md
-[2]: https://github.com/TheLupaxaProject/.github/blob/master/CONTRIBUTING.md
-[3]: https://github.com/TheLupaxaProject/.github/blob/master/GOVERNANCE.md
-[4]: https://github.com/TheLupaxaProject/.github/blob/master/MAINTAINERS.md
-[5]: https://github.com/TheLupaxaProject/.github/blob/master/PROJECTS.md
-[6]: https://github.com/TheLupaxaProject/.github/blob/master/SECURITY.md
-[7]: https://github.com/TheLupaxaProject/.github/blob/master/SUPPORT.md
-
-<h2>Organisation-Wide Labels</h2>
-
-We maintain a consistent, structured label taxonomy across all repositories:
-
-- Impact levels (impact: critical, impact: low, etc.)
-- State labels (state: triage, state: confirmed, etc.)
-- Resolution labels
-- Dependabot ecosystem labels
-- Type labels (type: feature, type: bug, …)
-
-More details can be found in the labels section of [How to Contribute](CONTRIBUTING.md).
+Details are documented in the central contributing guide.
 
 <h2>Security by Design</h2>
 
-Security is a core organisational principle.
+Security is designed into every layer of **The Lupaxa Project**:
 
-- All commits must be signed
-- All workflows follow principle of least privilege
-- Default permissions are read-only unless escalated by consumer workflows
-- All reusable workflows include explicit input validation and guardrails
-- Public vulnerability handling is documented in [Security Policy](SECURITY.md)
+- Signed commits are required for all contributions
+- Workflows operate with least privilege by default
+- Reusable workflows include input validation and guardrails
+- Vulnerability reporting follows a standard automated procedure
 
-<h2>High-Level Governance</h2>
+Security requirements are detailed in the central security policy.
 
-The Lupaxa Project enforces:
+<h2>Governance and Quality Assurance</h2>
 
-- Consistent coding standards across languages
-- Reproducible builds
-- Mandatory testing in all relevant versions
-- Open governance for feature proposals
-- Clearly defined lifecycle for issues and PRs
-- Automated stale/triage workflows
-- Secure, minimal permissions for all automation
+All of **The Lupaxa Project** organisations follow consistent rules for:
 
-This repository captures these principles so all downstream repositories inherit the same quality and safety requirements.
+- Code quality and review policies
+- Documentation expectations
+- Testing, versioning, and release processes
+- Lifecycle management for features, issues, and repositories
+- Automation safety and permissions
+
+These principles ensure predictability, fairness, and technical excellence across the entire project.
 
 <h2>Contributing</h2>
 
-We welcome all contributions, code, documentation, testing, or design.
+We welcome contributions from anyone aligned with the values of **The Lupaxa Project**.
 
-Review:
+Before contributing, please review:
 
-- [How to Contribute](CONTRIBUTING.md)
-- [Code of Conduct](CODE_OF_CONDUCT.md)
+- [How to Contribute][1]
+- [Code of Donduct][2]
 
-Before sending a pull request.
+[1]: https://github.com/the-lupaxa-project/contributing
+[2]: https://github.com/the-lupaxa-project/code-of-conduct
+
+All contributions must follow the organisation-wide requirements.
 
 <h2>Security Reporting</h2>
 
-Never open a public issue for a vulnerability.
+Please **do not** report vulnerabilities publicly.
 
-Please refer to the [Security Policy](SECURITY.md) for the correct reporting channel.
+Refer to the [Security Policy][3] for responsible disclosure instructions.
+
+[3]: https://github.com/the-lupaxa-project/security
 
 <h2>License</h2>
 
-Unless explicitly stated otherwise, repositories under The Lupaxa Project follow the [MIT License](LICENSE.md).
+Unless a repository states otherwise, code under **The Lupaxa Project** follows the **MIT License**.
 
-<h1></h1>
+<h1>&nbsp;</h1>
 
 <p align="center">
     <strong>
