@@ -89,7 +89,8 @@ General questions about how to use the tools or how they work internally are alw
 
 ## Project Scope
 
-**The Lupaxa Project** maintains a wide range of tools across multiple organisations, please refer to the [Projects Overview](https://github.com/the-lupaxa-project/.github/blob/master/PROJECTS.md) for a complete list.
+**The Lupaxa Project** maintains a wide range of tools across multiple organisations, please refer to the
+[Projects Overview](https://github.com/the-lupaxa-project/.github/blob/master/PROJECTS.md) for a complete list.
 
 Support processes and expectations are consistent across all of them.
 
