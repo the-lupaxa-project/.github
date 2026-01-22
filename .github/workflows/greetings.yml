@@ -1,44 +1,124 @@
+# -----------------------------------------------------------------------------
+# Workflow: Greetings
+# Purpose:
+#   - Automatically greets contributors when they open:
+#       • A new pull request
+#       • A new issue
+#   - Helps make the project more welcoming and engaging.
+#   - Uses a reusable workflow so all Lupaxa repositories share the same
+#     greeting behavior and message format.
+#   - Aggregates results into a single status job.
+#   - Optionally sends Slack notifications if something fails or times out.
+# -----------------------------------------------------------------------------
 name: Greetings
 
+# -----------------------------------------------------------------------------
+# Triggers
+# -----------------------------------------------------------------------------
 on:
+  # Trigger when a pull request is opened, reopened, or synchronized.
   pull_request:
+
+  # Trigger when an issue is opened or reopened.
   issues:
+
+  # Allow manual execution from the GitHub UI.
   workflow_dispatch:
 
+# -----------------------------------------------------------------------------
+# Concurrency
+# -----------------------------------------------------------------------------
 concurrency:
+  # Ensure only one instance of this workflow runs per ref at a time.
+  # If the workflow is retriggered while already running, the old run is cancelled.
+  # This avoids duplicated greetings and unnecessary API calls.
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# -----------------------------------------------------------------------------
+# Permissions
+# -----------------------------------------------------------------------------
 permissions:
+  # Required to read workflow/job metadata.
   actions: read
+
+  # Required to read repository contents if templates or config files are used.
   contents: read
+
+  # Required to post comments on issues.
   issues: write
+
+  # Required to post comments on pull requests.
   pull-requests: write
 
 jobs:
+  # ---------------------------------------------------------------------------
+  # Job: greetings
+  # What it does:
+  #   - Calls a reusable workflow that:
+  #       • Detects new issues and PRs
+  #       • Posts a friendly greeting comment
+  #       • Optionally handles first-time contributors differently
+  # Why it exists:
+  #   - Improves contributor experience.
+  #   - Sets a consistent and welcoming tone across all Lupaxa projects.
+  # Secrets:
+  #   - Uses GitHub’s built-in token to authenticate API calls for posting comments.
+  # ---------------------------------------------------------------------------
   greetings:
     name: Run Greetings
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-greetings.yml@master
     secrets:
+      # Default GitHub token for interacting with issues and PRs.
       repo-token: ${{ secrets.GITHUB_TOKEN }}
 
+  # ---------------------------------------------------------------------------
+  # Job: status-check
+  # What it does:
+  #   - Runs after the greetings job.
+  #   - Aggregates the result into a single, definitive workflow outcome.
+  # Why it exists:
+  #   - Provides a consistent “gate” job for monitoring and automation.
+  #   - Simplifies Slack notification logic.
+  # `if: always()`:
+  #   - Ensures this job runs even if the greetings job fails or is cancelled.
+  # Important:
+  #   - This is a *job-level* reusable workflow call, not a step.
+  # ---------------------------------------------------------------------------
   status-check:
     name: Check Jobs Status
     needs:
       - greetings
     if: always()
-    # 🔴 IMPORTANT: this is a *job-level* uses, not under steps:
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-check-jobs-status.yml@master
 
+  # ---------------------------------------------------------------------------
+  # Job: slack-workflow-status
+  # What it does:
+  #   - Sends a Slack notification about the workflow result.
+  #   - Triggered after the aggregated status-check job completes.
+  # Why it exists:
+  #   - Alerts maintainers if the greetings automation fails.
+  #   - Ensures onboarding automation stays reliable.
+  # Noise control:
+  #   - Only sends messages for failures or timeouts.
+  # `ignore_jobs`:
+  #   - Excludes the aggregator job from Slack summaries.
+  # Secrets:
+  #   - Requires SLACK_WEBHOOK_URL to exist in repository secrets.
+  # ---------------------------------------------------------------------------
   slack-workflow-status:
     name: Slack Post Workflow Notification
     needs:
       - status-check
     if: always()
-
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-slack-workflow-status.yml@master
     with:
+      # Comma-separated list of results that should trigger Slack notifications.
       notify_on_results: "failure,timed_out"
+
+      # Jobs to exclude from Slack message details.
       ignore_jobs: "Check Jobs Status"
     secrets:
+      # Maps the repository’s Slack webhook secret into the reusable workflow.
       slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}

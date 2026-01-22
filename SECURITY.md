@@ -22,7 +22,7 @@ We follow a Security by Design approach based on:
 - Auditable automation
 - Secure development lifecycle (SDL) practices
 
-Our goal: a secure ecosystem where contributors, users, and automated systems interact safely.
+Our goal is a secure ecosystem where contributors, users, and automated systems interact safely.
 
 ## 2. Security Architecture Overview
 
@@ -87,7 +87,7 @@ We maintain strict control of our supply chain:
 ### 2.6 Infrastructure & Secrets
 
 - No secrets are stored in source control
-- Secrets are scoped per repo and minimal privilege
+- Secrets are scoped per repo and use minimal privilege
 - Automated rotation for short-lived tokens
 - No plaintext secrets in automation logs
 - Secrets never exposed to untrusted workflows
@@ -132,10 +132,10 @@ If a security issue is suspected, observed, or confirmed, we follow the structur
 
 All incidents are classified into severity levels:
 
-- Critical: Active exploitation or remote unauthenticated impact
-- High: Privilege escalation or major information exposure
-- Medium: Limited-scope exposure or misuse potential
-- Low: Hardening gaps, misconfigurations, or informational issues
+- **Critical**: Active exploitation or remote unauthenticated impact
+- **High**: Privilege escalation or major information exposure
+- **Medium**: Limited-scope exposure or misuse potential
+- **Low**: Hardening gaps, misconfigurations, or informational issues
 
 ### 4.2 Containment
 
@@ -202,7 +202,7 @@ All contributors should:
 
 - Use 2FA on GitHub
 - Avoid committing secrets
-- Use signed commits when possible
+- Use signed commits wherever possible
 - Keep dependencies updated locally
 - Run tests before pushing
 - Follow coding standards and review expectations

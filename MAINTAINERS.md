@@ -8,7 +8,7 @@
 
 This document lists the maintainers of **The Lupaxa Project** and outlines the expectations and responsibilities associated with maintaining repositories within the ecosystem.
 
-The intent is to provide clarity, transparency, and consistency across all Lupaxa organisations and tools.
+The intent is to provide clarity, transparency, and consistency across all Lupaxa organisations and repositories.
 
 For the full governance model and decision-making process, see [Governance][1]
 
@@ -56,7 +56,7 @@ Communication is primarily through GitHub Issues, Discussions, and Pull Requests
 
 ## 4. Decision Making
 
-Maintainers should aim for lightweight consensus.
+Maintainers should aim for lightweight consensus wherever possible.
 For major changes or disagreements, see [Governance](https://github.com/the-lupaxa-project/.github/blob/master/GOVERNANCE.md), which describes the decision-making model and escalation path.
 
 The Project Steward has final decision authority when consensus cannot be reached.
@@ -89,9 +89,9 @@ Any changes will be communicated clearly.
 
 ## 7. Contact
 
-For general questions, see [Getting Support](https://github.com/the-lupaxa-project/.github/blob/master/SUPPORT.md)
-For security concerns, follow the instructions in the [Security Policy](https://github.com/the-lupaxa-project/.github/blob/master/SECURITY.md).
-For governance or maintainership questions, open a discussion in [**The Lupaxa Project**](https://github.com/orgs/the-lupaxa-project/discussions) organisation.
+- For general questions, see [Getting Support](https://github.com/the-lupaxa-project/.github/blob/master/SUPPORT.md)
+- For security concerns, follow the instructions in the [Security Policy](https://github.com/the-lupaxa-project/.github/blob/master/SECURITY.md).
+- For governance or maintainership questions, open a discussion in [**The Lupaxa Project**](https://github.com/orgs/the-lupaxa-project/discussions) organisation.
 
 <h1></h1>
 

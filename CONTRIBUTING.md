@@ -11,7 +11,7 @@ We welcome contributions of all kinds, whether it’s fixing a bug, improving do
 If you discover issues, have ideas for improvements, or would like to propose new features, please open an issue in the
 relevant repository or submit a pull request.
 
-Please follow the guidelines below when doing so.
+Please follow the guidelines below when contributing.
 
 <h2>Organisation-Wide Governance</h2>
 
@@ -21,7 +21,7 @@ Organisation-level structure and decision-making are defined centrally in the [`
 
 - [Governance][1]
 - [Maintainers][2]
-- [Projects overview][3]
+- [Projects Overview][3]
 
 [1]: https://github.com/the-lupaxa-project/.github/blob/master/GOVERNANCE.md
 [2]: https://github.com/the-lupaxa-project/.github/blob/master/MAINTAINERS.md
@@ -82,7 +82,7 @@ For details, see [GitHub’s Guide to Signing Commits](https://docs.github.com/e
 > [!IMPORTANT]
 > **Unsigned commits will be rejected automatically.**
 
-<h2>Labeling Guidelines</h2>
+<h2>Labelling Guidelines</h2>
 
 To maintain consistency across all repositories in **The Lupaxa Project**, we use a structured label system based on four categories:
 

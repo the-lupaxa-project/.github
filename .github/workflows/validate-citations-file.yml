@@ -1,48 +1,129 @@
+# -----------------------------------------------------------------------------
+# Workflow: Validate Citations File
+# Purpose:
+#   - Ensures the CITATION.cff file is always valid and correctly formatted.
+#   - Helps maintain accurate citation metadata for research, software citation,
+#     and academic references.
+#   - Runs automatically whenever CITATION.cff is changed.
+#   - Uses a reusable workflow so citation validation is consistent across all
+#     Lupaxa repositories.
+#   - Aggregates results into a single status job.
+#   - Optionally sends Slack notifications on failures or timeouts.
+# -----------------------------------------------------------------------------
 name: Validate Citations File
 
+# -----------------------------------------------------------------------------
+# Triggers
+# -----------------------------------------------------------------------------
 on:
+  # Run on pushes that modify the CITATION.cff file,
+  # except for Dependabot branches (to avoid unnecessary noise).
   push:
     branches-ignore:
       - 'dependabot/**'
     paths:
       - 'CITATION.cff'
+
+  # Run on pull requests that modify the CITATION.cff file.
+  # This prevents invalid citation metadata from being merged.
   pull_request:
     branches:
       - '**'
     paths:
       - 'CITATION.cff'
 
+# -----------------------------------------------------------------------------
+# Concurrency
+# -----------------------------------------------------------------------------
 concurrency:
+  # Ensures only one instance of this workflow runs per ref.
+  # If the same file is updated again before completion,
+  # the in-progress run is cancelled and replaced.
+  # This avoids duplicated validation work.
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# -----------------------------------------------------------------------------
+# Permissions
+# -----------------------------------------------------------------------------
 permissions:
+  # Required to read workflow/job metadata.
   actions: read
+
+  # Required to read the CITATION.cff file from the repository.
   contents: read
 
 jobs:
+  # ---------------------------------------------------------------------------
+  # Job: validate
+  # What it does:
+  #   - Calls a reusable workflow that:
+  #       • Parses the CITATION.cff file
+  #       • Validates it against the Citation File Format specification
+  #       • Fails if the file is invalid, incomplete, or malformed
+  # Why it exists:
+  #   - Guarantees that citation metadata remains standards-compliant.
+  #   - Ensures the repository can be correctly cited by researchers and tools
+  #     such as GitHub’s “Cite this repository” feature.
+  # Implementation:
+  #   - Centralized in a reusable workflow so all Lupaxa projects enforce the
+  #     same citation rules and validation logic.
+  # Secrets:
+  #   - `secrets: inherit` passes repository secrets if required by the
+  #     reusable workflow (for API access, logging, etc.).
+  # ---------------------------------------------------------------------------
   validate:
     name: Validate Citation File
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-validate-citations-file.yml@master
     secrets: inherit
 
+  # ---------------------------------------------------------------------------
+  # Job: status-check
+  # What it does:
+  #   - Runs after the citation validation job.
+  #   - Aggregates the result into a single, definitive workflow status.
+  # Why it exists:
+  #   - Provides one “gate” job for CI visibility and automation.
+  #   - Simplifies Slack notification logic.
+  # `if: always()`:
+  #   - Ensures this job runs even if validation fails or is cancelled.
+  # Important:
+  #   - This is a *job-level* reusable workflow call, not a step.
+  # ---------------------------------------------------------------------------
   status-check:
     name: Check Jobs Status
     needs:
       - validate
     if: always()
-    # 🔴 IMPORTANT: this is a *job-level* uses, not under steps:
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-check-jobs-status.yml@master
 
+  # ---------------------------------------------------------------------------
+  # Job: slack-workflow-status
+  # What it does:
+  #   - Posts the workflow result to Slack using a reusable workflow.
+  #   - Triggered after the aggregated status-check job completes.
+  # Why it exists:
+  #   - Alerts maintainers immediately if the citation file becomes invalid.
+  #   - Helps ensure metadata quality remains high.
+  # Noise control:
+  #   - Only sends messages for failures or timeouts.
+  # `ignore_jobs`:
+  #   - Excludes the aggregator job from Slack summaries to reduce clutter.
+  # Secrets:
+  #   - Requires SLACK_WEBHOOK_URL to exist in repository secrets.
+  # ---------------------------------------------------------------------------
   slack-workflow-status:
     name: Slack Workflow Status
     needs:
       - status-check
     if: always()
-
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-slack-workflow-status.yml@master
     with:
+      # Comma-separated list of outcomes that should trigger Slack notifications.
       notify_on_results: "failure,timed_out"
+
+      # Jobs to exclude from Slack message details.
       ignore_jobs: "Check Jobs Status"
     secrets:
+      # Maps the repository’s Slack webhook secret into the reusable workflow.
       slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}

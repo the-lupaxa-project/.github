@@ -1,43 +1,123 @@
+# -----------------------------------------------------------------------------
+# Workflow: Documentation Lint
+# Purpose:
+#   - Validates the quality and consistency of project documentation.
+#   - Runs link checking (Awesomebot), Markdown linting, and YAML linting.
+#   - Aggregates all results into a single status job.
+#   - Optionally posts Slack notifications on failure or timeout.
+#   - Designed to be reusable, predictable, and noise-free in CI.
+# -----------------------------------------------------------------------------
 name: Documentation Lint
+
+# -----------------------------------------------------------------------------
+# Triggers
+# -----------------------------------------------------------------------------
 on:
+  # Run when commits are pushed to ANY branch, but only if documentation
+  # or YAML files are affected.
   push:
     branches:
-      - "**"          # run on any branch push
+      - "**"          # Run on every branch
     paths:
-      - "**/*.md"
-      - "**/*.yml"
-      - "**/*.yaml"
-  pull_request:       # run on PRs
-    paths:
-      - "**/*.md"
-      - "**/*.yml"
-      - "**/*.yaml"
-  workflow_dispatch:  # add a Run Workflow button
+      - "**/*.md"     # Markdown documentation
+      - "**/*.yml"    # YAML config files
+      - "**/*.yaml"   # YAML config files (alternate extension)
 
+  # Run on pull requests when documentation or YAML files change.
+  pull_request:
+    paths:
+      - "**/*.md"
+      - "**/*.yml"
+      - "**/*.yaml"
+
+  # Allow manual execution from the GitHub UI ("Run workflow" button).
+  workflow_dispatch:
+
+# -----------------------------------------------------------------------------
+# Concurrency
+# -----------------------------------------------------------------------------
 concurrency:
+  # Ensures only one instance of this workflow runs per branch/PR ref.
+  # If a new commit is pushed, the previous in-progress run is cancelled.
+  # This prevents duplicated work and reduces CI noise.
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# -----------------------------------------------------------------------------
+# Permissions (read-only, since this workflow only validates content)
+# -----------------------------------------------------------------------------
 permissions:
+  # Needed for reading workflow metadata and job status.
   actions: read
+
+  # Needed for checking repository files.
   contents: read
 
 jobs:
+  # ---------------------------------------------------------------------------
+  # Job: awesomebot
+  # What it does:
+  #   - Runs Awesomebot against Markdown files.
+  #   - Checks external links for validity (404s, timeouts, etc.).
+  # Why it exists:
+  #   - Prevents broken links in documentation.
+  #   - Keeps README files and docs trustworthy.
+  # Implementation:
+  #   - Delegated to a reusable workflow for consistency across all Lupaxa repos.
+  # ---------------------------------------------------------------------------
   awesomebot:
     name: Awesomeboy
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-awesomebot.yml@master
     secrets: inherit
 
+  # ---------------------------------------------------------------------------
+  # Job: markdown-lint
+  # What it does:
+  #   - Lints Markdown files for formatting and style issues.
+  # Examples:
+  #   - Heading structure
+  #   - Line length
+  #   - Trailing whitespace
+  #   - Code block formatting
+  # Why it exists:
+  #   - Enforces consistent documentation style across the project.
+  #   - Improves readability and maintainability.
+  # ---------------------------------------------------------------------------
   markdown-lint:
     name: Markdown Lint
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-markdown-lint.yml@master
     secrets: inherit
 
+  # ---------------------------------------------------------------------------
+  # Job: yaml-lint
+  # What it does:
+  #   - Lints YAML files for syntax and formatting errors.
+  # Examples:
+  #   - Invalid indentation
+  #   - Incorrect types
+  #   - Structural issues
+  # Why it exists:
+  #   - Prevents broken GitHub Actions, configs, and automation files.
+  #   - Ensures YAML remains clean and predictable.
+  # ---------------------------------------------------------------------------
   yaml-lint:
     name: YAML Lint
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-yaml-lint.yml@master
     secrets: inherit
 
+  # ---------------------------------------------------------------------------
+  # Job: status-check
+  # What it does:
+  #   - Runs after all linting jobs complete.
+  #   - Aggregates their results into a single overall workflow status.
+  # Why it exists:
+  #   - Makes CI easier to reason about (one “gate” job).
+  #   - Simplifies Slack notifications and branch protection rules.
+  # `if: always()`:
+  #   - Ensures this job runs even if any upstream job fails or is cancelled.
+  # Important:
+  #   - This is a *job-level* reusable workflow call, not a step.
+  # ---------------------------------------------------------------------------
   status-check:
     name: Check Jobs Status
     needs:
@@ -45,18 +125,37 @@ jobs:
       - markdown-lint
       - yaml-lint
     if: always()
-    # 🔴 IMPORTANT: this is a *job-level* uses, not under steps:
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-check-jobs-status.yml@master
 
+  # ---------------------------------------------------------------------------
+  # Job: slack-workflow-status
+  # What it does:
+  #   - Sends workflow result notifications to Slack.
+  #   - Triggered only after the aggregated status-check job completes.
+  # Why it exists:
+  #   - Gives fast feedback to maintainers when documentation quality fails.
+  #   - Keeps CI visible without requiring manual checking.
+  # `notify_on_results`:
+  #   - Only post messages when the workflow fails or times out.
+  # `ignore_jobs`:
+  #   - Excludes the aggregator job from Slack summaries to reduce noise.
+  # Secrets:
+  #   - Requires SLACK_WEBHOOK_URL to be defined in repository secrets.
+  # `if: always()`:
+  #   - Ensures Slack can still post even if previous jobs fail.
+  # ---------------------------------------------------------------------------
   slack-workflow-status:
     name: Slack Post Workflow Notification
     needs:
       - status-check
     if: always()
-
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-slack-workflow-status.yml@master
     with:
+      # Comma-separated list of outcomes that should trigger a Slack message.
       notify_on_results: "failure,timed_out"
+
+      # Job names to exclude from notification details.
       ignore_jobs: "Check Jobs Status"
     secrets:
+      # Map local secret into the reusable workflow.
       slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}

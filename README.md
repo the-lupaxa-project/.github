@@ -4,12 +4,12 @@
     </a>
 </p>
 
-<h1 align="center">The Lupaxa Project: The<em>.github</em> Repository</h1>
+<h1 align="center">The Lupaxa Project: <em>.github</em> Repository</h1>
 
-This repository provides a central entry point into **The Lupaxa Project**. It introduces the ecosystem, links to our organisation-wide
-documentation, and defines the shared expectations that apply throughout all Lupaxa organisations and repositories.
+This repository provides the central entry point to **The Lupaxa Project**. It introduces the ecosystem, links to organisation-wide documentation,
+and defines the shared standards that apply across all Lupaxa organisations and repositories.
 
-These resources ensure consistent, secure, and maintainable standards across the entire project portfolio.
+These resources ensure consistent, secure, and maintainable practices across the entire project portfolio.
 
 <h2>Organisation-Wide Documentation</h2>
 
@@ -82,7 +82,7 @@ We welcome contributions from anyone aligned with the values of **The Lupaxa Pro
 Before contributing, please review:
 
 - [How to Contribute][1]
-- [Code of Donduct][2]
+- [Code of Conduct][2]
 
 [1]: https://github.com/the-lupaxa-project/contributing
 [2]: https://github.com/the-lupaxa-project/code-of-conduct

@@ -1,44 +1,129 @@
+# -----------------------------------------------------------------------------
+# Workflow: Publish to TestPyPI
+# Purpose:
+#   - Runs for *release candidate* (RC) tags only.
+#   - Used to validate packaging, metadata, and publishing logic against
+#     TestPyPI before a final production release to PyPI.
+#   - Generates release notes via a reusable workflow.
+#   - Aggregates job results into a single status.
+#   - Sends Slack notifications only on failure or timeout.
+#
+# Typical flow:
+#   1. Tag vX.Y.Z-rcN is pushed.
+#   2. This workflow runs.
+#   3. Release notes are generated.
+#   4. Status is aggregated.
+#   5. Slack is notified only if something goes wrong.
+# -----------------------------------------------------------------------------
 name: Publish to TestPyPI
 
+# -----------------------------------------------------------------------------
+# Triggers
+# -----------------------------------------------------------------------------
 on:
+  # Trigger on RC version tags only, for example:
+  #   v1.2.3-rc1
+  #   v2.0.0-rc4
+  #
+  # These are *pre-release* versions and should go to TestPyPI,
+  # never to the real PyPI index.
   push:
     tags:
-      - 'v[0-9]+\.[0-9]+\.[0-9]+-rc[0-9]+'  # exclude RC prereleases
+      - 'v[0-9]+.[0-9]+.[0-9]+-rc[0-9]+'  # RC prereleases only
+
+  # Allow manual execution from the GitHub UI.
   workflow_dispatch:
 
+# -----------------------------------------------------------------------------
+# Concurrency
+# -----------------------------------------------------------------------------
 concurrency:
+  # Only allow one run of this workflow per ref (tag or manual run).
+  # If re-triggered, the in-progress run is cancelled and replaced.
+  # Prevents duplicate publishing attempts and CI noise.
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# -----------------------------------------------------------------------------
+# Permissions
+# -----------------------------------------------------------------------------
 permissions:
+  # Required for reading workflow and job metadata.
   actions: read
+
+  # Required for interacting with repository contents and releases.
   contents: write
+
+  # Required for OIDC authentication.
+  # This enables trusted publishing to TestPyPI without storing API tokens.
   id-token: write
 
 jobs:
+  # ---------------------------------------------------------------------------
+  # Job: generate-release-notes
+  # What it does:
+  #   - Calls a reusable workflow that generates release notes for the RC tag.
+  #   - Usually creates or updates a GitHub pre-release with changelog content.
+  # Why it exists:
+  #   - Ensures release note generation is consistent across all Lupaxa projects.
+  #   - Allows maintainers to review RC release notes before final release.
+  # Secrets:
+  #   - Uses GitHub's provided token for API access.
+  # ---------------------------------------------------------------------------
   generate-release-notes:
     name: Generate Release Notes
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-generate-release.yml@master
     secrets:
+      # Default token provided by GitHub Actions.
       github-token: ${{ secrets.GITHUB_TOKEN }}
 
+  # ---------------------------------------------------------------------------
+  # Job: status-check
+  # What it does:
+  #   - Runs after `generate-release-notes`.
+  #   - Aggregates the result into one definitive workflow status.
+  # Why it exists:
+  #   - Simplifies branch protection and monitoring.
+  #   - Acts as a single gate for Slack notifications.
+  # `if: always()`:
+  #   - Ensures this job runs even if the release-note job fails or is cancelled.
+  # Important:
+  #   - This is a *job-level* reusable workflow call, not a step.
+  # ---------------------------------------------------------------------------
   status-check:
     name: Generate Test Release Status
     needs:
       - generate-release-notes
     if: always()
-    # 🔴 IMPORTANT: this is a *job-level* uses, not under steps:
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-check-jobs-status.yml@master
 
+  # ---------------------------------------------------------------------------
+  # Job: slack-workflow-status
+  # What it does:
+  #   - Posts the workflow result to Slack using a reusable workflow.
+  #   - Triggered after the aggregated status-check job completes.
+  # Why it exists:
+  #   - Gives immediate feedback if TestPyPI publishing preparation fails.
+  #   - Helps catch packaging or metadata issues early, before production.
+  # Noise control:
+  #   - Only posts messages on failure or timeout.
+  # `ignore_jobs`:
+  #   - Excludes the aggregator job from Slack summaries.
+  # Secrets:
+  #   - Requires SLACK_WEBHOOK_URL in repository secrets.
+  # ---------------------------------------------------------------------------
   slack-workflow-status:
     name: Slack Workflow Status
     needs:
       - status-check
     if: always()
-
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-slack-workflow-status.yml@master
     with:
+      # Comma-separated list of outcomes that should trigger Slack notifications.
       notify_on_results: "failure,timed_out"
+
+      # Jobs to exclude from Slack message details.
       ignore_jobs: "Check Jobs Status"
     secrets:
+      # Maps this repository's secret into the reusable workflow.
       slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}

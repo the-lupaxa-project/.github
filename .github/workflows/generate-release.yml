@@ -1,46 +1,130 @@
+# -----------------------------------------------------------------------------
+# Workflow: Publish to PyPI
+# Purpose:
+#   - Runs when a version tag is pushed (vX.Y.Z) to publish a release.
+#   - Explicitly excludes release-candidate (rc) tags from triggering this flow.
+#   - Delegates release note generation to a reusable workflow.
+#   - Aggregates job outcomes into a single status result.
+#   - Sends Slack notifications only on failures/timeouts to reduce noise.
+#
+# Notes:
+#   - This workflow currently *generates release notes* (via reusable workflow).
+#     If you also publish to PyPI elsewhere (or inside the reusable workflow),
+#     keep this name consistent with what the reusable workflow actually does.
+# -----------------------------------------------------------------------------
 name: Publish to PyPI
 
+# -----------------------------------------------------------------------------
+# Triggers
+# -----------------------------------------------------------------------------
 on:
+  # Trigger on pushes of tags that match *final* semantic versions:
+  #   v1.2.3
+  #
+  # And explicitly exclude RC prereleases like:
+  #   v1.2.3-rc1
+  #
+  # This ensures only final releases trigger the publish workflow.
   push:
     tags:
-      - 'v[0-9]+\.[0-9]+\.[0-9]+'            # final releases
-      - '!v[0-9]+\.[0-9]+\.[0-9]+-rc[0-9]+'  # exclude RC prereleases
+      - 'v[0-9]+.[0-9]+.[0-9]+'            # final releases (vX.Y.Z)
+      - '!v[0-9]+.[0-9]+.[0-9]+-rc[0-9]+'  # exclude RC prereleases (vX.Y.Z-rcN)
+
+  # Allow manual execution from the GitHub UI.
   workflow_dispatch:
 
+# -----------------------------------------------------------------------------
+# Concurrency
+# -----------------------------------------------------------------------------
 concurrency:
+  # Only allow one run per tag/ref at a time.
+  # If the same ref triggers again (rare for tags, more relevant for manual runs),
+  # any in-progress run is cancelled and replaced.
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# -----------------------------------------------------------------------------
+# Permissions
+# -----------------------------------------------------------------------------
 permissions:
+  # Read workflow/job metadata (commonly needed for status tooling).
   actions: read
+
+  # Write access to repository contents (often needed for creating releases,
+  # updating release artifacts, or committing generated files if applicable).
   contents: write
+
+  # Enable OIDC authentication.
+  # This is required when publishing to registries (like PyPI) via trusted
+  # publishing / OIDC instead of long-lived API tokens.
   id-token: write
 
 jobs:
+  # ---------------------------------------------------------------------------
+  # Job: generate-release-notes
+  # What it does:
+  #   - Calls a reusable workflow that generates release notes for the tag.
+  #   - Typically creates/updates a GitHub Release with changelog content,
+  #     based on commits, PR titles, conventional commits, or configured rules.
+  # Why it exists:
+  #   - Keeps release generation consistent across all Lupaxa repos.
+  #   - Centralizes logic so individual repos stay minimal and uniform.
+  # Secrets:
+  #   - Passes GitHub's provided token for API access (creating releases, etc.).
+  # ---------------------------------------------------------------------------
   generate-release-notes:
     name: Generate Release Notes
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-generate-release.yml@master
     secrets:
+      # The default token provided by GitHub Actions for this repository.
       github-token: ${{ secrets.GITHUB_TOKEN }}
 
+  # ---------------------------------------------------------------------------
+  # Job: status-check
+  # What it does:
+  #   - Runs after `generate-release-notes`.
+  #   - Aggregates upstream job results into one definitive workflow outcome.
+  # Why it exists:
+  #   - Provides a single “gate” job for branch protection / release automation.
+  #   - Makes Slack notifications and monitoring simpler and more consistent.
+  # `if: always()`:
+  #   - Ensures the aggregator runs even if the upstream job fails/cancels.
+  # Important:
+  #   - This is a *job-level* reusable workflow call, not a step.
+  # ---------------------------------------------------------------------------
   status-check:
     name: Generate Release Status
     needs:
       - generate-release-notes
     if: always()
-    # 🔴 IMPORTANT: this is a *job-level* uses, not under steps:
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-check-jobs-status.yml@master
 
+  # ---------------------------------------------------------------------------
+  # Job: slack-workflow-status
+  # What it does:
+  #   - Posts a Slack message about the workflow outcome using a reusable workflow.
+  #   - Runs after the aggregated `status-check` job completes.
+  # Why it exists:
+  #   - Alerts maintainers immediately if a release workflow fails or times out.
+  # Noise control:
+  #   - Only notifies on failure/timeouts, not success.
+  # `ignore_jobs`:
+  #   - Excludes the aggregator job from Slack summaries (less clutter).
+  # Secrets:
+  #   - Requires SLACK_WEBHOOK_URL to exist in repository secrets.
+  # ---------------------------------------------------------------------------
   slack-workflow-status:
     name: Slack Workflow Status
     needs:
       - status-check
     if: always()
-
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-slack-workflow-status.yml@master
     with:
+      # Comma-separated list of outcomes that should trigger a Slack message.
       notify_on_results: "failure,timed_out"
+
+      # Jobs to exclude from the Slack message details.
       ignore_jobs: "Check Jobs Status"
     secrets:
+      # Maps repository secret into the reusable workflow.
       slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}
-

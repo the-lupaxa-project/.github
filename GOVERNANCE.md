@@ -13,8 +13,8 @@ The intent is to ensure consistent stewardship, transparency, and long-term sust
 
 ## 1. Project Scope
 
-**The Lupaxa Project** maintains a wide range of tools across multiple organisations, please refer to the
-[Projects Overview](https://github.com/the-lupaxa-project/.github/blob/master/PROJECTS.md) for a complete list.
+**The Lupaxa Project** maintains a wide range of tools across multiple organisations. For a complete list, please refer to the
+[Projects Overview](https://github.com/the-lupaxa-project/.github/blob/master/PROJECTS.md).
 
 Governance processes and expectations are consistent across all of them.
 
@@ -140,9 +140,9 @@ Changes may be proposed via pull request, and require:
 
 ## 9. Contact
 
-For general questions, see [Getting Support](https://github.com/the-lupaxa-project/.github/blob/master/SUPPORT.md)
-For security concerns, follow the instructions in the [Security Policy](https://github.com/the-lupaxa-project/.github/blob/master/SECURITY.md).
-For governance or structural questions, open a discussion in [**The Lupaxa Project**](https://github.com/orgs/the-lupaxa-project/discussions) organisation.
+- For general questions, see [Getting Support](https://github.com/the-lupaxa-project/.github/blob/master/SUPPORT.md)
+- For security concerns, follow the instructions in the [Security Policy](https://github.com/the-lupaxa-project/.github/blob/master/SECURITY.md).
+- For governance or structural questions, open a discussion in [**The Lupaxa Project**](https://github.com/orgs/the-lupaxa-project/discussions) organisation.
 
 <h1></h1>
 

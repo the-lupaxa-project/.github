@@ -1,49 +1,133 @@
+# -----------------------------------------------------------------------------
+# Workflow: Ensure SHA-Pinned GitHub Actions
+# Purpose:
+#   - Enforces security best practices by ensuring all GitHub Actions used in
+#     workflow files are pinned to a full commit SHA instead of mutable tags
+#     (e.g., @v1, @main).
+#   - Prevents supply-chain attacks by guaranteeing that workflows always run
+#     against a known, immutable version of an action.
+#   - Aggregates results into a single status job.
+#   - Optionally posts Slack notifications when failures or timeouts occur.
+# -----------------------------------------------------------------------------
 name: Ensure SHA-Pinned GitHub Actions
 
+# -----------------------------------------------------------------------------
+# Triggers
+# -----------------------------------------------------------------------------
 on:
+  # Run when workflow files are modified in a pull request.
+  # This ensures new or changed workflows are validated before merge.
   pull_request:
     paths:
       - ".github/workflows/*.yml"
       - ".github/workflows/*.yaml"
+
+  # Run on any branch push when workflow files change.
+  # This catches direct commits that bypass PRs (e.g., admin changes, hotfixes).
   push:
     branches:
       - "**"
     paths:
       - ".github/workflows/*.yml"
       - ".github/workflows/*.yaml"
+
+  # Allow manual execution from the GitHub UI.
   workflow_dispatch:
 
+# -----------------------------------------------------------------------------
+# Concurrency
+# -----------------------------------------------------------------------------
 concurrency:
+  # Ensures only one instance of this workflow runs per branch/PR ref.
+  # If new commits are pushed, any in-progress run is cancelled and replaced.
+  # This prevents duplicate checks and reduces CI noise.
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# -----------------------------------------------------------------------------
+# Permissions
+# -----------------------------------------------------------------------------
 permissions:
+  # Required for reading action and workflow metadata.
   actions: read
+
+  # Required for reading workflow files in the repository.
   contents: read
+
+  # Required for interacting with pull requests (e.g., comments, annotations).
   pull-requests: write
 
 jobs:
+  # ---------------------------------------------------------------------------
+  # Job: ensure-sha-pinned
+  # What it does:
+  #   - Calls a reusable workflow that scans all GitHub Actions used in
+  #     `.github/workflows/*.yml|yaml`.
+  #   - Verifies that every `uses:` reference is pinned to a commit SHA:
+  #       ✅ actions/checkout@8f4b7...   (allowed)
+  #       ❌ actions/checkout@v4         (rejected)
+  #       ❌ org/action@main             (rejected)
+  # Why it exists:
+  #   - Tags and branches can be moved or compromised.
+  #   - SHA pinning guarantees deterministic and secure execution.
+  # Implementation:
+  #   - Delegated to a reusable workflow so all Lupaxa repos share the same
+  #     enforcement rules and behavior.
+  # ---------------------------------------------------------------------------
   ensure-sha-pinned:
     name: Run Ensure SHA-Pinned GitHub Actions (Reusable)
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-ensure-sha-pinned-actions.yml@master
 
+  # ---------------------------------------------------------------------------
+  # Job: status-check
+  # What it does:
+  #   - Runs after `ensure-sha-pinned`.
+  #   - Aggregates its result into a single, definitive workflow outcome.
+  # Why it exists:
+  #   - Provides a consistent “gate” job for branch protection rules.
+  #   - Simplifies Slack notifications and CI visibility.
+  # `if: always()`:
+  #   - Ensures this job runs even if the SHA-pin check fails or is cancelled.
+  # Important:
+  #   - This is a *job-level* reusable workflow call, not a step.
+  # ---------------------------------------------------------------------------
   status-check:
     name: Check Jobs Status
     needs:
       - ensure-sha-pinned
     if: always()
-    # 🔴 IMPORTANT: this is a *job-level* uses, not under steps:
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-check-jobs-status.yml@master
 
+  # ---------------------------------------------------------------------------
+  # Job: slack-workflow-status
+  # What it does:
+  #   - Sends workflow results to Slack using a reusable workflow.
+  #   - Triggered after the aggregated `status-check` job completes.
+  # Why it exists:
+  #   - Gives immediate visibility when insecure (non-SHA-pinned) actions are
+  #     introduced.
+  #   - Helps enforce security policy across all repositories.
+  # `notify_on_results`:
+  #   - Only notify on failure or timeout to avoid noise.
+  # `ignore_jobs`:
+  #   - Excludes the aggregator job from Slack details for clarity.
+  # Secrets:
+  #   - Requires SLACK_WEBHOOK_URL to exist in repository secrets.
+  # `if: always()`:
+  #   - Ensures Slack can still post even if earlier jobs fail.
+  # ---------------------------------------------------------------------------
   slack-workflow-status:
     name: Slack Post Workflow Notification
     needs:
       - status-check
     if: always()
-
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-slack-workflow-status.yml@master
     with:
+      # Comma-separated list of workflow results that trigger Slack messages.
       notify_on_results: "failure,timed_out"
+
+      # Job names to exclude from Slack summaries.
       ignore_jobs: "Check Jobs Status"
     secrets:
+      # Maps this repository's Slack webhook secret into the reusable workflow.
       slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}

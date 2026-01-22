@@ -1,41 +1,117 @@
+# -----------------------------------------------------------------------------
+# Workflow: Purge Deprecated Workflow Runs
+# Purpose:
+#   - Periodically cleans up old or deprecated GitHub Actions workflow runs.
+#   - Helps reduce repository clutter and storage usage.
+#   - Keeps the Actions UI easier to navigate.
+#   - Uses a reusable workflow so the same cleanup logic is shared across all
+#     Lupaxa repositories.
+#   - Aggregates results into a single status job.
+#   - Optionally posts Slack notifications when failures or timeouts occur.
+# -----------------------------------------------------------------------------
 name: Purge Deprecated Workflow Runs
 
+# -----------------------------------------------------------------------------
+# Triggers
+# -----------------------------------------------------------------------------
 on:
+  # Allow manual execution from the GitHub UI.
+  # Useful for testing or running an immediate cleanup.
   workflow_dispatch:
 
+  # Scheduled execution:
+  # Runs every Monday at 03:33 UTC.
+  # This provides automated, regular maintenance without manual intervention.
   schedule:
     - cron: '33 3 * * 1'
 
+# -----------------------------------------------------------------------------
+# Concurrency
+# -----------------------------------------------------------------------------
 concurrency:
+  # Ensures only one instance of this cleanup workflow runs per ref.
+  # If triggered again while running (manual + schedule overlap),
+  # the in-progress run is cancelled and replaced.
+  # Prevents duplicated deletions and API rate-limit pressure.
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+# -----------------------------------------------------------------------------
+# Permissions
+# -----------------------------------------------------------------------------
 permissions:
+  # Required to delete or modify workflow runs via the GitHub Actions API.
   actions: write
+
+  # Required to read repository contents if configuration files are needed.
   contents: read
 
 jobs:
+  # ---------------------------------------------------------------------------
+  # Job: purge-deprecated-workflows
+  # What it does:
+  #   - Calls a reusable workflow that:
+  #       • Identifies workflow runs that are deprecated, obsolete, or expired
+  #       • Deletes them according to defined retention rules
+  # Why it exists:
+  #   - Keeps repositories clean and performant.
+  #   - Reduces GitHub Actions storage consumption.
+  #   - Prevents long-term accumulation of useless CI history.
+  # Implementation:
+  #   - Centralized in a reusable workflow so behavior is consistent across all
+  #     Lupaxa repositories.
+  # ---------------------------------------------------------------------------
   purge-deprecated-workflows:
     name: Run Purge Deprecated Workflow Runs (Reusable)
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-purge-deprecated-workflow-runs.yml@master
 
+  # ---------------------------------------------------------------------------
+  # Job: status-check
+  # What it does:
+  #   - Runs after the purge job.
+  #   - Aggregates its result into a single, definitive workflow status.
+  # Why it exists:
+  #   - Provides one “gate” job for monitoring and notifications.
+  #   - Simplifies Slack logic and operational observability.
+  # `if: always()`:
+  #   - Ensures this job runs even if the purge job fails or is cancelled.
+  # Important:
+  #   - This is a *job-level* reusable workflow call, not a step.
+  # ---------------------------------------------------------------------------
   status-check:
     name: Check Jobs Status
     needs:
       - purge-deprecated-workflows
     if: always()
-    # 🔴 IMPORTANT: this is a *job-level* uses, not under steps:
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-check-jobs-status.yml@master
 
+  # ---------------------------------------------------------------------------
+  # Job: slack-workflow-status
+  # What it does:
+  #   - Posts the workflow result to Slack using a reusable workflow.
+  #   - Triggered after the aggregated status-check job completes.
+  # Why it exists:
+  #   - Alerts maintainers if the automated cleanup fails.
+  #   - Ensures repository hygiene automation remains reliable.
+  # Noise control:
+  #   - Only sends messages for failures or timeouts.
+  # `ignore_jobs`:
+  #   - Excludes the aggregator job from Slack summaries to reduce clutter.
+  # Secrets:
+  #   - Requires SLACK_WEBHOOK_URL to exist in repository secrets.
+  # ---------------------------------------------------------------------------
   slack-workflow-status:
     name: Slack Post Workflow Notification
     needs:
       - status-check
     if: always()
-
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-slack-workflow-status.yml@master
     with:
+      # Comma-separated list of results that should trigger Slack notifications.
       notify_on_results: "failure,timed_out"
+
+      # Jobs to exclude from Slack message details.
       ignore_jobs: "Check Jobs Status"
     secrets:
+      # Maps the repository’s Slack webhook secret into the reusable workflow.
       slack_webhook_url: ${{ secrets.SLACK_WEBHOOK_URL }}

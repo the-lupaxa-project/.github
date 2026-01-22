@@ -8,7 +8,7 @@
 
 We strive to make participation in **The Lupaxa Project** a welcoming, harassment-free, and respectful experience for **everyone**!
 
-We are committed to fostering an open and collaborative community built on mutual respect, and constructive dialogue.
+We are committed to fostering an open and collaborative community built on mutual respect and constructive dialogue.
 Every interaction within our projects should reflect the same principles we value in our code, **clarity, integrity, and purpose**.
 
 <h2>Our Standards</h2>
@@ -18,11 +18,11 @@ Every interaction within our projects should reflect the same principles we valu
 - Respecting differing opinions, experiences, and perspectives.
 - Gracefully accepting constructive feedback.
 - Focusing on what is best for the project and its community.
-- Recognizing and valuing each contributor’s effort and expertise.
+- Recognising and valuing each contributor’s effort and expertise.
 
 <h3>Examples of unacceptable behaviour include:</h3>
 
-- The use of sexualized language or imagery.
+- The use of sexualised language or imagery.
 - Personal attacks, insults, or derogatory comments.
 - Trolling, excessive negativity, or sustained disruption.
 - Public or private harassment.
@@ -53,7 +53,7 @@ Instances of abusive, harassing, or otherwise unacceptable behaviour may be repo
 **[conduct@thelupaxaproject.org](mailto:conduct@thelupaxaproject.org)**
 
 All complaints will be reviewed promptly, investigated confidentially, and resolved as quickly as possible.
-The maintainers are obligated to respect the privacy and security of the reporter at all times.
+Maintainers are obligated to respect the privacy and security of the reporter at all times.
 
 <h2>Enforcement Guidelines</h2>
 

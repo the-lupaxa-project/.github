@@ -6,8 +6,10 @@
 
 <h1 align="center">The Lupaxa Project: Getting Support</h1>
 
-**The Lupaxa Project** provides open-source tools across multiple repositories and organisations.
-This document describes how to seek help, report issues, and request improvements.
+**The Lupaxa Project** maintains a wide range of tools across multiple organisations. Please refer to the
+[Projects Overview](https://github.com/the-lupaxa-project/.github/blob/master/PROJECTS.md) for a complete list.
+
+This document describes how to seek help, report issues, and request improvements across the ecosystem.
 
 ## Before Opening an Issue
 
@@ -58,7 +60,7 @@ Not all requests will be implemented, but all will be considered.
 Do not report security issues publicly.
 Instead, follow the guidance in the organisation-wide [Security Policy](https://github.com/the-lupaxa-project/.github/blob/master/SECURITY.md).
 
-We take security seriously and will respond promptly and privately.
+We take security seriously and will respond promptly and confidentially.
 
 ## Contributing
 
