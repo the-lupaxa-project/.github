@@ -39,6 +39,16 @@ regardless of which repositories they work with.
 | <img src="https://raw.githubusercontent.com/the-lupaxa-project/brand-assets/master/logos/organisations/sre-toolbox/readme-logo.png" width="48" alt="SRE Toolbox">                     | **SRE Toolbox**           | Site Reliability Engineering tools focused on reliability, resilience, and performance. |
 | <img src="https://raw.githubusercontent.com/the-lupaxa-project/brand-assets/master/logos/organisations/terraform-toolbox/readme-logo.png" width="48" alt="Terraform Toolbox">         | **Terraform Toolbox**     | Terraform modules and Infrastructure-as-Code resources.                                 |
 
+## Lupaxa Organisations
+
+| Logo                                                                                                                                                                                              | Project                          | Description                                                                                     |
+| :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------- | :---------------------------------------------------------------------------------------------- |
+| <img src="https://raw.githubusercontent.com/the-lupaxa-project/brand-assets/master/logos/organisations/the-lupaxa-blueprints/readme-logo.png" width="48" alt="The Lupaxa Blueprints">             | **The Lupaxa Blueprints**        | Official organisation and repository templates and blueprints for The Lupaxa Project ecosystem. |
+| <img src="https://raw.githubusercontent.com/the-lupaxa-project/brand-assets/master/logos/organisations/the-lupaxa-internal-toolbox/readme-logo.png" width="48" alt="The Lupaxa Internal Toolbox"> | **The Lupaxa Internal Toolbox**  | A collection of internal tools used by The Lupaxa Project team.                                 |
+| <img src="https://raw.githubusercontent.com/the-lupaxa-project/brand-assets/master/logos/organisations/the-lupaxa-lab/readme-logo.png" width="48" alt="The Lupaxa Lab">                           | **The Lupaxa Lab**               | A space for experimental ideas that may grow into real projects.                                |
+| <img src="https://raw.githubusercontent.com/the-lupaxa-project/brand-assets/master/logos/organisations/the-lupaxa-project/readme-logo.png" width="48" alt="The Lupaxa Project">                   | **The Lupaxa Project**           | The Lupaxa Project. Where exploration meets precision. Where the untamed meets the engineered.  |
+| <img src="https://raw.githubusercontent.com/the-lupaxa-project/brand-assets/master/logos/organisations/the-lupaxa-project-private/readme-logo.png" width="48" alt="The Lupaxa Project (Private)"> | **The Lupaxa Project (Private)** | Private repositories for The Lupaxa Project.                                                    |
+
 ## Shared Standards
 
 Although each organisation focuses on a different area, all repositories across **The Lupaxa Project** share a common set of standards covering:
