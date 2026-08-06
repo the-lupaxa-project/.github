@@ -1,13 +1,23 @@
-name: Generate Test Release
-
-# Makefile mapping: make bump-*-rc → version X.Y.Z-rcN → tag vX.Y.Z-rcN
-# Creates a GitHub prerelease (not a draft).
-# -devN tags do not trigger this workflow (local / in-repo WIP only).
+name: Markdown Linter
 
 on:
   push:
-    tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+-rc[0-9]+'
+    paths:
+      - ".github/workflows/markdown-linter.yml"
+      - "**/*.md"
+      - ".markdownlint.yml"
+      - ".markdownlintignore"
+      - ".markdownlint-cli2.jsonc"
+
+  pull_request:
+    branches:
+      - "master"
+    paths:
+      - ".github/workflows/markdown-linter.yml"
+      - "**/*.md"
+      - ".markdownlint.yml"
+      - ".markdownlintignore"
+      - ".markdownlint-cli2.jsonc"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -15,22 +25,18 @@ concurrency:
 
 permissions:
   actions: read
-  contents: write
+  contents: read
 
 jobs:
-  generate-release-notes:
-    name: Generate Release Notes
-    uses: the-lupaxa-project/workflows/.github/workflows/reusable-github-release-generator.yml@master
-    with:
-      draft: false
-      prerelease: true
-    secrets:
-      github-token: ${{ secrets.GITHUB_TOKEN }}
+  markdown-linter:
+    name: Markdown Linter
+    uses: the-lupaxa-project/workflows/.github/workflows/reusable-markdown-linter.yml@master
+    secrets: inherit
 
   generate-workflow-summary:
     name: Generate Workflow Summary
     needs:
-      - generate-release-notes
+      - markdown-linter
     if: always()
     uses: the-lupaxa-project/workflows/.github/workflows/reusable-workflow-summary.yml@master
 
